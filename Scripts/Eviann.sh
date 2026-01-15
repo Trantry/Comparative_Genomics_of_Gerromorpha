@@ -15,7 +15,8 @@ conda activate eviann
 WORKDIR=/home/tbessonn/Eviann
 ROOTDIR=/home/tbessonn/ressources/genomes
 EVIANN=${HOME}/miniconda3/envs/eviann/bin/eviann.sh
-PROT="$ROOTDIR/EviAnn/proteins_related_species/"
+PROT=/home/tbessonn/ressources/Protein/Heteroptera_Sternorrhyncha_G_buenoi_prot.fasta
+Transcriptome=
 
 # building an associative array with the genomes of 7 species of gerromorpha
 declare -A assembly
@@ -56,6 +57,7 @@ do
         mkdir -p $WORKDIR/$key
         $EVIANN -g $GENOME \
                 -p $PROT \
+                -e $Transcriptome \
                 -t 24
     fi
 done
