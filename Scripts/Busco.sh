@@ -1,14 +1,15 @@
 #!/bin/bash
 #SBATCH --job-name=busco
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=16
 #SBATCH --mem=30G
 #SBATCH --time=02-00:00:00
-#SBATCH --partition=Cascade
+#SBATCH --partition=Lake
 #SBATCH --output=/home/tbessonn/stdout/%A_%a.out # standard output file format
 #SBATCH --error=/home/tbessonn/stderr/%A_%a.err # error file format
 
-WORKDIR=/home/tbessonn/Busco
+mkdir -p /scratch/Bio/tbessonn/busco
+WORKDIR=/scratch/Bio/tbessonn/busco
 ROOTDIR=/home/tbessonn/ressources/genomes
 
 # building an associative array with the genomes of 8 species of gerromorpha
@@ -62,15 +63,15 @@ conda activate busco
 for key in "${!assembly[@]}"
 do
     GENOME=${assembly[$key]}
-    if [ ! -f "$WORKDIR/$key/$key/run_hemiptera_odb12/short_summary.txt" ]
+    if [ ! -f "$WORKDIR/$key/run_hemiptera_odb12/short_summary.txt" ]
     then
         mkdir -p "$WORKDIR/$key"
         busco -i $GENOME \
         -l hemiptera_odb12 \
         -m genome \
         -o $key \
-        --out_path "$WORKDIR/$key" \
-        --cpu 8
+        --out_path "$WORKDIR" \
+        --cpu 16
     fi
 done
 
