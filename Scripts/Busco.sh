@@ -71,7 +71,8 @@ do
         -m genome \
         -o $key \
         --out_path "$WORKDIR" \
-        --cpu 16
+        --cpu 16 \
+        -f
     fi
 done
 
