@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=Download_SRA
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=24
+#SBATCH --cpus-per-task=16
 #SBATCH --mem=100G
 #SBATCH --time=05-15:00:00
 #SBATCH --partition=Lake
@@ -13,7 +13,7 @@
 for csv in /scratch/Bio/tbessonn/RNA_seq/*/SraAccList.csv; do
   dir=$(dirname "$csv")
   tail -n +2 "$csv" | while read acc; do
-    prefetch "$acc" --max-size 1t -O "$dir"
-    (cd "$dir" && fasterq-dump "$acc" -e 24 --outdir "$dir")
+    prefetch "$acc" --max-size u -O "$dir"
+    (cd "$dir" && fasterq-dump "$acc" -e 16 --outdir "$dir")
   done
 done
