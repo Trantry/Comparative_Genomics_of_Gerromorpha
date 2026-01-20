@@ -1,18 +1,17 @@
 #!/bin/bash
-#
 #SBATCH --job-name=busco
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=16
+#SBATCH --cpus-per-task=8
 #SBATCH --mem=30G
 #SBATCH --time=02-00:00:00
 #SBATCH --partition=Cascade
-#SBATCH --output=%x.out
-#SBATCH --error=%x.err
+#SBATCH --output=/home/tbessonn/stdout/%A_%a.out # standard output file format
+#SBATCH --error=/home/tbessonn/stderr/%A_%a.err # error file format
 
 WORKDIR=/home/tbessonn/Busco
 ROOTDIR=/home/tbessonn/ressources/genomes
 
-# building an associative array with the genomes of 7 species of gerromorpha
+# building an associative array with the genomes of 8 species of gerromorpha
 declare -A assembly
 assembly[A_paludum]="$ROOTDIR/gerromorpha/aquarius_paludum/ncbi_dataset/ncbi_dataset/data/GCA_052327185.1/GCA_052327185.1_ASM5232718v1_genomic.fna"
 assembly[G_buenoi]="$ROOTDIR/gerromorpha/gerris_buenoi/water_strider_11Jul2018_yVXgK.fasta"
@@ -22,6 +21,7 @@ assembly[G_odontogaster]="$ROOTDIR/gerromorpha/gerris_odontogaster/gerris_odonto
 assembly[H_lingyangjiaoensis]="$ROOTDIR/gerromorpha/hermatobates_lingyangjiaoensis/ncbi_dataset/ncbi_dataset/data/GCA_026182355.1/GCA_026182355.1_ASM2618235v1_genomic.fna"
 assembly[M_longipes]="$ROOTDIR/gerromorpha/microvelia_longipes/Mlon_polished_genome_round2.fasta"
 assembly[R_antilleana]="$ROOTDIR/gerromorpha/rhagovelia_antilleana/unmasked_genome/rhagovelia_antilleana_genome_fourth_polish.fasta.renamed"
+assembly[T_zetteli]="$ROOTDIR/gerromorpha/tetraripis_zetteli/tzet_genome_flye_v4_unmasked.fasta"
 
 # building an associative array with the genomes of 6 species of non gerromorpha (Nepomorpha)
 assembly[D_zealandiae]="$ROOTDIR/non_gerromorpha/nepomorpha/diaprepocoris_zealandiae/ncbi_dataset/ncbi_dataset/data/GCA_050613935.1/GCA_050613935.1_ASM5061393v1_genomic.fna"
@@ -62,16 +62,15 @@ conda activate busco
 for key in "${!assembly[@]}"
 do
     GENOME=${assembly[$key]}
-    if [ ! -f $WORKDIR/$key/report.txt ]
+    if [ ! -f "$WORKDIR/$key/$key/run_hemiptera_odb12/short_summary.txt" ]
     then
-        mkdir -p $WORKDIR/$key
+        mkdir -p "$WORKDIR/$key"
         busco -i $GENOME \
         -l hemiptera_odb12 \
         -m genome \
         -o $key \
-        --out_path $WORKDIR/$key \
-        -f \
-        --cpu 16
+        --out_path "$WORKDIR/$key" \
+        --cpu 8
     fi
 done
 

@@ -18,7 +18,7 @@ EVIANN=${HOME}/miniconda3/envs/eviann/bin/eviann.sh
 PROT=/home/tbessonn/ressources/Protein/Heteroptera_Sternorrhyncha_G_buenoi_prot.fasta
 Transcriptome=
 
-# building an associative array with the genomes of 7 species of gerromorpha
+# building an associative array with the genomes of 8 species of gerromorpha
 declare -A assembly
 assembly[A_paludum]="$ROOTDIR/gerromorpha/aquarius_paludum/ncbi_dataset/ncbi_dataset/data/GCA_052327185.1/GCA_052327185.1_ASM5232718v1_genomic.fna"
 assembly[G_buenoi]="$ROOTDIR/gerromorpha/gerris_buenoi/water_strider_11Jul2018_yVXgK.fasta"
@@ -28,6 +28,7 @@ assembly[G_odontogaster]="$ROOTDIR/gerromorpha/gerris_odontogaster/gerris_odonto
 assembly[H_lingyangjiaoensis]="$ROOTDIR/gerromorpha/hermatobates_lingyangjiaoensis/ncbi_dataset/ncbi_dataset/data/GCA_026182355.1/GCA_026182355.1_ASM2618235v1_genomic.fna"
 assembly[M_longipes]="$ROOTDIR/gerromorpha/microvelia_longipes/Mlon_polished_genome_round2.fasta"
 assembly[R_antilleana]="$ROOTDIR/gerromorpha/rhagovelia_antilleana/unmasked_genome/rhagovelia_antilleana_genome_fourth_polish.fasta.renamed"
+assembly[T_zetteli]="$ROOTDIR/gerromorpha/tetraripis_zetteli/tzet_genome_flye_v4_unmasked.fasta"
 
 # building an associative array with the genomes of 2 species of non gerromorpha (Nepomorpha)
 assembly[L_indicus]="$ROOTDIR/non_gerromorpha/nepomorpha/lethocerus_indicus/ncbi_dataset/ncbi_dataset/data/GCA_019843655.1/GCA_019843655.1_UK_Lind_1.0_genomic.fna"
