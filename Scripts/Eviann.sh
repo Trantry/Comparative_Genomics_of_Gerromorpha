@@ -4,7 +4,7 @@
 #SBATCH --cpus-per-task=24
 #SBATCH --mem=100G
 #SBATCH --time=05-15:00:00
-#SBATCH --partition=Cascade
+#SBATCH --partition=Lake
 #SBATCH --output=/home/tbessonn/stdout/%A_%a.out # standard output file format
 #SBATCH --error=/home/tbessonn/stderr/%A_%a.err # error file format
 
