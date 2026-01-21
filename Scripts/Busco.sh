@@ -2,7 +2,7 @@
 #SBATCH --job-name=busco
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
-#SBATCH --mem=30G
+#SBATCH --mem=100G
 #SBATCH --time=02-00:00:00
 #SBATCH --partition=Lake
 #SBATCH --output=/home/tbessonn/stdout/%A_%a.out # standard output file format
@@ -66,13 +66,23 @@ do
     if [ ! -f "$WORKDIR/$key/run_hemiptera_odb12/short_summary.txt" ]
     then
         mkdir -p "$WORKDIR/$key"
-        busco -i $GENOME \
+        busco -i "$GENOME" \
         -l hemiptera_odb12 \
         -m genome \
         -o $key \
         --out_path "$WORKDIR" \
         --cpu 16 \
         -f
+    fi
+done
+
+# collect only the short_summary files and move it into /home/tbessonn/busco/<key>
+for key in "${!assembly[@]}"
+do
+    if [ ! -f "/home/tbessonn/busco/$key/short_summary.txt" ]
+    then
+        mkdir -p "/home/tbessonn/busco/$key"
+        mv -f "/scratch/Bio/tbessonn/busco/$key/run_hemiptera_odb12/short_summary.txt" "/home/tbessonn/busco/$key/"
     fi
 done
 
