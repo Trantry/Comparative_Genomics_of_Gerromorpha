@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --job-name=Eviann
+#SBATCH --job-name=T_infestans_Eviann
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=24
-#SBATCH --mem=100G
+#SBATCH --mem=150G
 #SBATCH --time=06-00:00:00
 #SBATCH --partition=Lake
 #SBATCH --output=/home/tbessonn/stdout/%A_%a.out # standard output file format
@@ -16,9 +16,12 @@ WORKDIR=/scratch/Bio/tbessonn/Eviann
 ROOTDIR=/home/tbessonn/ressources/genomes
 EVIANN=${HOME}/miniconda3/envs/eviann/bin/eviann.sh
 PROT=/home/tbessonn/ressources/Protein/Heteroptera_Sternorrhyncha_G_buenoi_prot.fasta
-Transcriptome=/home/tbessonn/ressources/transcriptomes/A_lucorum/SRR10605280.fastq
+Transcriptome=/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR5305050.fastq
+#For paired-end:
 #paste <(ls $PWD/*_1.fastq) <(ls $PWD/*_2.fastq) > paired.txt
-RNASEQ=/home/tbessonn/ressources/RNA_seq/A_lucorum/paired.txt
+# For single-end:
+#ls "$PWD"/*.fastq | grep -Ev '(_1|_2)\.fastq$' >> paired.txt
+RNASEQ=/home/tbessonn/ressources/RNA_seq/T_infestans/paired.txt
 
 # building an associative array with the genomes of 8 species of gerromorpha
 declare -A assembly
@@ -38,10 +41,10 @@ declare -A assembly
 
 # building an associative array with the genomes of 5 species of non gerromorpha (Cimicomorpha)
 #assembly[A_suturalis]="$ROOTDIR/non_gerromorpha/cimicomorpha/adelphocoris_suturalis/ncbi_dataset/ncbi_dataset/data/GCA_030762985.1/GCA_030762985.1_ASM3076298v1_genomic.fna"
-assembly[A_lucorum]="$ROOTDIR/non_gerromorpha/cimicomorpha/apolygus_lucorum/ncbi_dataset/ncbi_dataset/data/GCA_009739505.2/GCA_009739505.2_ASM973950v2_genomic.fna"
+#assembly[A_lucorum]="$ROOTDIR/non_gerromorpha/cimicomorpha/apolygus_lucorum/ncbi_dataset/ncbi_dataset/data/GCA_009739505.2/GCA_009739505.2_ASM973950v2_genomic.fna"
 #assembly[C_lectularius_Genbank]="$ROOTDIR/non_gerromorpha/cimicomorpha/cimex_lectularius/ncbi_dataset/ncbi_dataset/data/GCA_000648675.3/GCA_000648675.3_Clec_2.1_genomic.fna"
 #assembly[R_fuscipes]="$ROOTDIR/non_gerromorpha/cimicomorpha/rhynocoris_fuscipes/ncbi_dataset/ncbi_dataset/data/GCA_040020575.1/GCA_040020575.1_Rfu_1.0_genomic.fna"
-#assembly[T_infestans]="$ROOTDIR/non_gerromorpha/cimicomorpha/triatoma_infestans/ncbi_dataset/ncbi_dataset/data/GCA_965641795.1/GCA_965641795.1_ihTriInfe1.hap1.1_genomic.fna"
+assembly[T_infestans]="$ROOTDIR/non_gerromorpha/cimicomorpha/triatoma_infestans/ncbi_dataset/ncbi_dataset/data/GCA_965641795.1/GCA_965641795.1_ihTriInfe1.hap1.1_genomic.fna"
 
 # building an associative array with the genomes of 5 species of non gerromorpha (Pentatomomorpha)
 #assembly[A_truncatus]="$ROOTDIR/non_gerromorpha/pentatomomorpha/aradus_truncatus/ncbi_dataset/ncbi_dataset/data/GCA_965153375.1/GCA_965153375.1_ihAraTrun1.hap1.1_genomic.fna"
@@ -50,14 +53,13 @@ assembly[A_lucorum]="$ROOTDIR/non_gerromorpha/cimicomorpha/apolygus_lucorum/ncbi
 #assembly[O_fasciatus]="$ROOTDIR/non_gerromorpha/pentatomomorpha/oncopeltus_fasciatus/ncbi_dataset/ncbi_dataset/data/GCA_000696205.2/GCA_000696205.2_Ofas_2.0_genomic.fna"
 #assembly[R_pedestris]="$ROOTDIR/non_gerromorpha/pentatomomorpha/riptortus_pedestris/ncbi_dataset/ncbi_dataset/data/GCA_019009955.1/GCA_019009955.1_ASM1900995v1_genomic.fna"
 
-cd /home/tbessonn/Eviann
-
 for key in "${!assembly[@]}"
 do
     GENOME=${assembly[$key]}
     if [ ! -f $WORKDIR/$key/report.txt ]
     then
         mkdir -p $WORKDIR/$key
+        cd /home/tbessonn/Eviann/$key
         $EVIANN -g $GENOME \
                 -p $PROT \
                 -r $RNASEQ \
