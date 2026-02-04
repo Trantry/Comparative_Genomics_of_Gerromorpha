@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --job-name=A_suturalis_Eviann
+#SBATCH --job-name=M_longipes_Eviann
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
-#SBATCH --mem=150G
+#SBATCH --mem=120G
 #SBATCH --time=06-00:00:00
 #SBATCH --partition=Lake
 #SBATCH --output=/home/tbessonn/stdout/%A_%a.out # standard output file format
@@ -16,22 +16,21 @@ WORKDIR=/scratch/Bio/tbessonn/Eviann
 ROOTDIR=/home/tbessonn/ressources/genomes
 EVIANN=${HOME}/miniconda3/envs/eviann/bin/eviann.sh
 PROT=/home/tbessonn/ressources/Protein/Heteroptera_Sternorrhyncha_G_buenoi_prot.fasta
-Transcriptome=/home/tbessonn/ressources/transcriptomes/A_lucorum/SRR10605280.fastq
+Transcriptome=/scratch/Bio/tbessonn/transcriptome/M_longipes/10024092.1_Microvelia_longipes.trinity.fa
 #For paired-end:
 #paste <(ls $PWD/*_1.fastq) <(ls $PWD/*_2.fastq) > paired.txt
 # For single-end:
 #ls "$PWD"/*.fastq | grep -Ev '(_1|_2)\.fastq$' >> paired.txt
-RNASEQ=/home/tbessonn/ressources/RNA_seq/A_suturalis/paired.txt
+RNASEQ=/home/tbessonn/ressources/RNA_seq/Gerromorpha/M_longipes/paired.txt
 
 # building an associative array with the genomes of 8 species of gerromorpha
 declare -A assembly
 #assembly[A_paludum]="$ROOTDIR/gerromorpha/aquarius_paludum/ncbi_dataset/ncbi_dataset/data/GCA_052327185.1/GCA_052327185.1_ASM5232718v1_genomic.fna"
-#assembly[G_buenoi]="$ROOTDIR/gerromorpha/gerris_buenoi/water_strider_11Jul2018_yVXgK.fasta"
-#assembly[G_lacustris_ref]="$ROOTDIR/gerromorpha/gerris_lacustris/ncbi_dataset-2/ncbi_dataset/data/GCA_951217055.1/GCA_951217055.1_ihGerLacu2.1_genomic.fna"
-#assembly[G_lacustris_haplo]="$ROOTDIR/gerromorpha/gerris_lacustris/ncbi_dataset-3/ncbi_dataset/data/GCA_951217045.1/GCA_951217045.1_ihGerLacu2.1_alternate_haplotype_genomic.fna"
+#assembly[G_buenoi]="$ROOTDIR/gerromorpha/gerris_buenoi/new/genome.softmasked.fa"
+#assembly[G_lacustris]="$ROOTDIR/gerromorpha/gerris_lacustris/ncbi_dataset-2/ncbi_dataset/data/GCA_951217055.1/GCA_951217055.1_ihGerLacu2.1_genomic.fna"
 #assembly[G_odontogaster]="$ROOTDIR/gerromorpha/gerris_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa"
 #assembly[H_lingyangjiaoensis]="$ROOTDIR/gerromorpha/hermatobates_lingyangjiaoensis/ncbi_dataset/ncbi_dataset/data/GCA_026182355.1/GCA_026182355.1_ASM2618235v1_genomic.fna"
-#assembly[M_longipes]="$ROOTDIR/gerromorpha/microvelia_longipes/Mlon_polished_genome_round2.fasta"
+assembly[M_longipes]="$ROOTDIR/gerromorpha/microvelia_longipes/Mlon_polished_genome_round2.fasta"
 #assembly[R_antilleana]="$ROOTDIR/gerromorpha/rhagovelia_antilleana/unmasked_genome/rhagovelia_antilleana_genome_fourth_polish.fasta.renamed"
 #assembly[T_zetteli]="$ROOTDIR/gerromorpha/tetraripis_zetteli/tzet_genome_flye_v4_unmasked.fasta"
 
@@ -40,7 +39,7 @@ declare -A assembly
 #assembly[R_chinensis]="$ROOTDIR/non_gerromorpha/nepomorpha/ranatra_chinensis/ncbi_dataset/ncbi_dataset/data/GCA_040954505.1/GCA_040954505.1_ASM4095450v1_genomic.fna"
 
 # building an associative array with the genomes of 5 species of non gerromorpha (Cimicomorpha)
-assembly[A_suturalis]="$ROOTDIR/non_gerromorpha/cimicomorpha/adelphocoris_suturalis/ncbi_dataset/ncbi_dataset/data/GCA_030762985.1/GCA_030762985.1_ASM3076298v1_genomic.fna"
+#assembly[A_suturalis]="$ROOTDIR/non_gerromorpha/cimicomorpha/adelphocoris_suturalis/ncbi_dataset/ncbi_dataset/data/GCA_030762985.1/GCA_030762985.1_ASM3076298v1_genomic.fna"
 #assembly[A_lucorum]="$ROOTDIR/non_gerromorpha/cimicomorpha/apolygus_lucorum/ncbi_dataset/ncbi_dataset/data/GCA_009739505.2/GCA_009739505.2_ASM973950v2_genomic.fna"
 #assembly[C_lectularius_Genbank]="$ROOTDIR/non_gerromorpha/cimicomorpha/cimex_lectularius/ncbi_dataset/ncbi_dataset/data/GCA_000648675.3/GCA_000648675.3_Clec_2.1_genomic.fna"
 #assembly[R_fuscipes]="$ROOTDIR/non_gerromorpha/cimicomorpha/rhynocoris_fuscipes/ncbi_dataset/ncbi_dataset/data/GCA_040020575.1/GCA_040020575.1_Rfu_1.0_genomic.fna"
@@ -56,14 +55,11 @@ assembly[A_suturalis]="$ROOTDIR/non_gerromorpha/cimicomorpha/adelphocoris_sutura
 for key in "${!assembly[@]}"
 do
     GENOME=${assembly[$key]}
-    if [ ! -f $WORKDIR/$key/report.txt ]
-    then
-        mkdir -p $WORKDIR/$key
-        cd $WORKDIR/$key
-        $EVIANN -g $GENOME \
-                -p $PROT \
-                -r $RNASEQ \
-                -e $Transcriptome \
-                -t 32
-    fi
+    mkdir -p $WORKDIR/$key
+    cd $WORKDIR/$key
+    $EVIANN -g $GENOME \
+            -p $PROT \
+            -r $RNASEQ \
+            -e $Transcriptome \
+            -t 32
 done

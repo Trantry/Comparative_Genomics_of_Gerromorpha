@@ -14,8 +14,9 @@ ROOTDIR=/home/tbessonn/ressources/genomes
 
 # building an associative array with the genomes of 8 species of gerromorpha
 declare -A assembly
-assembly[A_paludum]="$ROOTDIR/gerromorpha/aquarius_paludum/ncbi_dataset/ncbi_dataset/data/GCA_052327185.1/GCA_052327185.1_ASM5232718v1_genomic.fna"
+#assembly[A_paludum]="$ROOTDIR/gerromorpha/aquarius_paludum/ncbi_dataset/ncbi_dataset/data/GCA_052327185.1/GCA_052327185.1_ASM5232718v1_genomic.fna"
 assembly[G_buenoi]="$ROOTDIR/gerromorpha/gerris_buenoi/water_strider_11Jul2018_yVXgK.fasta"
+assembly[G_buenoi_new]="$ROOTDIR/gerromorpha/gerris_buenoi/new/genome.softmasked.fa"
 assembly[G_lacustris_ref]="$ROOTDIR/gerromorpha/gerris_lacustris/ncbi_dataset-2/ncbi_dataset/data/GCA_951217055.1/GCA_951217055.1_ihGerLacu2.1_genomic.fna"
 assembly[G_lacustris_haplo]="$ROOTDIR/gerromorpha/gerris_lacustris/ncbi_dataset-3/ncbi_dataset/data/GCA_951217045.1/GCA_951217045.1_ihGerLacu2.1_alternate_haplotype_genomic.fna"
 assembly[G_odontogaster]="$ROOTDIR/gerromorpha/gerris_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa"
@@ -39,8 +40,8 @@ assembly[C_lectularius_Genbank]="$ROOTDIR/non_gerromorpha/cimicomorpha/cimex_lec
 assembly[C_lectularius_Refseq]="$ROOTDIR/non_gerromorpha/cimicomorpha/cimex_lectularius/ncbi_dataset/ncbi_dataset/data/GCF_000648675.2/GCF_000648675.2_Clec_2.1_genomic.fna"
 assembly[N_tenius]="$ROOTDIR/non_gerromorpha/cimicomorpha/nesidiocoris_tenuis/ncbi_dataset/ncbi_dataset/data/GCA_036186465.1/GCA_036186465.1_ASM3618646v1_genomic.fna"
 assembly[P_geniculatus]="$ROOTDIR/non_gerromorpha/cimicomorpha/panstrongylus_geniculatus/ncbi_dataset/ncbi_dataset/data/GCA_019603395.1/GCA_019603395.1_ASM1960339v1_genomic.fna"
-assembly[R_prolixus_Genbank]="$ROOTDIR/non_gerromorpha/cimicomorpha/rhodnius_prolixus/ncbi_dataset/ncbi_dataset/data/GCA_049639745.1/GCA_049639745.1_Rpr_genomic.fna"
 assembly[R_prolixus_Refseq]="$ROOTDIR/non_gerromorpha/cimicomorpha/rhodnius_prolixus/ncbi_dataset/ncbi_dataset/data/GCF_049639745.1/GCF_049639745.1_Rpr_genomic.fna"
+assembly[R_prolixus_Genbank]="$ROOTDIR/non_gerromorpha/cimicomorpha/rhodnius_prolixus/ncbi_dataset/ncbi_dataset/data/GCA_049639745.1/GCA_049639745.1_Rpr_genomic.fna"
 assembly[R_fuscipes]="$ROOTDIR/non_gerromorpha/cimicomorpha/rhynocoris_fuscipes/ncbi_dataset/ncbi_dataset/data/GCA_040020575.1/GCA_040020575.1_Rfu_1.0_genomic.fna"
 assembly[T_infestans]="$ROOTDIR/non_gerromorpha/cimicomorpha/triatoma_infestans/ncbi_dataset/ncbi_dataset/data/GCA_965641795.1/GCA_965641795.1_ihTriInfe1.hap1.1_genomic.fna"
 
@@ -81,8 +82,8 @@ for key in "${!assembly[@]}"
 do
     if [ ! -f "/home/tbessonn/busco/$key/short_summary.txt" ]
     then
-        mkdir -p "/home/tbessonn/busco/$key"
-        mv -f "/scratch/Bio/tbessonn/busco/$key/run_hemiptera_odb12/short_summary.txt" "/home/tbessonn/busco/$key/"
+        mkdir -p "/home/tbessonn/0_busco/$key"
+        mv -f "/scratch/Bio/tbessonn/busco/$key/run_hemiptera_odb12/short_summary.txt" "/home/tbessonn/0_busco/$key/"
     fi
 done
 
