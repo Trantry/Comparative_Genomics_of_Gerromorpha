@@ -4,17 +4,17 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=100G
 #SBATCH --time=02-00:00:00
-#SBATCH --partition=Lake
+#SBATCH --partition=Cascade
 #SBATCH --output=/home/tbessonn/stdout/%A_%a.out # standard output file format
 #SBATCH --error=/home/tbessonn/stderr/%A_%a.err # error file format
 
-mkdir -p /scratch/Bio/tbessonn/busco
-WORKDIR=/scratch/Bio/tbessonn/busco
+mkdir -p /scratch/Cascade/tbessonn/1_busco
+WORKDIR=/scratch/Cascade/tbessonn/1_busco
 ROOTDIR=/home/tbessonn/ressources/genomes
 
 # building an associative array with the genomes of 8 species of gerromorpha
 declare -A assembly
-#assembly[A_paludum]="$ROOTDIR/gerromorpha/aquarius_paludum/ncbi_dataset/ncbi_dataset/data/GCA_052327185.1/GCA_052327185.1_ASM5232718v1_genomic.fna"
+assembly[A_paludum]="$ROOTDIR/gerromorpha/aquarius_paludum/ncbi_dataset/ncbi_dataset/data/GCA_052327185.1/GCA_052327185.1_ASM5232718v1_genomic.fna"
 assembly[G_buenoi]="$ROOTDIR/gerromorpha/gerris_buenoi/water_strider_11Jul2018_yVXgK.fasta"
 assembly[G_buenoi_new]="$ROOTDIR/gerromorpha/gerris_buenoi/new/genome.softmasked.fa"
 assembly[G_lacustris_ref]="$ROOTDIR/gerromorpha/gerris_lacustris/ncbi_dataset-2/ncbi_dataset/data/GCA_951217055.1/GCA_951217055.1_ihGerLacu2.1_genomic.fna"
@@ -64,27 +64,30 @@ conda activate busco
 for key in "${!assembly[@]}"
 do
     GENOME=${assembly[$key]}
-    if [ ! -f "$WORKDIR/$key/run_hemiptera_odb12/short_summary.txt" ]
+    if [ ! -f "$WORKDIR/$key/short_summary.specific.hemiptera_odb12.$key.json" ]
     then
-        mkdir -p "$WORKDIR/$key"
         busco -i "$GENOME" \
         -l hemiptera_odb12 \
         -m genome \
         -o $key \
         --out_path "$WORKDIR" \
-        --cpu 16 \
-        -f
+        --cpu 16
     fi
 done
 
 # collect only the short_summary files and move it into /home/tbessonn/busco/<key>
 for key in "${!assembly[@]}"
 do
-    if [ ! -f "/home/tbessonn/busco/$key/short_summary.txt" ]
+    if [ ! -f "/home/tbessonn/busco/$key/short_summary.specific.hemiptera_odb12.$key.json" ]
     then
         mkdir -p "/home/tbessonn/0_busco/$key"
-        mv -f "/scratch/Bio/tbessonn/busco/$key/run_hemiptera_odb12/short_summary.txt" "/home/tbessonn/0_busco/$key/"
+        mv -f "/scratch/Cascade/tbessonn/1_busco/$key/short_summary.specific.hemiptera_odb12.$key.txt" "/home/tbessonn/0_busco/$key/"
+        mv -f "/scratch/Cascade/tbessonn/1_busco/$key/short_summary.specific.hemiptera_odb12.$key.json" "/home/tbessonn/0_busco/$key/"
     fi
 done
+
+cd /home/tbessonn/0_busco
+
+busco --plot /home/tbessonn/0_busco/
 
 conda deactivate
