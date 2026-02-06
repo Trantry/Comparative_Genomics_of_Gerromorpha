@@ -8,14 +8,14 @@
 #SBATCH --output=/home/tbessonn/stdout/%A_%a.out # standard output file format
 #SBATCH --error=/home/tbessonn/stderr/%A_%a.err # error file format
 
-mkdir -p /scratch/Cascade/tbessonn/busco
-WORKDIR=/scratch/Cascade/tbessonn/busco
+mkdir -p /scratch/Cascade/tbessonn/busco_annotation
+WORKDIR=/scratch/Cascade/tbessonn/busco_annotation
 ROOTDIR=/home/tbessonn/1_Eviann
 
 # building an associative array with the genomes of 8 species of gerromorpha
 declare -A assembly
 assembly[A_paludum]="$ROOTDIR/A_paludum/GCA_052327185.1_ASM5232718v1_genomic.fna.transcripts.fasta"
-#assembly[G_buenoi]="$ROOTDIR/"
+assembly[G_buenoi]="$ROOTDIR/G_buenoi/genome.softmasked.fa.transcripts.fasta"
 assembly[G_lacustris]="$ROOTDIR/G_lacustris/GCA_951217055.1_ihGerLacu2.1_genomic.fna.transcripts.fasta"
 assembly[G_odontogaster]="$ROOTDIR/G_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa.transcripts.fasta"
 assembly[H_lingyangjiaoensis]="$ROOTDIR//H_lingyangjiaoensis/GCA_026182355.1_ASM2618235v1_genomic.fna.transcripts.fasta"
@@ -47,9 +47,8 @@ conda activate busco
 for key in "${!assembly[@]}"
 do
     GENOME=${assembly[$key]}
-    if [ ! -f "$WORKDIR/$key/run_hemiptera_odb12/short_summary.txt" ]
+    if [ ! -f "$WORKDIR/$key/short_summary.specific.hemiptera_odb12.$key.json" ]
     then
-        mkdir -p "$WORKDIR/$key"
         busco -i "$GENOME" \
         -l hemiptera_odb12 \
         -m genome \
@@ -63,10 +62,11 @@ done
 # collect only the short_summary files and move it into /home/tbessonn/busco/<key>
 for key in "${!assembly[@]}"
 do
-    if [ ! -f "/home/tbessonn/busco/$key/short_summary.txt" ]
+    if [ ! -f "/home/tbessonn/2_busco_annotation/$key/short_summary.specific.hemiptera_odb12.$key.json" ]
     then
         mkdir -p "/home/tbessonn/2_busco_annotation/$key"
-        mv -f "/scratch/Cascade/tbessonn/busco/$key/run_hemiptera_odb12/short_summary.txt" "/home/tbessonn/2_busco_annotation/$key/"
+        mv -f "$WORKDIR/$key/short_summary.specific.hemiptera_odb12.$key.txt" "/home/tbessonn/2_busco_annotation/$key/"
+        mv -f "$WORKDIR/$key/short_summary.specific.hemiptera_odb12.$key.json" "/home/tbessonn/2_busco_annotation/$key/"
     fi
 done
 
