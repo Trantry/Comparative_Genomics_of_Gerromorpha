@@ -15,6 +15,7 @@ ROOTDIR=/home/tbessonn/ressources/genomes
 # building an associative array with the genomes of 8 species of gerromorpha
 declare -A assembly
 assembly[A_paludum]="$ROOTDIR/gerromorpha/aquarius_paludum/ncbi_dataset/ncbi_dataset/data/GCA_052327185.1/GCA_052327185.1_ASM5232718v1_genomic.fna"
+assembly[A_najas]="$ROOTDIR/gerromorpha/Aquarius_najas/Anajas_softmasked_genome.fa"
 assembly[G_buenoi]="$ROOTDIR/gerromorpha/gerris_buenoi/water_strider_11Jul2018_yVXgK.fasta"
 assembly[G_buenoi_new]="$ROOTDIR/gerromorpha/gerris_buenoi/new/genome.softmasked.fa"
 assembly[G_lacustris_ref]="$ROOTDIR/gerromorpha/gerris_lacustris/ncbi_dataset-2/ncbi_dataset/data/GCA_951217055.1/GCA_951217055.1_ihGerLacu2.1_genomic.fna"
