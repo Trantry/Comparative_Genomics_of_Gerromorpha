@@ -1,0 +1,5 @@
+A_suturalis /home/tbessonn/ressources/genomes/non_gerromorpha/cimicomorpha/adelphocoris_suturalis/ncbi_dataset/ncbi_dataset/data/GCA_030762985.1/GCA_030762985.1_ASM3076298v1_genomic.fna
+A_lucorum /home/tbessonn/ressources/genomes/non_gerromorpha/cimicomorpha/apolygus_lucorum/ncbi_dataset/ncbi_dataset/data/GCA_009739505.2/GCA_009739505.2_ASM973950v2_genomic.fna
+C_lectularius_Genbank /home/tbessonn/ressources/genomes/non_gerromorpha/cimicomorpha/cimex_lectularius/ncbi_dataset/ncbi_dataset/data/GCA_000648675.3/GCA_000648675.3_Clec_2.1_genomic.fna
+R_fuscipes /home/tbessonn/ressources/genomes/non_gerromorpha/cimicomorpha/rhynocoris_fuscipes/ncbi_dataset/ncbi_dataset/data/GCA_040020575.1/GCA_040020575.1_Rfu_1.0_genomic.fna
+T_infestans /home/tbessonn/ressources/genomes/non_gerromorpha/cimicomorpha/triatoma_infestans/ncbi_dataset/ncbi_dataset/data/GCA_965641795.1/GCA_965641795.1_ihTriInfe1.hap1.1_genomic.fna

@@ -15,10 +15,11 @@ ROOTDIR=/home/tbessonn/1_Eviann
 # building an associative array with the genomes of 8 species of gerromorpha
 declare -A assembly
 assembly[A_paludum]="$ROOTDIR/A_paludum/GCA_052327185.1_ASM5232718v1_genomic.fna.transcripts.fasta"
+assembly[A_najas]="$ROOTDIR/A_najas/Anajas_softmasked_genome.fa.transcripts.fasta"
 assembly[G_buenoi]="$ROOTDIR/G_buenoi/genome.softmasked.fa.transcripts.fasta"
 assembly[G_lacustris]="$ROOTDIR/G_lacustris/GCA_951217055.1_ihGerLacu2.1_genomic.fna.transcripts.fasta"
 assembly[G_odontogaster]="$ROOTDIR/G_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa.transcripts.fasta"
-assembly[H_lingyangjiaoensis]="$ROOTDIR//H_lingyangjiaoensis/GCA_026182355.1_ASM2618235v1_genomic.fna.transcripts.fasta"
+assembly[H_lingyangjiaoensis]="$ROOTDIR/H_lingyangjiaoensis/GCA_026182355.1_ASM2618235v1_genomic.fna.transcripts.fasta"
 #assembly[M_longipes]="$ROOTDIR/"
 assembly[R_antilleana]="$ROOTDIR/R_antilleana/rhagovelia_antilleana_genome_fourth_polish.fasta.renamed.transcripts.fasta"
 assembly[T_zetteli]="$ROOTDIR/T_zetteli/tzet_genome_flye_v4_unmasked.fasta.transcripts.fasta"
@@ -34,7 +35,7 @@ assembly[R_fuscipes]="$ROOTDIR/R_fuscipes/GCA_040020575.1_Rfu_1.0_genomic.fna.tr
 assembly[T_infestans]="$ROOTDIR/T_infestans/GCA_965641795.1_ihTriInfe1.hap1.1_genomic.fna.transcripts.fasta"
 
 # building an associative array with the genomes of 5 species of non gerromorpha (Pentatomomorpha)
-#assembly[A_truncatus]="$ROOTDIR/"
+assembly[A_truncatus]="$ROOTDIR/A_truncatus/GCA_965153375.1_ihAraTrun1.hap1.1_genomic.fna.transcripts.fasta"
 assembly[E_furcellata]="$ROOTDIR/E_furcellata/GCA_052550355.1_ASM5255035v1_genomic.fna.transcripts.fasta"
 assembly[G_acuteangulatus]="$ROOTDIR/G_acuteangulatus/GCA_946811695.1_ihGonAcut1.1_genomic.fna.transcripts.fasta"
 assembly[O_fasciatus]="$ROOTDIR/O_fasciatus/GCA_000696205.2_Ofas_2.0_genomic.fna.transcripts.fasta"

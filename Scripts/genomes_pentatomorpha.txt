@@ -1,0 +1,5 @@
+A_truncatus /home/tbessonn/ressources/genomes/non_gerromorpha/pentatomomorpha/aradus_truncatus/ncbi_dataset/ncbi_dataset/data/GCA_965153375.1/GCA_965153375.1_ihAraTrun1.hap1.1_genomic.fna
+E_furcellata /home/tbessonn/ressources/genomes/non_gerromorpha/pentatomomorpha/eocanthecona_furcellata/ncbi_dataset/ncbi_dataset/data/GCA_052550355.1/GCA_052550355.1_ASM5255035v1_genomic.fna
+G_acuteangulatus /home/tbessonn/ressources/genomes/non_gerromorpha/pentatomomorpha/gonocerus_acuteangulatus/ncbi_dataset/ncbi_dataset/data/GCA_946811695.1/GCA_946811695.1_ihGonAcut1.1_genomic.fna
+O_fasciatus /home/tbessonn/ressources/genomes/non_gerromorpha/pentatomomorpha/oncopeltus_fasciatus/ncbi_dataset/ncbi_dataset/data/GCA_000696205.2/GCA_000696205.2_Ofas_2.0_genomic.fna
+R_pedestris /home/tbessonn/ressources/genomes/non_gerromorpha/pentatomomorpha/riptortus_pedestris/ncbi_dataset/ncbi_dataset/data/GCA_019009955.1/GCA_019009955.1_ASM1900995v1_genomic.fna

@@ -1,0 +1,1 @@
+R_chinensis /home/tbessonn/ressources/genomes/non_gerromorpha/nepomorpha/ranatra_chinensis/ncbi_dataset/ncbi_dataset/data/GCA_040954505.1/GCA_040954505.1_ASM4095450v1_genomic.fna
