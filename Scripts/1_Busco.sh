@@ -4,15 +4,15 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=100G
 #SBATCH --time=02-00:00:00
-#SBATCH --partition=Cascade
-#SBATCH --output=/home/tbessonn/stdout/%A_%a.out # standard output file format
-#SBATCH --error=/home/tbessonn/stderr/%A_%a.err # error file format
+#SBATCH --partition=Cascade,Genoa-premium,Emerald-premium
+#SBATCH --output=/home/tbessonn/stdout/%x_%A_%a.out
+#SBATCH --error=/home/tbessonn/stderr/%x_%A_%a.err
 
 mkdir -p /scratch/Cascade/tbessonn/1_busco
 WORKDIR=/scratch/Cascade/tbessonn/1_busco
 ROOTDIR=/home/tbessonn/ressources/genomes
 
-# building an associative array with the genomes of 8 species of gerromorpha
+# building an associative array with the genomes of 9 species of gerromorpha
 declare -A assembly
 assembly[A_paludum]="$ROOTDIR/gerromorpha/aquarius_paludum/ncbi_dataset/ncbi_dataset/data/GCA_052327185.1/GCA_052327185.1_ASM5232718v1_genomic.fna"
 assembly[A_najas]="$ROOTDIR/gerromorpha/Aquarius_najas/Anajas_softmasked_genome.fa"

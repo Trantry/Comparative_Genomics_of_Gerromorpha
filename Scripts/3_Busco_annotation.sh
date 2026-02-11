@@ -4,9 +4,9 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=100G
 #SBATCH --time=02-00:00:00
-#SBATCH --partition=Cascade
-#SBATCH --output=/home/tbessonn/stdout/%A_%a.out # standard output file format
-#SBATCH --error=/home/tbessonn/stderr/%A_%a.err # error file format
+#SBATCH --partition=Cascade,Genoa-premium,Emerald-premium
+#SBATCH --output=/home/tbessonn/stdout/%x_%A_%a.out
+#SBATCH --error=/home/tbessonn/stderr/%x_%A_%a.err
 
 mkdir -p /scratch/Cascade/tbessonn/busco_annotation
 WORKDIR=/scratch/Cascade/tbessonn/busco_annotation
