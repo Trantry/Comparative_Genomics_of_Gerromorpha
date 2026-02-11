@@ -5,11 +5,11 @@
 #SBATCH --mem=48G
 #SBATCH --time=05-15:00:00
 #SBATCH --partition=Cascade
-#SBATCH --output=/home/tbessonn/stdout/%A_%a.out # standard output file format
-#SBATCH --error=/home/tbessonn/stderr/%A_%a.err # error file format
+#SBATCH --output=/home/tbessonn/stdout/%x_%A_%a.out
+#SBATCH --error=/home/tbessonn/stderr/%x_%A_%a.err
 
 
-# Simple : pour chaque */SraAccList.csv, télécharge chaque accession puis convertit en FASTQ dans le même dossier.
+# Pour chaque */SraAccList.csv, télécharge chaque accession puis convertit en FASTQ dans le même dossier.
 for csv in /scratch/Cascade/tbessonn/RNA-seq/*/SraAccList.csv; do
   dir=$(dirname "$csv")
   tail -n +2 "$csv" | while read acc; do

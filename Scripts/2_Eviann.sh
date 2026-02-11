@@ -1,38 +1,39 @@
 #!/bin/bash
-#SBATCH --job-name=A_najas_Eviann
+#SBATCH --job-name=M_longipes_Eviann
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
-#SBATCH --mem=120G
+#SBATCH --mem=164G
 #SBATCH --time=06-00:00:00
-#SBATCH --partition=Cascade
-#SBATCH --output=/home/tbessonn/stdout/%A_%a.out # standard output file format
-#SBATCH --error=/home/tbessonn/stderr/%A_%a.err # error file format
+#SBATCH --partition=Lake,Epyc,Lake-premium
+#SBATCH --output=/home/tbessonn/stdout/%x_%A_%a.out
+#SBATCH --error=/home/tbessonn/stderr/%x_%A_%a.err
 
 source "${HOME}/miniconda3/etc/profile.d/conda.sh"
 conda activate eviann
 
 #Variables
-WORKDIR=/scratch/Cascade/tbessonn/Eviann
+WORKDIR=/scratch/Bio/tbessonn/Eviann
 ROOTDIR=/home/tbessonn/ressources/genomes
 EVIANN=${HOME}/miniconda3/envs/eviann/bin/eviann.sh
 PROT=/home/tbessonn/ressources/Protein/Heteroptera_Sternorrhyncha_G_buenoi_prot.fasta
-#Transcriptome=/scratch/Bio/tbessonn/transcriptome/M_longipes/10024092.1_Microvelia_longipes.trinity.fa
-Transcriptome=/home/tbessonn/ressources/transcriptomes/A_najas/Aqu_naj_trinity.Trinity.fasta
+#Transcriptome=/home/tbessonn/ressources/transcriptomes/G_buenoi/gerbue_OGSv1.1_trans.fa
+Transcriptome=/scratch/Bio/tbessonn/transcriptome/M_longipes/10024092.1_Microvelia_longipes.trinity.fa
 #For paired-end:
 #paste <(ls $PWD/*_1.fastq) <(ls $PWD/*_2.fastq) > paired.txt
 # For single-end:
 #ls "$PWD"/*.fastq | grep -Ev '(_1|_2)\.fastq$' >> paired.txt
-RNASEQ=/home/tbessonn/ressources/RNA_seq/Gerromorpha/A_najas/paired.txt
+#RNASEQ=/home/tbessonn/ressources/RNA_seq/Gerromorpha/G_buenoi/paired.txt
+RNASEQ=/home/tbessonn/ressources/RNA_seq/Gerromorpha/M_longipes/paired.txt
 
 # building an associative array with the genomes of 9 species of gerromorpha
 declare -A assembly
 #assembly[A_paludum]="$ROOTDIR/gerromorpha/aquarius_paludum/ncbi_dataset/ncbi_dataset/data/GCA_052327185.1/GCA_052327185.1_ASM5232718v1_genomic.fna"
-assembly[A_najas]="$ROOTDIR/gerromorpha/Aquarius_najas/Anajas_softmasked_genome.fa"
+#assembly[A_najas]="$ROOTDIR/gerromorpha/Aquarius_najas/Anajas_softmasked_genome.fa"
 #assembly[G_buenoi]="$ROOTDIR/gerromorpha/gerris_buenoi/new/genome.softmasked.fa"
 #assembly[G_lacustris]="$ROOTDIR/gerromorpha/gerris_lacustris/ncbi_dataset-2/ncbi_dataset/data/GCA_951217055.1/GCA_951217055.1_ihGerLacu2.1_genomic.fna"
 #assembly[G_odontogaster]="$ROOTDIR/gerromorpha/gerris_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa"
 #assembly[H_lingyangjiaoensis]="$ROOTDIR/gerromorpha/hermatobates_lingyangjiaoensis/ncbi_dataset/ncbi_dataset/data/GCA_026182355.1/GCA_026182355.1_ASM2618235v1_genomic.fna"
-#assembly[M_longipes]="$ROOTDIR/gerromorpha/microvelia_longipes/Mlon_polished_genome_round2.fasta"
+assembly[M_longipes]="$ROOTDIR/gerromorpha/microvelia_longipes/Mlon_polished_genome_round2.fasta"
 #assembly[R_antilleana]="$ROOTDIR/gerromorpha/rhagovelia_antilleana/unmasked_genome/rhagovelia_antilleana_genome_fourth_polish.fasta.renamed"
 #assembly[T_zetteli]="$ROOTDIR/gerromorpha/tetraripis_zetteli/tzet_genome_flye_v4_unmasked.fasta"
 
@@ -48,7 +49,7 @@ assembly[A_najas]="$ROOTDIR/gerromorpha/Aquarius_najas/Anajas_softmasked_genome.
 #assembly[T_infestans]="$ROOTDIR/non_gerromorpha/cimicomorpha/triatoma_infestans/ncbi_dataset/ncbi_dataset/data/GCA_965641795.1/GCA_965641795.1_ihTriInfe1.hap1.1_genomic.fna"
 
 # building an associative array with the genomes of 5 species of non gerromorpha (Pentatomomorpha)
-#assembly[A_truncatus]="$ROOTDIR/non_gerromorpha/pentatomomorpha/aradus_truncatus/ncbi_dataset/ncbi_dataset/data/GCA_965153375.1/GCA_965153375.1_ihAraTrun1.hap1.1_genomic.fna"
+#assembly[P_apterus]="$ROOTDIR/non_gerromorpha/pentatomomorpha/pyrrhocoris_apterus/ncbi_dataset/ncbi_dataset/data/GCA_039877355.1/GCA_039877355.1_ASM3987735v1_genomic.fna"
 #assembly[E_furcellata]="$ROOTDIR/non_gerromorpha/pentatomomorpha/eocanthecona_furcellata/ncbi_dataset/ncbi_dataset/data/GCA_052550355.1/GCA_052550355.1_ASM5255035v1_genomic.fna"
 #assembly[G_acuteangulatus]="$ROOTDIR/non_gerromorpha/pentatomomorpha/gonocerus_acuteangulatus/ncbi_dataset/ncbi_dataset/data/GCA_946811695.1/GCA_946811695.1_ihGonAcut1.1_genomic.fna"
 #assembly[O_fasciatus]="$ROOTDIR/non_gerromorpha/pentatomomorpha/oncopeltus_fasciatus/ncbi_dataset/ncbi_dataset/data/GCA_000696205.2/GCA_000696205.2_Ofas_2.0_genomic.fna"
