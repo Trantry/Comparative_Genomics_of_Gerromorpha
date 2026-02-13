@@ -2,7 +2,7 @@
 #SBATCH --job-name=M_longipes_Eviann
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
-#SBATCH --mem=164G
+#SBATCH --mem=120G
 #SBATCH --time=06-00:00:00
 #SBATCH --partition=Lake,Epyc,Lake-premium
 #SBATCH --output=/home/tbessonn/stdout/%x_%A_%a.out
