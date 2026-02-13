@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --array=0-4
-#SBATCH --job-name=Pentatomorpha_earlgrey
+#SBATCH --array=0-8
+#SBATCH --job-name=Gerromorpha_earlgrey
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=364G
@@ -13,10 +13,10 @@
 # Place genomes*.txt next to this script.
 
 WORKDIR=/home/tbessonn/2_Earlgrey
-#GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/genomes_gerromorpha.txt
+GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/genomes_gerromorpha.txt
 #GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/genomes_cimicomorpha.txt
 #GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/genomes_nepomorpha.txt
-GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/genomes_pentatomorpha.txt
+#GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/genomes_pentatomorpha.txt
 read KEY GENOME < <(sed -n "$((SLURM_ARRAY_TASK_ID+1))p" $GENOME_FILE)
 
 OUTDIR=$WORKDIR/$KEY
