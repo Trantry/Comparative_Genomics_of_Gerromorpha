@@ -1,1 +1,2 @@
+Scripts/2_Genome_Annotation/*.fasta filter=lfs diff=lfs merge=lfs -text
 Scripts/2_Genome_Annotation/Heteroptera_Sternorrhyncha_G_buenoi_prot.fasta filter=lfs diff=lfs merge=lfs -text
