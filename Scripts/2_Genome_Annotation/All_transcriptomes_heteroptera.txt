@@ -1,0 +1,20 @@
+Aquarius_paludum /home/tbessonn/ressources/transcriptomes/A_paludum/A_paludum_trinity_combined.fasta
+Aquarius_najas /home/tbessonn/ressources/transcriptomes/A_najas/Aqu_naj_trinity.Trinity.fasta
+Gerris_lacustris /home/tbessonn/ressources/transcriptomes/G_lacustris/Ger_lac_trinity.Trinity.fasta
+Hermatobates_lingyangjiaoensis /home/tbessonn/ressources/transcriptomes/H_lingyangjiaoensis/Hermatobates_lingyangjiaoensis_trinity.fasta
+Microvelia_longipes /home/tbessonn/ressources/transcriptomes/M_longipes/10024092.1_Microvelia_longipes.trinity.fa
+Tetraripis_zetteli /home/tbessonn/ressources/transcriptomes/T_zetteli/tzet_transcriptome_trinity.fasta
+Gerris_buenoi /home/tbessonn/ressources/transcriptomes/G_buenoi/gerbue_OGSv1.1_trans.fa
+Rhagovelia_antilleana /home/tbessonn/ressources/transcriptomes/R_antilleana/10024092.1_Rhagovelia_sp__Puerto_Rico.trinity.fa
+Gerris_odontogaster /home/tbessonn/ressources/transcriptomes/G_odontogaster/Ger_odo_trinity.Trinity.fasta
+Adelphocoris_suturalis /home/tbessonn/ressources/transcriptomes/A_lucorum/SRR10605280.fastq
+Apolygus_lucorum /home/tbessonn/ressources/transcriptomes/A_lucorum/SRR10605280.fastq
+Cimex_lectularius /home/tbessonn/ressources/transcriptomes/A_lucorum/SRR10605280.fastq
+Rhynocoris_fuscipes
+Triatoma_infestans
+Ranatra_chinensis /home/tbessonn/ressources/transcriptomes/R_antilleana/10024092.1_Rhagovelia_sp__Puerto_Rico.trinity.fa
+Pyrrhocoris_apterus /home/tbessonn/ressources/transcriptomes/P_apterus/P_apterus_trinity_combined.fasta
+Eocanthecona_furcellata /home/tbessonn/ressources/transcriptomes/E_furcellata/SRR22405946.fastq
+Gonocerus_acuteangulatus /home/tbessonn/ressources/transcriptomes/E_furcellata/SRR22405946.fastq
+Oncopeltus_fasciatus /home/tbessonn/ressources/transcriptomes/E_furcellata/SRR22405946.fastq
+Riptorus_pedestris /home/tbessonn/ressources/transcriptomes/E_furcellata/SRR22405946.fastq

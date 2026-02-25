@@ -1,0 +1,5 @@
+pyrrhocorisApterus /home/tbessonn/ressources/genomes/non_gerromorpha/pentatomomorpha/pyrrhocoris_apterus/ncbi_dataset/ncbi_dataset/data/GCA_039877355.1/GCA_039877355.1_ASM3987735v1_genomic.fna
+eocantheconaFurcellata /home/tbessonn/ressources/genomes/non_gerromorpha/pentatomomorpha/eocanthecona_furcellata/ncbi_dataset/ncbi_dataset/data/GCA_052550355.1/GCA_052550355.1_ASM5255035v1_genomic.fna
+gonoceruAcuteangulatus /home/tbessonn/ressources/genomes/non_gerromorpha/pentatomomorpha/gonocerus_acuteangulatus/ncbi_dataset/ncbi_dataset/data/GCA_946811695.1/GCA_946811695.1_ihGonAcut1.1_genomic.fna
+oncopeltusFasciatus /home/tbessonn/ressources/genomes/non_gerromorpha/pentatomomorpha/oncopeltus_fasciatus/ncbi_dataset/ncbi_dataset/data/GCA_000696205.2/GCA_000696205.2_Ofas_2.0_genomic.fna
+riptorusPedestris /home/tbessonn/ressources/genomes/non_gerromorpha/pentatomomorpha/riptortus_pedestris/ncbi_dataset/ncbi_dataset/data/GCA_019009955.1/GCA_019009955.1_ASM1900995v1_genomic.fna

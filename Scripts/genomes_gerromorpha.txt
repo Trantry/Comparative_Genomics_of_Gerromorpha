@@ -1,9 +1,0 @@
-A_paludum /home/tbessonn/ressources/genomes/gerromorpha/aquarius_paludum/ncbi_dataset/ncbi_dataset/data/GCA_052327185.1/GCA_052327185.1_ASM5232718v1_genomic.fna
-A_najas /home/tbessonn/ressources/genomes/gerromorpha/Aquarius_najas/Anajas_softmasked_genome.fa
-G_lacustris /home/tbessonn/ressources/genomes/gerromorpha/gerris_lacustris/ncbi_dataset-2/ncbi_dataset/data/GCA_951217055.1/GCA_951217055.1_ihGerLacu2.1_genomic.fna
-H_lingyangjiaoensis /home/tbessonn/ressources/genomes/gerromorpha/hermatobates_lingyangjiaoensis/ncbi_dataset/ncbi_dataset/data/GCA_026182355.1/GCA_026182355.1_ASM2618235v1_genomic.fna
-M_longipes /home/tbessonn/ressources/genomes/gerromorpha/microvelia_longipes/Mlon_polished_genome_round2.fasta
-T_zetteli /home/tbessonn/ressources/genomes/gerromorpha/tetraripis_zetteli/tzet_genome_flye_v4_unmasked.fasta
-G_buenoi /home/tbessonn/ressources/genomes/gerromorpha/gerris_buenoi/new/genome.softmasked.fa
-R_antilleana /home/tbessonn/ressources/genomes/gerromorpha/rhagovelia_antilleana/unmasked_genome/rhagovelia_antilleana_genome_fourth_polish.fasta.renamed
-G_odontogaster /home/tbessonn/ressources/genomes/gerromorpha/gerris_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa

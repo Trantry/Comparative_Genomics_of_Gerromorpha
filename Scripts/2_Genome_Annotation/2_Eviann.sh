@@ -3,7 +3,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=120G
-#SBATCH --time=06-00:00:00
+#SBATCH --time=07-00:00:00
 #SBATCH --partition=Lake,Epyc,Lake-premium
 #SBATCH --output=/home/tbessonn/stdout/%x_%A_%a.out
 #SBATCH --error=/home/tbessonn/stderr/%x_%A_%a.err
