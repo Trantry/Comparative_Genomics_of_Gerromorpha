@@ -1,0 +1,385 @@
+---
+title: "Repeatlandscape"
+execute:
+  echo: true
+  warning: false
+format:
+  docx:
+    toc: true
+    number-sections: true
+    highlight-style: github
+  html:
+    toc: true
+    number-sections: true
+    self-contained: true
+  pdf:
+    toc: true
+    number-sections: true 
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+# Environment setup
+
+```{r}
+#| eval: false
+save.image(file = "/Users/trystanbessonnier/Desktop/Genomique_comparative/Earlgrey/RepeatLandscape.RData")
+```
+
+```{r}
+#| eval: false
+load(file = "/Users/trystanbessonnier/Desktop/Genomique_comparative/Earlgrey/RepeatLandscape.RData")
+```
+
+## 1. Data loading
+
+```{r}
+#Define the environment here. 
+setwd("/Users/trystanbessonnier/Desktop/Genomique_comparative/Earlgrey/")
+
+#Install packages
+install.packages("ggplot2")
+BiocManager::install("plyranges")
+install.packages("gridtext")
+install.packages("ggtext")
+```
+
+```{r}
+library(plyranges)
+library(dplyr)
+library(ggplot2)
+library(ggtext)
+library(gridtext)
+library(readr)
+library(tibble)
+library(optparse)
+```
+
+## Earlgrey Code for 1 species (Nepomorpha)
+
+```{r}
+# ---- Paramètres (à adapter) ----
+species_name_nepo <- "Ranatra_chinensis"
+in_gff_nepo <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape/Ranatra_chinensis.filteredRepeats.gff"
+out_directory_nepo <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape/output"
+axis_flip_nepo <- TRUE
+y_limit_nepo <- 7.5e7   # même échelle Y demandée
+
+# ---- Lecture ----
+divergence_eg_gff_nepo <- read_gff(in_gff_nepo)
+divergence_eg_tes_gff_nepo <- as_tibble(divergence_eg_gff_nepo)
+
+# Calculer width si nécessaire (nécessite start/end)
+if(!("width" %in% colnames(divergence_eg_tes_gff_nepo)) && all(c("start","end") %in% colnames(divergence_eg_tes_gff_nepo))) {
+  divergence_eg_tes_gff_nepo <- divergence_eg_tes_gff_nepo %>%
+    mutate(width = as.numeric(end) - as.numeric(start) + 1)
+}
+
+# ---- Classification minimale ----
+divergence_eg_tes_gff_nepo <- divergence_eg_tes_gff_nepo %>%
+  mutate(subclass = sub("/.*", "", type),
+         superfamily = sub("-.*", "", sub(".*/", "", type))) %>%
+  mutate(subclass = ifelse(superfamily == "Penelope", "PLE", subclass)) %>%
+  mutate(subclass = ifelse(subclass %in% c("DNA","LINE","LTR","PLE","RC","SINE","Unknown"), subclass, "Other")) %>%
+  mutate(named_subclass = case_when(subclass == "DNA" ~ "DNA Transposon",
+                                    subclass == "LTR" ~ "LTR Retrotransposon",
+                                    subclass == "PLE" ~ "Penelope",
+                                    subclass == "RC" ~ "Rolling Circle",
+                                    TRUE ~ subclass))
+
+# ---- Préparation des données pour les plots (utilise 'kimura80' minuscule) ----
+divergence_eg_tes_rounded_for_plot_nepo <- divergence_eg_tes_gff_nepo %>%
+  filter(!is.na(kimura80)) %>%
+  mutate(kimura80 = as.numeric(kimura80)) %>%
+  filter(kimura80 <= 0.5) %>%
+  mutate(kimura80 = round(kimura80, 2)) %>%
+  group_by(named_subclass, kimura80) %>%
+  mutate(KIMURA_SUM = sum(width, na.rm = TRUE)) %>%
+  ungroup() %>%
+  select(subclass, named_subclass, kimura80, KIMURA_SUM) %>%
+  unique() %>%
+  arrange(named_subclass, kimura80)
+
+# ---- Couleurs ----
+fill_colours_nepo <- tibble(subclass = c("DNA","LINE","LTR","PLE","RC","SINE","Other","Unknown"),
+                       named_subclass = c("DNA Transposon","LINE","LTR Retrotransposon","Penelope","Rolling Circle","SINE","Other","Unknown"),
+                       fill_colour = c("#E32017","#0098D4","#00782A","#7156A5","#EE7C0E","#9B0056","#F3A9BB","#A0A5A9")) %>%
+  filter(subclass %in% divergence_eg_tes_rounded_for_plot_nepo$subclass) %>%
+  arrange(named_subclass)
+
+# ---- Plots (avec y_limit appliqué) ----
+plot_title_nepo <- paste0("Repeat landscape of *", gsub("_", " ", species_name_nepo), "*")
+kimura_plot_nepo <- ggplot(divergence_eg_tes_rounded_for_plot_nepo, aes(x = kimura80, y = KIMURA_SUM, fill = named_subclass)) +
+  geom_col(position = "stack", width = 0.01) +
+  theme_bw() +
+  labs(title = plot_title_nepo) + theme(plot.title = element_markdown(hjust = 0.5)) +
+  scale_fill_manual(values = fill_colours_nepo$fill_colour, name = "TE Subclass")
+
+subclass_kimura_plot_nepo <- kimura_plot_nepo +
+  scale_y_continuous(limits = c(0, y_limit_nepo), expand = c(0.01,0), name = "Base pairs")
+
+if(axis_flip_nepo){
+  subclass_kimura_plot_nepo <- subclass_kimura_plot_nepo +
+    scale_x_continuous(limits = c(0.51, -0.01), expand = c(0,0), name = "Kimura 2-Parameter Distance", trans = "reverse")
+} else {
+  subclass_kimura_plot_nepo <- subclass_kimura_plot_nepo +
+    scale_x_continuous(limits = c(-0.01, 0.51), expand = c(0,0), name = "Kimura 2-Parameter Distance")
+}
+ggsave(plot = subclass_kimura_plot_nepo, filename = paste0(out_directory_nepo, "/", species_name_nepo, "_classification_landscape_nepo.pdf"), device = "pdf", width = 12.85, height = 8.5)
+
+# Pour le plot scindé : utiliser scales="fixed" si tu veux la même échelle Y sur toutes les facettes
+split_subclass_kimura_plot_nepo <- kimura_plot_nepo +
+  scale_y_continuous(limits = c(0, y_limit_nepo), name = "Base pairs", labels = function(x) format(x, scientific = TRUE)) +
+  facet_grid(subclass ~ ., scales = "fixed")
+
+if(axis_flip_nepo){
+  split_subclass_kimura_plot_nepo <- split_subclass_kimura_plot_nepo +
+    scale_x_continuous(limits = c(0.51, -0.01), expand = c(0,0), name = "Kimura 2-Parameter Distance", trans = "reverse")
+} else {
+  split_subclass_kimura_plot_nepo <- split_subclass_kimura_plot_nepo +
+    scale_x_continuous(limits = c(-0.01, 0.51), expand = c(0,0), name = "Kimura 2-Parameter Distance")
+}
+ggsave(plot = split_subclass_kimura_plot_nepo, filename = paste0(out_directory_nepo, "/", species_name_nepo, "_split_class_landscape_nepo.pdf"), device = "pdf", width = 12.85, height = 8.5)
+```
+
+## Same scale Gerromorpha
+
+```{r}
+# Gerromorpha (variables suffixées _gerro)
+gff_dir_gerro <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape"
+species_list_gerro <- c(
+  "Aquarius_najas",
+  "Aquarius_paludum",
+  "Gerris_buenoi",
+  "Gerris_lacustris",
+  "Gerris_odontogaster",
+  "Hermatobates_lingyangjiaoensis",
+  "Microvelia_longipes",
+  "Rhagovelia_antilleana",
+  "Tetraripis_zetteli"
+)
+out_directory_gerro <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape/output"
+axis_flip_gerro <- TRUE
+y_limit_gerro <- 7.5e7
+
+process_gff_gerro <- function(gff_path, species_name) {
+  g <- read_gff(gff_path)
+  df <- as_tibble(g)
+  if(!("width" %in% colnames(df)) && all(c("start","end") %in% colnames(df))) {
+    df <- df %>% mutate(width = as.numeric(end) - as.numeric(start) + 1)
+  }
+  df <- df %>%
+    mutate(subclass = sub("/.*", "", type),
+           superfamily = sub("-.*", "", sub(".*/", "", type))) %>%
+    mutate(subclass = ifelse(superfamily == "Penelope", "PLE", subclass)) %>%
+    mutate(subclass = ifelse(subclass %in% c("DNA","LINE","LTR","PLE","RC","SINE","Unknown"), subclass, "Other")) %>%
+    mutate(named_subclass = case_when(
+      subclass == "DNA" ~ "DNA Transposon",
+      subclass == "LTR" ~ "LTR Retrotransposon",
+      subclass == "PLE" ~ "Penelope",
+      subclass == "RC" ~ "Rolling Circle",
+      TRUE ~ subclass
+    ))
+  out <- df %>%
+    filter(!is.na(kimura80)) %>%
+    mutate(kimura80 = as.numeric(kimura80)) %>%
+    filter(kimura80 <= 0.5) %>%
+    mutate(kimura80 = round(kimura80, 2)) %>%
+    group_by(named_subclass, kimura80) %>%
+    mutate(KIMURA_SUM = sum(width, na.rm = TRUE)) %>%
+    ungroup() %>%
+    select(subclass, named_subclass, kimura80, KIMURA_SUM) %>%
+    unique() %>%
+    arrange(named_subclass, kimura80) %>%
+    mutate(species = species_name)
+  return(out)
+}
+
+all_dfs_gerro <- lapply(species_list_gerro, function(sp) {
+  gff_path <- file.path(gff_dir_gerro, paste0(sp, ".filteredRepeats.gff"))
+  process_gff_gerro(gff_path, sp)
+})
+df_all_gerro <- bind_rows(all_dfs_gerro)
+
+fill_colours_gerro <- tibble(subclass = c("DNA","LINE","LTR","PLE","RC","SINE","Other","Unknown"),
+                       named_subclass = c("DNA Transposon","LINE","LTR Retrotransposon","Penelope","Rolling Circle","SINE","Other","Unknown"),
+                       fill_colour = c("#E32017","#0098D4","#00782A","#7156A5","#EE7C0E","#9B0056","#F3A9BB","#A0A5A9")) %>%
+  filter(subclass %in% df_all_gerro$subclass) %>%
+  arrange(named_subclass)
+
+plot_title_gerro <- "Repeat landscapes Gerromorpha"
+p_gerro <- ggplot(df_all_gerro, aes(x = kimura80, y = KIMURA_SUM, fill = named_subclass)) +
+  geom_col(position = "stack", width = 0.01) +
+  scale_fill_manual(values = fill_colours_gerro$fill_colour, name = "TE Subclass") +
+  facet_wrap(~species, ncol = 3, scales = "fixed") +
+  theme_bw() +
+  labs(title = plot_title_gerro) +
+  theme(plot.title = element_text(hjust = 0.5),
+        strip.text = element_text(size = 10)) +
+  scale_y_continuous(limits = c(0, y_limit_gerro), expand = c(0,0), name = "Base pairs") +
+  { if(axis_flip_gerro) scale_x_continuous(limits = c(0.51, -0.01), expand = c(0,0), name = "Kimura 2-Parameter Distance", trans = "reverse")
+    else scale_x_continuous(limits = c(-0.01, 0.51), expand = c(0,0), name = "Kimura 2-Parameter Distance")
+  }
+
+out_file_gerro <- file.path(out_directory_gerro, "9species_repeatlandscape_3x3_gerro.pdf")
+ggsave(plot = p_gerro, filename = out_file_gerro, device = "pdf", width = 12.85, height = 12)
+```
+
+## Same scale Cimicomorpha
+
+```{r}
+# Cimicomorpha (variables suffixées _cimico)
+gff_dir_cimico <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape"
+species_list_cimico <- c(
+  "Adelphocoris_suturalis",
+  "Apolygus_lucorum",
+  "Cimex_lectularius",
+  "Rhynocoris_fuscipes",
+  "Triatoma_infestans"
+)
+out_directory_cimico <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape/output"
+axis_flip_cimico <- TRUE
+y_limit_cimico <- 7.5e7
+
+process_gff_cimico <- function(gff_path, species_name) {
+  g <- read_gff(gff_path)
+  df <- as_tibble(g)
+  if(!("width" %in% colnames(df)) && all(c("start","end") %in% colnames(df))) {
+    df <- df %>% mutate(width = as.numeric(end) - as.numeric(start) + 1)
+  }
+  df <- df %>%
+    mutate(subclass = sub("/.*", "", type),
+           superfamily = sub("-.*", "", sub(".*/", "", type))) %>%
+    mutate(subclass = ifelse(superfamily == "Penelope", "PLE", subclass)) %>%
+    mutate(subclass = ifelse(subclass %in% c("DNA","LINE","LTR","PLE","RC","SINE","Unknown"), subclass, "Other")) %>%
+    mutate(named_subclass = case_when(
+      subclass == "DNA" ~ "DNA Transposon",
+      subclass == "LTR" ~ "LTR Retrotransposon",
+      subclass == "PLE" ~ "Penelope",
+      subclass == "RC" ~ "Rolling Circle",
+      TRUE ~ subclass
+    ))
+  out <- df %>%
+    filter(!is.na(kimura80)) %>%
+    mutate(kimura80 = as.numeric(kimura80)) %>%
+    filter(kimura80 <= 0.5) %>%
+    mutate(kimura80 = round(kimura80, 2)) %>%
+    group_by(named_subclass, kimura80) %>%
+    mutate(KIMURA_SUM = sum(width, na.rm = TRUE)) %>%
+    ungroup() %>%
+    select(subclass, named_subclass, kimura80, KIMURA_SUM) %>%
+    unique() %>%
+    arrange(named_subclass, kimura80) %>%
+    mutate(species = species_name)
+  return(out)
+}
+
+all_dfs_cimico <- lapply(species_list_cimico, function(sp) {
+  gff_path <- file.path(gff_dir_cimico, paste0(sp, ".filteredRepeats.gff"))
+  process_gff_cimico(gff_path, sp)
+})
+df_all_cimico <- bind_rows(all_dfs_cimico)
+
+fill_colours_cimico <- tibble(subclass = c("DNA","LINE","LTR","PLE","RC","SINE","Other","Unknown"),
+                       named_subclass = c("DNA Transposon","LINE","LTR Retrotransposon","Penelope","Rolling Circle","SINE","Other","Unknown"),
+                       fill_colour = c("#E32017","#0098D4","#00782A","#7156A5","#EE7C0E","#9B0056","#F3A9BB","#A0A5A9")) %>%
+  filter(subclass %in% df_all_cimico$subclass) %>%
+  arrange(named_subclass)
+
+plot_title_cimico <- "Repeat landscapes Cimicomorpha"
+p_cimico <- ggplot(df_all_cimico, aes(x = kimura80, y = KIMURA_SUM, fill = named_subclass)) +
+  geom_col(position = "stack", width = 0.01) +
+  scale_fill_manual(values = fill_colours_cimico$fill_colour, name = "TE Subclass") +
+  facet_wrap(~species, ncol = 3, scales = "fixed") +
+  theme_bw() +
+  labs(title = plot_title_cimico) +
+  theme(plot.title = element_text(hjust = 0.5),
+        strip.text = element_text(size = 10)) +
+  scale_y_continuous(limits = c(0, y_limit_cimico), expand = c(0,0), name = "Base pairs") +
+  { if(axis_flip_cimico) scale_x_continuous(limits = c(0.51, -0.01), expand = c(0,0), name = "Kimura 2-Parameter Distance", trans = "reverse")
+    else scale_x_continuous(limits = c(-0.01, 0.51), expand = c(0,0), name = "Kimura 2-Parameter Distance")
+  }
+
+out_file_cimico <- file.path(out_directory_cimico, "5_cimicomorpha_species_repeatlandscape_3x3_cimico.pdf")
+ggsave(plot = p_cimico, filename = out_file_cimico, device = "pdf", width = 12.85, height = 12)
+```
+
+## Same scale Pentatomorpha
+
+```{r}
+# Pentatomorpha (variables suffixées _pentato)
+gff_dir_pentato <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape"
+species_list_pentato <- c(
+  "Eocanthecona_furcellata",
+  "Gonocerus_acuteangulatus",
+  "Oncopeltus_fasciatus",
+  "Pyrrhocoris_apterus",
+  "Riptorus_pedestris"
+)
+out_directory_pentato <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape/output"
+axis_flip_pentato <- TRUE
+y_limit_pentato <- 7.5e7
+
+process_gff_pentato <- function(gff_path, species_name) {
+  g <- read_gff(gff_path)
+  df <- as_tibble(g)
+  if(!("width" %in% colnames(df)) && all(c("start","end") %in% colnames(df))) {
+    df <- df %>% mutate(width = as.numeric(end) - as.numeric(start) + 1)
+  }
+  df <- df %>%
+    mutate(subclass = sub("/.*", "", type),
+           superfamily = sub("-.*", "", sub(".*/", "", type))) %>%
+    mutate(subclass = ifelse(superfamily == "Penelope", "PLE", subclass)) %>%
+    mutate(subclass = ifelse(subclass %in% c("DNA","LINE","LTR","PLE","RC","SINE","Unknown"), subclass, "Other")) %>%
+    mutate(named_subclass = case_when(
+      subclass == "DNA" ~ "DNA Transposon",
+      subclass == "LTR" ~ "LTR Retrotransposon",
+      subclass == "PLE" ~ "Penelope",
+      subclass == "RC" ~ "Rolling Circle",
+      TRUE ~ subclass
+    ))
+  out <- df %>%
+    filter(!is.na(kimura80)) %>%
+    mutate(kimura80 = as.numeric(kimura80)) %>%
+    filter(kimura80 <= 0.5) %>%
+    mutate(kimura80 = round(kimura80, 2)) %>%
+    group_by(named_subclass, kimura80) %>%
+    mutate(KIMURA_SUM = sum(width, na.rm = TRUE)) %>%
+    ungroup() %>%
+    select(subclass, named_subclass, kimura80, KIMURA_SUM) %>%
+    unique() %>%
+    arrange(named_subclass, kimura80) %>%
+    mutate(species = species_name)
+  return(out)
+}
+
+all_dfs_pentato <- lapply(species_list_pentato, function(sp) {
+  gff_path <- file.path(gff_dir_pentato, paste0(sp, ".filteredRepeats.gff"))
+  process_gff_pentato(gff_path, sp)
+})
+df_all_pentato <- bind_rows(all_dfs_pentato)
+
+fill_colours_pentato <- tibble(subclass = c("DNA","LINE","LTR","PLE","RC","SINE","Other","Unknown"),
+                       named_subclass = c("DNA Transposon","LINE","LTR Retrotransposon","Penelope","Rolling Circle","SINE","Other","Unknown"),
+                       fill_colour = c("#E32017","#0098D4","#00782A","#7156A5","#EE7C0E","#9B0056","#F3A9BB","#A0A5A9")) %>%
+  filter(subclass %in% df_all_pentato$subclass) %>%
+  arrange(named_subclass)
+
+plot_title_pentato <- "Repeat landscapes Pentatomorpha"
+p_pentato <- ggplot(df_all_pentato, aes(x = kimura80, y = KIMURA_SUM, fill = named_subclass)) +
+  geom_col(position = "stack", width = 0.01) +
+  scale_fill_manual(values = fill_colours_pentato$fill_colour, name = "TE Subclass") +
+  facet_wrap(~species, ncol = 3, scales = "fixed") +
+  theme_bw() +
+  labs(title = plot_title_pentato) +
+  theme(plot.title = element_text(hjust = 0.5),
+        strip.text = element_text(size = 10)) +
+  scale_y_continuous(limits = c(0, y_limit_pentato), expand = c(0,0), name = "Base pairs") +
+  { if(axis_flip_pentato) scale_x_continuous(limits = c(0.51, -0.01), expand = c(0,0), name = "Kimura 2-Parameter Distance", trans = "reverse")
+    else scale_x_continuous(limits = c(-0.01, 0.51), expand = c(0,0), name = "Kimura 2-Parameter Distance")
+  }
+
+out_file_pentato <- file.path(out_directory_pentato, "5_pentatomorpha_species_repeatlandscape_3x3_pentato.pdf")
+ggsave(plot = p_pentato, filename = out_file_pentato, device = "pdf", width = 12.85, height = 12)
+```
