@@ -10,8 +10,8 @@ Gerris_odontogaster /home/tbessonn/ressources/transcriptomes/G_odontogaster/Ger_
 Adelphocoris_suturalis /home/tbessonn/ressources/transcriptomes/A_lucorum/SRR10605280.fastq
 Apolygus_lucorum /home/tbessonn/ressources/transcriptomes/A_lucorum/SRR10605280.fastq
 Cimex_lectularius /home/tbessonn/ressources/transcriptomes/A_lucorum/SRR10605280.fastq
-Rhynocoris_fuscipes
-Triatoma_infestans
+Rhynocoris_fuscipes /home/tbessonn/ressources/transcriptomes/R_fuscipes/SRR22799258.fastq
+Triatoma_infestans  /home/tbessonn/ressources/transcriptomes/T_infestans/SRR5305050.fastq
 Ranatra_chinensis /home/tbessonn/ressources/transcriptomes/R_antilleana/10024092.1_Rhagovelia_sp__Puerto_Rico.trinity.fa
 Pyrrhocoris_apterus /home/tbessonn/ressources/transcriptomes/P_apterus/P_apterus_trinity_combined.fasta
 Eocanthecona_furcellata /home/tbessonn/ressources/transcriptomes/E_furcellata/SRR22405946.fastq
