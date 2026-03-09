@@ -7,5 +7,7 @@
 #SBATCH --partition=Cascade,Genoa-premium,Emerald-premium
 #SBATCH --output=/home/tbessonn/stdout/%x_%A_%a.out
 #SBATCH --error=/home/tbessonn/stderr/%x_%A_%a.err
+source "${HOME}/miniconda3/etc/profile.d/conda.sh"
+
 mamba create -n earlgrey -c conda-forge -c bioconda earlgrey
 mamba activate earlgrey

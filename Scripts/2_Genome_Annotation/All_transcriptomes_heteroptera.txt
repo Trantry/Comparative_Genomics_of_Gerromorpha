@@ -1,6 +1,7 @@
 Aquarius_paludum /home/tbessonn/ressources/transcriptomes/A_paludum/A_paludum_trinity_combined.fasta
 Aquarius_najas /home/tbessonn/ressources/transcriptomes/A_najas/Aqu_naj_trinity.Trinity.fasta
 Gerris_lacustris /home/tbessonn/ressources/transcriptomes/G_lacustris/Ger_lac_trinity.Trinity.fasta
+Gigantometra_gigas /home/tbessonn/ressources/transcriptomes/G_gigas/Gigantometra_gigas.fasta
 Hermatobates_lingyangjiaoensis /home/tbessonn/ressources/transcriptomes/H_lingyangjiaoensis/Hermatobates_lingyangjiaoensis_trinity.fasta
 Microvelia_longipes /home/tbessonn/ressources/transcriptomes/M_longipes/10024092.1_Microvelia_longipes.trinity.fa
 Tetraripis_zetteli /home/tbessonn/ressources/transcriptomes/T_zetteli/tzet_transcriptome_trinity.fasta

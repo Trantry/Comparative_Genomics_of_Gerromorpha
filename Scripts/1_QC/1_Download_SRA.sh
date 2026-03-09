@@ -3,7 +3,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=48G
-#SBATCH --time=05-15:00:00
+#SBATCH --time=06-15:00:00
 #SBATCH --partition=Cascade
 #SBATCH --output=/home/tbessonn/stdout/%x_%A_%a.out
 #SBATCH --error=/home/tbessonn/stderr/%x_%A_%a.err

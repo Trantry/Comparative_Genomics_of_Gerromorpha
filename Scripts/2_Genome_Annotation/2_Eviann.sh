@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --array=1-20
+#SBATCH --array=1-21
 #SBATCH --job-name=Eviann
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
-#SBATCH --mem=120G
+#SBATCH --mem=512G
 #SBATCH --time=07-00:00:00
 #SBATCH --partition=Cascade,Genoa-premium,Emerald-premium
 #SBATCH --output=/home/tbessonn/stdout/%x_%A_%a.out

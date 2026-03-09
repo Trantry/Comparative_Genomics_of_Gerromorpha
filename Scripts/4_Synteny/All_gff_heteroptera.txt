@@ -1,0 +1,16 @@
+Aquarius_paludum /home/tbessonn/1_Eviann/Aquarius_paludum/GCA_052327185.1_ASM5232718v1_genomic.fna.pseudo_label.gff
+Aquarius_najas /home/tbessonn/1_Eviann/Aquarius_najas/Anajas_softmasked_genome.fa.pseudo_label.gff
+Gerris_lacustris /home/tbessonn/1_Eviann/Gerris_lacustris/GCA_951217055.1_ihGerLacu2.1_genomic.fna.pseudo_label.gff
+Microvelia_longipes /home/tbessonn/1_Eviann/Microvelia_longipes/Mlon_polished_genome_round2.fasta.pseudo_label.gff
+Rhagovelia_antilleana /home/tbessonn/1_Eviann/Rhagovelia_antilleana/rhagovelia_antilleana_genome_fourth_polish.fasta.renamed.pseudo_label.gff
+Gerris_odontogaster /home/tbessonn/1_Eviann/Gerris_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa.pseudo_label.gff
+Adelphocoris_suturalis /home/tbessonn/1_Eviann/Adelphocoris_suturalis/GCA_030762985.1_ASM3076298v1_genomic.fna.pseudo_label.gff
+Apolygus_lucorum /home/tbessonn/1_Eviann/Apolygus_lucorum/GCA_009739505.2_ASM973950v2_genomic.fna.pseudo_label.gff
+Cimex_lectularius /home/tbessonn/1_Eviann/Cimex_lectularius/Fragmented/GCA_000648675.3_Clec_2.1_genomic.fna.pseudo_label.gff
+Rhynocoris_fuscipes /home/tbessonn/1_Eviann/Rhynocoris_fuscipes/GCA_040020575.1_Rfu_1.0_genomic.fna.pseudo_label.gff
+Triatoma_infestans /home/tbessonn/1_Eviann/Triatoma_infestans/GCA_965641795.1_ihTriInfe1.hap1.1_genomic.fna.pseudo_label.gff
+Ranatra_chinensis /home/tbessonn/1_Eviann/Ranatra_chinensis/GCA_040954505.1_ASM4095450v1_genomic.fna.pseudo_label.gff
+Pyrrhocoris_apterus /home/tbessonn/1_Eviann/Pyrrhocoris_apterus/GCA_039877355.1_ASM3987735v1_genomic.fna.pseudo_label.gff
+Eocanthecona_furcellata /home/tbessonn/1_Eviann/Eocanthecona_furcellata/GCA_052550355.1_ASM5255035v1_genomic.fna.pseudo_label.gff
+Gonocerus_acuteangulatus /home/tbessonn/1_Eviann/Gonocerus_acuteangulatus/GCA_946811695.1_ihGonAcut1.1_genomic.fna.pseudo_label.gff
+Riptorus_pedestris /home/tbessonn/1_Eviann/Riptorus_pedestris/GCA_019009955.1_ASM1900995v1_genomic.fna.pseudo_label.gff

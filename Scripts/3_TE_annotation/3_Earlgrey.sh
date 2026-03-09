@@ -13,10 +13,10 @@
 # Place genomes*.txt next to this script.
 
 WORKDIR=/home/tbessonn/2_Earlgrey
-#GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/genomes_gerromorpha.txt
-#GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/genomes_pentatomorpha.txt
-GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/genomes_cimicomorpha.txt
-#GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/genomes_nepomorpha.txt
+#GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/3_TE_annotation/genomes_gerromorpha.txt
+#GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/3_TE_annotation/genomes_pentatomorpha.txt
+GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/3_TE_annotation/genomes_cimicomorpha.txt
+#GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/3_TE_annotation/genomes_nepomorpha.txt
 
 read KEY GENOME < <(sed -n "$((SLURM_ARRAY_TASK_ID+1))p" $GENOME_FILE)
 

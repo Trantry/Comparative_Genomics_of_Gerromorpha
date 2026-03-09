@@ -14,32 +14,33 @@ ROOTDIR=/home/tbessonn/1_Eviann
 
 # building an associative array with the genomes of 8 species of gerromorpha
 declare -A assembly
-assembly[A_paludum]="$ROOTDIR/A_paludum/GCA_052327185.1_ASM5232718v1_genomic.fna.transcripts.fasta"
-assembly[A_najas]="$ROOTDIR/A_najas/Anajas_softmasked_genome.fa.transcripts.fasta"
-assembly[G_buenoi]="$ROOTDIR/G_buenoi/2nd/genome.softmasked.fa.transcripts.fasta"
-assembly[G_lacustris]="$ROOTDIR/G_lacustris/GCA_951217055.1_ihGerLacu2.1_genomic.fna.transcripts.fasta"
-assembly[G_odontogaster]="$ROOTDIR/G_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa.transcripts.fasta"
-assembly[H_lingyangjiaoensis]="$ROOTDIR/H_lingyangjiaoensis/GCA_026182355.1_ASM2618235v1_genomic.fna.transcripts.fasta"
-assembly[M_longipes]="$ROOTDIR/M_longipes/Mlon_polished_genome_round2.fasta.transcripts.fasta"
-assembly[R_antilleana]="$ROOTDIR/R_antilleana/rhagovelia_antilleana_genome_fourth_polish.fasta.renamed.transcripts.fasta"
-assembly[T_zetteli]="$ROOTDIR/T_zetteli/tzet_genome_flye_v4_unmasked.fasta.transcripts.fasta"
+assembly[A_paludum]="$ROOTDIR/Aaquarius_paludum/GCA_052327185.1_ASM5232718v1_genomic.fna.transcripts.fasta"
+assembly[A_najas]="$ROOTDIR/Aquarius_najas/Anajas_softmasked_genome.fa.transcripts.fasta"
+assembly[G_buenoi]="$ROOTDIR/Gerris_buenoi/2nd/genome.softmasked.fa.transcripts.fasta"
+assembly[G_lacustris]="$ROOTDIR/Gerris_lacustris/GCA_951217055.1_ihGerLacu2.1_genomic.fna.transcripts.fasta"
+assembly[G_gigas]="$ROOTDIR/Gigantometra_gigas/Genome.reduced.final.fasta.transcripts.fasta"
+assembly[G_odontogaster]="$ROOTDIR/Gerris_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa.transcripts.fasta"
+assembly[H_lingyangjiaoensis]="$ROOTDIR/Hermatobates_lingyangjiaoensis/GCA_026182355.1_ASM2618235v1_genomic.fna.transcripts.fasta"
+assembly[M_longipes]="$ROOTDIR/Microvelia_longipes/Mlon_polished_genome_round2.fasta.transcripts.fasta"
+assembly[R_antilleana]="$ROOTDIR/Rhagovelia_antilleana/rhagovelia_antilleana_genome_fourth_polish.fasta.renamed.transcripts.fasta"
+assembly[T_zetteli]="$ROOTDIR/Tetraripis_zetteli/tzet_genome_flye_v4_unmasked.fasta.transcripts.fasta"
 
 # building an associative array with the genomes of 1 species of non gerromorpha (Nepomorpha)
-assembly[R_chinensis]="$ROOTDIR/R_chinensis/GCA_040954505.1_ASM4095450v1_genomic.fna.transcripts.fasta"
+assembly[R_chinensis]="$ROOTDIR/Ranatra_chinensis/GCA_040954505.1_ASM4095450v1_genomic.fna.transcripts.fasta"
 
 # building an associative array with the genomes of 5 species of non gerromorpha (Cimicomorpha)
-assembly[A_suturalis]="$ROOTDIR/A_suturalis/GCA_030762985.1_ASM3076298v1_genomic.fna.transcripts.fasta"
-assembly[A_lucorum]="$ROOTDIR/A_lucorum/GCA_009739505.2_ASM973950v2_genomic.fna.transcripts.fasta"
-assembly[C_lectularius_Genbank]="$ROOTDIR/C_lectularius_Genbank/GCA_000648675.3_Clec_2.1_genomic.fna.transcripts.fasta"
-assembly[R_fuscipes]="$ROOTDIR/R_fuscipes/GCA_040020575.1_Rfu_1.0_genomic.fna.transcripts.fasta"
-assembly[T_infestans]="$ROOTDIR/T_infestans/GCA_965641795.1_ihTriInfe1.hap1.1_genomic.fna.transcripts.fasta"
+assembly[A_suturalis]="$ROOTDIR/Adelphocoris_suturalis/GCA_030762985.1_ASM3076298v1_genomic.fna.transcripts.fasta"
+assembly[A_lucorum]="$ROOTDIR/Apolygus_lucorum/GCA_009739505.2_ASM973950v2_genomic.fna.transcripts.fasta"
+assembly[C_lectularius_Genbank]="$ROOTDIR/Cimex_lectularius/GCA_000648675.3_Clec_2.1_genomic.fna.transcripts.fasta"
+assembly[R_fuscipes]="$ROOTDIR/Rhynocoris_fuscipes/GCA_040020575.1_Rfu_1.0_genomic.fna.transcripts.fasta"
+assembly[T_infestans]="$ROOTDIR/Triatoma_infestans/GCA_965641795.1_ihTriInfe1.hap1.1_genomic.fna.transcripts.fasta"
 
 # building an associative array with the genomes of 5 species of non gerromorpha (Pentatomomorpha)
-assembly[P_apterus]="$ROOTDIR/P_apterus/GCA_039877355.1_ASM3987735v1_genomic.fna.transcripts.fasta"
-assembly[E_furcellata]="$ROOTDIR/E_furcellata/GCA_052550355.1_ASM5255035v1_genomic.fna.transcripts.fasta"
-assembly[G_acuteangulatus]="$ROOTDIR/G_acuteangulatus/GCA_946811695.1_ihGonAcut1.1_genomic.fna.transcripts.fasta"
-assembly[O_fasciatus]="$ROOTDIR/O_fasciatus/GCA_000696205.2_Ofas_2.0_genomic.fna.transcripts.fasta"
-assembly[R_pedestris]="$ROOTDIR/R_pedestris/GCA_019009955.1_ASM1900995v1_genomic.fna.transcripts.fasta"
+assembly[P_apterus]="$ROOTDIR/Pyrrhocoris_apterus/GCA_039877355.1_ASM3987735v1_genomic.fna.transcripts.fasta"
+assembly[E_furcellata]="$ROOTDIR/Eocanthecona_furcellata/GCA_052550355.1_ASM5255035v1_genomic.fna.transcripts.fasta"
+assembly[G_acuteangulatus]="$ROOTDIR/Gonocerus_acuteangulatus/GCA_946811695.1_ihGonAcut1.1_genomic.fna.transcripts.fasta"
+assembly[O_fasciatus]="$ROOTDIR/Oncopeltus_fasciatus/GCA_000696205.2_Ofas_2.0_genomic.fna.transcripts.fasta"
+assembly[R_pedestris]="$ROOTDIR/Riptorus_pedestris/GCA_019009955.1_ASM1900995v1_genomic.fna.transcripts.fasta"
 
 ## Run busco analysis
 source "${HOME}/miniconda3/etc/profile.d/conda.sh"
@@ -55,8 +56,7 @@ do
         -m genome \
         -o $key \
         --out_path "$WORKDIR" \
-        --cpu 16 \
-        -f
+        --cpu 16
     fi
 done
 

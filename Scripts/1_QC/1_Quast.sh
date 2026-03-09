@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --array=0-19
+#SBATCH --array=0-21
 #SBATCH --job-name=Quast
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
@@ -10,7 +10,7 @@
 #SBATCH --error=/home/tbessonn/stderr/%x_%A_%a.err
 
 WORKDIR=/home/tbessonn/0_Quast
-GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/All_genomes_heteroptera.txt
+GENOME_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/1_QC/All_genomes_heteroptera.txt
 
 read KEY GENOME < <(sed -n "$((SLURM_ARRAY_TASK_ID+1))p" $GENOME_FILE)
 

@@ -1,0 +1,16 @@
+Aquarius_paludum 35153565
+Aquarius_najas 27210132
+Gerris_lacustris 43569283
+Microvelia_longipes 5395109
+Rhagovelia_antilleana 14686290
+Gerris_odontogaster 66538838
+Adelphocoris_suturalis 43643116
+Apolygus_lucorum 16429041
+Cimex_lectularius 23500664
+Rhynocoris_fuscipes 7950723
+Triatoma_infestans 44348574
+Ranatra_chinensis
+Pyrrhocoris_apterus 41911000
+Eocanthecona_furcellata 37855717
+Gonocerus_acuteangulatus 80628144
+Riptorus_pedestris 141148732
