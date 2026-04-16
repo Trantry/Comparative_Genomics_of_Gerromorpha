@@ -1,0 +1,35 @@
+Aquarius_paludum		Aquarius_najas		Gerris_lacustris		Gerris_odontogaster		Microvelia_longipes		Rhagovelia_antilleana		Ranatra_chinensis		Adelphocoris_suturalis		Apolygus_lucorum		Cimex_lectularius		Rhynocoris_fuscipes		Triatoma_infestans		Pyrrhocoris_apterus		Eocanthecona_furcellata		Gonocerus_acuteangulatus		Riptorus_pedestris	
+original_id	new_id	original_id	new_id	original_id	new_id	original_id	new_id	original_id	new_id	original_id	new_id	original_id	new_id	original_id	new_id	original_id	new_id	original_id	new_id	original_id	new_id	original_id	new_id	original_id	new_id	original_id	new_id	original_id	new_id	original_id	new_id
+CM126190.1	chr_Ap_01	chr_1	chr_An_01	OX578276.1	chr_Gl_01	Scmw4ez_1680	chr_Go_01	chr8_pp	chr_Ml_01	ScxFk4z_4134-HRSCAF_10114	chr_Ra_01	CM082405.1	chr_Rc_01	CM061040.1	chr_As_01	CM019167.2	chr_Al_01	CM113473.1	chr_Cl_01	CM078648.1	chr_Rf_01	OZ282537.1	chr_Ti_01	CM078371.1	chr_Pa_01	CM127147.1	chr_Ef_01	OX328123.1	chr_Ga_01	CM032228.1	chr_Rp_01
+CM126191.1	chr_AP_02	chr_2	chr_An_02	OX578277.1	chr_Gl_02	Scmw4ez_26	chr_Go_02	chr1911_pp	chr_Ml_02	ScxFk4z_1821-HRSCAF_5339	chr_Ra_02	CM082406.1	chr_Rc_02	CM061041.1	chr_As_02	CM019176.2	chr_Al_02	CM113474.1	chr_Cl_02	CM078649.1	chr_Rf_02	OZ282538.1	chr_Ti_02	CM078372.1	chr_Pa_02	CM127148.1	chr_Ef_02	OX328124.1	chr_Ga_02	CM032229.1	chr_Rp_02
+CM126192.1	chr_Ap_03	chr_3	chr_An_03	OX578278.1	chr_Gl_03	Scmw4ez_27	chr_Go_03	chr1863_pp	chr_Ml_03	ScxFk4z_372-HRSCAF_1263	chr_Ra_03	CM082407.1	chr_Rc_03	CM061042.1	chr_As_03	CM019177.2	chr_Al_03	CM113475.1	chr_Cl_03	CM078650.1	chr_Rf_03	OZ282539.1	chr_Ti_03	CM078373.1	chr_Pa_03	CM127149.1	chr_Ef_03	OX328125.1	chr_Ga_03	CM032230.1	chr_Rp_03
+CM126193.1	chr_Ap_04	chr_4	chr_An_04	OX578279.1	chr_Gl_04	Scmw4ez_125	chr_Go_04	chr1908_pp	chr_Ml_04	ScxFk4z_2679-HRSCAF_7254	chr_Ra_04	CM082408.1	chr_Rc_04	CM061043.1	chr_As_04	CM019178.2	chr_Al_04	CM113476.1	chr_Cl_04	CM078651.1	chr_Rf_04	OZ282540.1	chr_Ti_04	CM078374.1	chr_Pa_04	CM127150.1	chr_Ef_04	OX328126.1	chr_Ga_04	CM032231.1	chr_Rp_04
+CM126194.1	chr_Ap_05	chr_5	chr_An_05	OX578280.1	chr_Gl_05	Scmw4ez_1438	chr_Go_05	chr1870_pp	chr_Ml_05	ScxFk4z_1633-HRSCAF_4877	chr_Ra_05	CM082409.1	chr_Rc_05	CM061044.1	chr_As_05	CM019179.2	chr_Al_05	CM113477.1	chr_Cl_05	CM078652.1	chr_Rf_05	OZ282541.1	chr_Ti_05	CM078375.1	chr_Pa_05	CM127151.1	chr_Ef_05	OX328127.1	chr_Ga_05	CM032232.1	chr_Rp_05
+CM126195.1	chr_Ap_06	chr_6	chr_An_06	OX578281.1	chr_Gl_06	Scmw4ez_326	chr_Go_06	chr22_pp	chr_Ml_06	ScxFk4z_214-HRSCAF_772	chr_Ra_06	CM082410.1	chr_Rc_06	CM061045.1	chr_As_06	CM019180.2	chr_Al_06	CM113478.1	chr_Cl_06	CM078653.1	chr_Rf_06	OZ282542.1	chr_Ti_06	CM078376.1	chr_Pa_06	CM127152.1	chr_Ef_06	OX328128.1	chr_Ga_06	CM032233.1	chr_Rp_X
+CM126196.1	chr_Ap_07	chr_7	chr_An_07	OX578282.1	chr_Gl_07	Scmw4ez_1347	chr_Go_07	chr1914_pp	chr_Ml_07	ScxFk4z_925-HRSCAF_2976	chr_Ra_07	CM082411.1	chr_Rc_07	CM061046.1	chr_As_07	CM019181.2	chr_Al_07	CM113479.1	chr_Cl_07	CM078654.1	chr_Rf_07	OZ282543.1	chr_Ti_07	CM078377.1	chr_Pa_07	CM127153.1	chr_Ef_X	OX328129.1	chr_Ga_07		
+CM126197.1	chr_Ap_08	chr_8	chr_An_08	OX578283.1	chr_Gl_08	Scmw4ez_148	chr_Go_08	chr2_pp	chr_Ml_08	ScxFk4z_464-HRSCAF_1527	chr_Ra_08	CM082413.1	chr_Rc_08	CM061047.1	chr_As_08	CM019182.2	chr_Al_08	CM113480.1	chr_Cl_08	CM078655.1	chr_Rf_08	OZ282544.1	chr_Ti_08	CM078378.1	chr_Pa_08	CM127154.1	chr_Ef_Y	OX328130.1	chr_Ga_08		
+CM126198.1	chr_Ap_09	chr_9	chr_An_09	OX578284.1	chr_Gl_09	Scmw4ez_472	chr_Go_09	chr1913_pp	chr_Ml_09	ScxFk4z_5102-HRSCAF_11605	chr_Ra_09	CM082414.1	chr_Rc_09	CM061048.1	chr_As_09	CM019183.2	chr_Al_09	CM113481.1	chr_Cl_09	CM078656.1	chr_Rf_09	OZ282545.1	chr_Ti_09	CM078379.1	chr_Pa_09			OX328131.1	chr_Ga_09		
+CM126201.1	chr_Ap_10	chr_10	chr_An_10	OX578286.1	chr_Gl_10	Scmw4ez_2238	chr_Go_10	chr1859_pp	chr_Ml_10	ScxFk4z_366-HRSCAF_1241	chr_Ra_10	CM082415.1	chr_Rc_10	CM061049.1	chr_As_10	CM019168.2	chr_Al_10	CM113482.1	chr_Cl_10	CM078657.1	chr_Rf_10	OZ282546.1	chr_Ti_10	CM078380.1	chr_Pa_10			OX328132.1	chr_Ga_X		
+CM126199.1	chr_Ap_11	chr_11	chr_An_11	OX578285.1	chr_Gl_X	Scmw4ez_45	chr_Go_11	chr32_pp	chr_Ml_11	ScxFk4z_2158-HRSCAF_6154	chr_Ra_11	CM082416.1	chr_Rc_11	CM061050.1	chr_As_11	CM019169.2	chr_Al_11	CM113483.1	chr_Cl_11	CM078658.1	chr_Rf_11	OZ282547.1	chr_Ti_X	CM078381.1	chr_Pa_11						
+CM126200.1	chr_Ap_12	chr_12	chr_An_12					chr19_pp	chr_Ml_12			CM082417.1	chr_Rc_12	CM061051.1	chr_As_12	CM019170.2	chr_Al_12	CM113484.1	chr_Cl_12	CM078659.1	chr_Rf_12	OZ282548.1	chr_Ti_Y	CM078382.1	chr_Pa_12						
+								chr1893_pp	chr_Ml_X			CM082418.1	chr_Rc_13			CM019171.2	chr_Al_13	CM113485.1	chr_Cl_13	CM078660.1	chr_Rf_13										
+												CM082419.1	chr_Rc_14			CM019172.2	chr_Al_14	CM113486.1	chr_Cl_X1	CM078661.1	chr_Rf_14										
+												CM082420.1	chr_Rc_15			CM019173.2	chr_Al_15	CM113487.1	chr_Cl_X2	CM078662.1	chr_Rf_15										
+												CM082421.1	chr_Rc_16			CM019174.2	chr_Al_16														
+												CM082422.1	chr_Rc_17			CM019175.2	chr_Al_17														
+												CM082423.1	chr_Rc_18																		
+								 				CM082424.1	chr_Rc_19																		
+												CM082412.1	chr_Rc_X1																		
+												CM082425.1	chr_Rc_X2																		
+												CM082426.1	chr_Rc_X3																		
+												CM082427.1	chr_Rc_X4																		
+																															
+																															
+																															
+																															
+																															
+																															
+																															
+																															
+																															
+																		 													

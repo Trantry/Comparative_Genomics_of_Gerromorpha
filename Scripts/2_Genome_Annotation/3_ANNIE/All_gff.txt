@@ -1,7 +1,11 @@
 Aquarius_paludum /home/tbessonn/1_Eviann/Aquarius_paludum/GCA_052327185.1_ASM5232718v1_genomic.fna.pseudo_label.gff
 Aquarius_najas /home/tbessonn/1_Eviann/Aquarius_najas/Anajas_softmasked_genome.fa.pseudo_label.gff
 Gerris_lacustris /home/tbessonn/1_Eviann/Gerris_lacustris/GCA_951217055.1_ihGerLacu2.1_genomic.fna.pseudo_label.gff
+Gigantometra_gigas /home/tbessonn/1_Eviann/Gigantometra_gigas/Genome.reduced.final.fasta.pseudo_label.gff
+Hermatobates_lingyangjiaoensis /home/tbessonn/1_Eviann/Hermatobates_lingyangjiaoensis/GCA_026182355.1_ASM2618235v1_genomic.fna.pseudo_label.gff
 Microvelia_longipes /home/tbessonn/1_Eviann/Microvelia_longipes/Mlon_polished_genome_round2.fasta.pseudo_label.gff
+Tetraripis_zetteli /home/tbessonn/1_Eviann/Tetraripis_zetteli/tzet_genome_flye_v4_unmasked.fasta.pseudo_label.gff
+Gerris_buenoi /home/tbessonn/1_Eviann/Gerris_buenoi/genome.softmasked.fa.pseudo_label.gff
 Rhagovelia_antilleana /home/tbessonn/1_Eviann/Rhagovelia_antilleana/rhagovelia_antilleana_genome_fourth_polish.fasta.renamed.pseudo_label.gff
 Gerris_odontogaster /home/tbessonn/1_Eviann/Gerris_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa.pseudo_label.gff
 Adelphocoris_suturalis /home/tbessonn/1_Eviann/Adelphocoris_suturalis/GCA_030762985.1_ASM3076298v1_genomic.fna.pseudo_label.gff
@@ -13,4 +17,5 @@ Ranatra_chinensis /home/tbessonn/1_Eviann/Ranatra_chinensis/GCA_040954505.1_ASM4
 Pyrrhocoris_apterus /home/tbessonn/1_Eviann/Pyrrhocoris_apterus/GCA_039877355.1_ASM3987735v1_genomic.fna.pseudo_label.gff
 Eocanthecona_furcellata /home/tbessonn/1_Eviann/Eocanthecona_furcellata/GCA_052550355.1_ASM5255035v1_genomic.fna.pseudo_label.gff
 Gonocerus_acuteangulatus /home/tbessonn/1_Eviann/Gonocerus_acuteangulatus/GCA_946811695.1_ihGonAcut1.1_genomic.fna.pseudo_label.gff
+Oncopeltus_fasciatus /home/tbessonn/1_Eviann/Oncopeltus_fasciatus/GCA_000696205.2_Ofas_2.0_genomic.fna.pseudo_label.gff
 Riptorus_pedestris /home/tbessonn/1_Eviann/Riptorus_pedestris/GCA_019009955.1_ASM1900995v1_genomic.fna.pseudo_label.gff

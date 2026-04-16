@@ -3,7 +3,7 @@
 #SBATCH --job-name=Eviann
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
-#SBATCH --mem=512G
+#SBATCH --mem=332G
 #SBATCH --time=07-00:00:00
 #SBATCH --partition=Cascade,Genoa-premium,Emerald-premium
 #SBATCH --output=/home/tbessonn/stdout/%x_%A_%a.out

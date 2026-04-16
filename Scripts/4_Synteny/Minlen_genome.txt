@@ -9,7 +9,7 @@ Apolygus_lucorum 16429041
 Cimex_lectularius 23500664
 Rhynocoris_fuscipes 7950723
 Triatoma_infestans 44348574
-Ranatra_chinensis
+Ranatra_chinensis 7750000
 Pyrrhocoris_apterus 41911000
 Eocanthecona_furcellata 37855717
 Gonocerus_acuteangulatus 80628144

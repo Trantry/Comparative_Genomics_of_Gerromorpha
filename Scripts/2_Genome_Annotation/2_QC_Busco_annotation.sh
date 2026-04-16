@@ -32,6 +32,7 @@ assembly[R_chinensis]="$ROOTDIR/Ranatra_chinensis/GCA_040954505.1_ASM4095450v1_g
 assembly[A_suturalis]="$ROOTDIR/Adelphocoris_suturalis/GCA_030762985.1_ASM3076298v1_genomic.fna.transcripts.fasta"
 assembly[A_lucorum]="$ROOTDIR/Apolygus_lucorum/GCA_009739505.2_ASM973950v2_genomic.fna.transcripts.fasta"
 assembly[C_lectularius_Genbank]="$ROOTDIR/Cimex_lectularius/GCA_000648675.3_Clec_2.1_genomic.fna.transcripts.fasta"
+assembly[C_lectularius_chr_lvl]="$ROOTDIR/Cimex_lectularius/GCA_049903775.1_ASM4990377v1_genomic.fna.proteins.fasta"
 assembly[R_fuscipes]="$ROOTDIR/Rhynocoris_fuscipes/GCA_040020575.1_Rfu_1.0_genomic.fna.transcripts.fasta"
 assembly[T_infestans]="$ROOTDIR/Triatoma_infestans/GCA_965641795.1_ihTriInfe1.hap1.1_genomic.fna.transcripts.fasta"
 
@@ -53,7 +54,7 @@ do
     then
         busco -i "$GENOME" \
         -l hemiptera_odb12 \
-        -m genome \
+        -m proteins \
         -o $key \
         --out_path "$WORKDIR" \
         --cpu 16

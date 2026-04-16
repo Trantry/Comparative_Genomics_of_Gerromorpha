@@ -1,10 +1,10 @@
 #!/bin/bash
-#SBATCH --job-name=M_longipes_Eviann
+#SBATCH --job-name=A_paludum
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
-#SBATCH --mem=120G
+#SBATCH --mem=224G
 #SBATCH --time=07-00:00:00
-#SBATCH --partition=Lake,Epyc,Lake-premium
+#SBATCH --partition=Cascade,Genoa-premium,Emerald-premium
 #SBATCH --output=/home/tbessonn/stdout/%x_%A_%a.out
 #SBATCH --error=/home/tbessonn/stderr/%x_%A_%a.err
 
@@ -12,28 +12,28 @@ source "${HOME}/miniconda3/etc/profile.d/conda.sh"
 conda activate eviann
 
 #Variables
-WORKDIR=/scratch/Bio/tbessonn/Eviann
+WORKDIR=/scratch/Cascade/tbessonn/Eviann
 ROOTDIR=/home/tbessonn/ressources/genomes
 EVIANN=${HOME}/miniconda3/envs/eviann/bin/eviann.sh
 PROT=/home/tbessonn/ressources/Protein/Heteroptera_Sternorrhyncha_G_buenoi_prot.fasta
-#Transcriptome=/home/tbessonn/ressources/transcriptomes/G_buenoi/gerbue_OGSv1.1_trans.fa
-Transcriptome=/scratch/Bio/tbessonn/transcriptome/M_longipes/10024092.1_Microvelia_longipes.trinity.fa
+#Transcriptome=/home/tbessonn/ressources/transcriptomes/A_najas/Aqu_naj_trinity.Trinity.fasta
+Transcriptome=/home/tbessonn/ressources/transcriptomes/A_paludum/A_paludum_trinity_combined.fasta
 #For paired-end:
 #paste <(ls $PWD/*_1.fastq) <(ls $PWD/*_2.fastq) > paired.txt
 # For single-end:
 #ls "$PWD"/*.fastq | grep -Ev '(_1|_2)\.fastq$' >> paired.txt
-#RNASEQ=/home/tbessonn/ressources/RNA_seq/Gerromorpha/G_buenoi/paired.txt
-RNASEQ=/home/tbessonn/ressources/RNA_seq/Gerromorpha/M_longipes/paired.txt
+#RNASEQ=/home/tbessonn/ressources/RNA_seq/Gerromorpha/A_najas/paired.txt
+RNASEQ=/home/tbessonn/ressources/RNA_seq/Gerromorpha/A_paludum/paired.txt
 
 # building an associative array with the genomes of 9 species of gerromorpha
 declare -A assembly
-#assembly[A_paludum]="$ROOTDIR/gerromorpha/aquarius_paludum/ncbi_dataset/ncbi_dataset/data/GCA_052327185.1/GCA_052327185.1_ASM5232718v1_genomic.fna"
-#assembly[A_najas]="$ROOTDIR/gerromorpha/Aquarius_najas/Anajas_softmasked_genome.fa"
+assembly[A_paludum]="/home/tbessonn/3_Rename_chromosome/Aquarius_paludum/Aquarius_paludum.filtered_renamed.fa"
+#assembly[A_najas]="/home/tbessonn/3_Rename_chromosome/Aquarius_najas/Aquarius_najas.filtered_renamed.fa"
 #assembly[G_buenoi]="$ROOTDIR/gerromorpha/gerris_buenoi/new/genome.softmasked.fa"
 #assembly[G_lacustris]="$ROOTDIR/gerromorpha/gerris_lacustris/ncbi_dataset-2/ncbi_dataset/data/GCA_951217055.1/GCA_951217055.1_ihGerLacu2.1_genomic.fna"
 #assembly[G_odontogaster]="$ROOTDIR/gerromorpha/gerris_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa"
 #assembly[H_lingyangjiaoensis]="$ROOTDIR/gerromorpha/hermatobates_lingyangjiaoensis/ncbi_dataset/ncbi_dataset/data/GCA_026182355.1/GCA_026182355.1_ASM2618235v1_genomic.fna"
-assembly[M_longipes]="$ROOTDIR/gerromorpha/microvelia_longipes/Mlon_polished_genome_round2.fasta"
+#assembly[M_longipes]="$ROOTDIR/gerromorpha/microvelia_longipes/Mlon_polished_genome_round2.fasta"
 #assembly[R_antilleana]="$ROOTDIR/gerromorpha/rhagovelia_antilleana/unmasked_genome/rhagovelia_antilleana_genome_fourth_polish.fasta.renamed"
 #assembly[T_zetteli]="$ROOTDIR/gerromorpha/tetraripis_zetteli/tzet_genome_flye_v4_unmasked.fasta"
 

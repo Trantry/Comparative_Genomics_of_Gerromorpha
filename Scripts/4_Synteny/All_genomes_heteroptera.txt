@@ -6,7 +6,7 @@ Rhagovelia_antilleana /home/tbessonn/ressources/genomes/gerromorpha/rhagovelia_a
 Gerris_odontogaster /home/tbessonn/ressources/genomes/gerromorpha/gerris_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa
 Adelphocoris_suturalis /home/tbessonn/ressources/genomes/non_gerromorpha/cimicomorpha/adelphocoris_suturalis/ncbi_dataset/ncbi_dataset/data/GCA_030762985.1/GCA_030762985.1_ASM3076298v1_genomic.fna
 Apolygus_lucorum /home/tbessonn/ressources/genomes/non_gerromorpha/cimicomorpha/apolygus_lucorum/ncbi_dataset/ncbi_dataset/data/GCA_009739505.2/GCA_009739505.2_ASM973950v2_genomic.fna
-Cimex_lectularius /home/tbessonn/ressources/genomes/non_gerromorpha/cimicomorpha/cimex_lectularius/ncbi_dataset/ncbi_dataset/data/GCA_000648675.3/GCA_000648675.3_Clec_2.1_genomic.fna
+Cimex_lectularius /home/tbessonn/ressources/genomes/non_gerromorpha/cimicomorpha/cimex_lectularius_Ch_lvl/ncbi_dataset/ncbi_dataset/data/GCA_049903775.1/GCA_049903775.1_ASM4990377v1_genomic.fna
 Rhynocoris_fuscipes /home/tbessonn/ressources/genomes/non_gerromorpha/cimicomorpha/rhynocoris_fuscipes/ncbi_dataset/ncbi_dataset/data/GCA_040020575.1/GCA_040020575.1_Rfu_1.0_genomic.fna
 Triatoma_infestans /home/tbessonn/ressources/genomes/non_gerromorpha/cimicomorpha/triatoma_infestans/ncbi_dataset/ncbi_dataset/data/GCA_965641795.1/GCA_965641795.1_ihTriInfe1.hap1.1_genomic.fna
 Ranatra_chinensis /home/tbessonn/ressources/genomes/non_gerromorpha/nepomorpha/ranatra_chinensis/ncbi_dataset/ncbi_dataset/data/GCA_040954505.1/GCA_040954505.1_ASM4095450v1_genomic.fna

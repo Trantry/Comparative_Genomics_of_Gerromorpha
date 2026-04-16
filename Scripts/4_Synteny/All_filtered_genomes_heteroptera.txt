@@ -1,0 +1,16 @@
+Aquarius_paludum /home/tbessonn/3_Seqkit/Aquarius_paludum/Aquarius_paludum.filtered.fa
+Aquarius_najas /home/tbessonn/3_Seqkit/Aquarius_najas/Aquarius_najas.filtered.fa
+Gerris_lacustris /home/tbessonn/3_Seqkit/Gerris_lacustris/Gerris_lacustris.filtered.fa
+Microvelia_longipes /home/tbessonn/3_Seqkit/Microvelia_longipes/Microvelia_longipes.filtered.fa
+Rhagovelia_antilleana /home/tbessonn/3_Seqkit/Rhagovelia_antilleana/Rhagovelia_antilleana.filtered.fa
+Gerris_odontogaster /home/tbessonn/3_Seqkit/Gerris_odontogaster/Gerris_odontogaster.filtered.fa
+Adelphocoris_suturalis /home/tbessonn/3_Seqkit/Adelphocoris_suturalis/Adelphocoris_suturalis.filtered.fa
+Apolygus_lucorum /home/tbessonn/3_Seqkit/Apolygus_lucorum/Apolygus_lucorum.filtered.fa
+Cimex_lectularius /home/tbessonn/3_Seqkit/Cimex_lectularius/Cimex_lectularius.filtered.fa
+Rhynocoris_fuscipes /home/tbessonn/3_Seqkit/Rhynocoris_fuscipes/Rhynocoris_fuscipes.filtered.fa
+Triatoma_infestans /home/tbessonn/3_Seqkit/Triatoma_infestans/Triatoma_infestans.filtered.fa
+Ranatra_chinensis /home/tbessonn/3_Seqkit/Ranatra_chinensis/Ranatra_chinensis.filtered.fa
+Pyrrhocoris_apterus /home/tbessonn/3_Seqkit/Pyrrhocoris_apterus/Pyrrhocoris_apterus.filtered.fa
+Eocanthecona_furcellata /home/tbessonn/3_Seqkit/Eocanthecona_furcellata/Eocanthecona_furcellata.filtered.fa
+Gonocerus_acuteangulatus /home/tbessonn/3_Seqkit/Gonocerus_acuteangulatus/Gonocerus_acuteangulatus.filtered.fa
+Riptorus_pedestris /home/tbessonn/3_Seqkit/Riptorus_pedestris/Riptorus_pedestris.filtered.fa
