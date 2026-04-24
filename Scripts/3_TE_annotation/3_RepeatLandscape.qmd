@@ -20,19 +20,19 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Environment setup
+## Environment setup
 
 ```{r}
 #| eval: false
-save.image(file = "/Users/trystanbessonnier/Desktop/Genomique_comparative/Earlgrey/RepeatLandscape.RData")
+save.image(file = "/Users/trystanbessonnier/Desktop/Genomique_comparative/Earlgrey/RepeatLandscape_base_pairs.RData")
 ```
 
 ```{r}
 #| eval: false
-load(file = "/Users/trystanbessonnier/Desktop/Genomique_comparative/Earlgrey/RepeatLandscape.RData")
+load(file = "/Users/trystanbessonnier/Desktop/Genomique_comparative/Earlgrey/RepeatLandscape_base_pairs.RData")
 ```
 
-## 1. Data loading
+## Data loading
 
 ```{r}
 #Define the environment here. 
@@ -56,7 +56,9 @@ library(tibble)
 library(optparse)
 ```
 
-## Earlgrey Code for 1 species (Nepomorpha)
+# Earlgrey Code : RepeatLandscape Base pairs
+
+## For 1 species of Nepomorpha
 
 ```{r}
 # ---- Paramètres (à adapter) ----
@@ -143,7 +145,7 @@ if(axis_flip_nepo){
 ggsave(plot = split_subclass_kimura_plot_nepo, filename = paste0(out_directory_nepo, "/", species_name_nepo, "_split_class_landscape_nepo.pdf"), device = "pdf", width = 12.85, height = 8.5)
 ```
 
-## Same scale Gerromorpha
+## Same scale of 10 species of Gerromorpha
 
 ```{r}
 # Gerromorpha (variables suffixées _gerro)
@@ -154,6 +156,7 @@ species_list_gerro <- c(
   "Gerris_buenoi",
   "Gerris_lacustris",
   "Gerris_odontogaster",
+  "Gigantometra_gigas",
   "Hermatobates_lingyangjiaoensis",
   "Microvelia_longipes",
   "Rhagovelia_antilleana",
@@ -161,7 +164,7 @@ species_list_gerro <- c(
 )
 out_directory_gerro <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape/output"
 axis_flip_gerro <- TRUE
-y_limit_gerro <- 7.5e7
+y_limit_gerro <- 9.6e7
 
 process_gff_gerro <- function(gff_path, species_name) {
   g <- read_gff(gff_path)
@@ -222,11 +225,11 @@ p_gerro <- ggplot(df_all_gerro, aes(x = kimura80, y = KIMURA_SUM, fill = named_s
     else scale_x_continuous(limits = c(-0.01, 0.51), expand = c(0,0), name = "Kimura 2-Parameter Distance")
   }
 
-out_file_gerro <- file.path(out_directory_gerro, "9species_repeatlandscape_3x3_gerro.pdf")
+out_file_gerro <- file.path(out_directory_gerro, "10species_repeatlandscape_3x3_gerro.pdf")
 ggsave(plot = p_gerro, filename = out_file_gerro, device = "pdf", width = 12.85, height = 12)
 ```
 
-## Same scale Cimicomorpha
+## Same scale of 5 species of Cimicomorpha
 
 ```{r}
 # Cimicomorpha (variables suffixées _cimico)
@@ -305,7 +308,7 @@ out_file_cimico <- file.path(out_directory_cimico, "5_cimicomorpha_species_repea
 ggsave(plot = p_cimico, filename = out_file_cimico, device = "pdf", width = 12.85, height = 12)
 ```
 
-## Same scale Pentatomorpha
+## Same scale of 5 species of Pentatomorpha
 
 ```{r}
 # Pentatomorpha (variables suffixées _pentato)
@@ -382,4 +385,548 @@ p_pentato <- ggplot(df_all_pentato, aes(x = kimura80, y = KIMURA_SUM, fill = nam
 
 out_file_pentato <- file.path(out_directory_pentato, "5_pentatomorpha_species_repeatlandscape_3x3_pentato.pdf")
 ggsave(plot = p_pentato, filename = out_file_pentato, device = "pdf", width = 12.85, height = 12)
+```
+
+# Earlgrey code : RepeatLandscape %Genome
+
+## Data loading
+
+```{r}
+#| eval: false
+save.image(file = "/Users/trystanbessonnier/Desktop/Genomique_comparative/Earlgrey/RepeatLandscape_percent.RData")
+```
+
+```{r}
+#| eval: false
+load(file = "/Users/trystanbessonnier/Desktop/Genomique_comparative/Earlgrey/RepeatLandscape_percent.RData")
+```
+
+## For 1 species of Nepomorpha
+
+```{r}
+# ---- Paramètres (à adapter) ----
+species_name_nepo <- "Ranatra_chinensis"
+in_gff_nepo <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape/Ranatra_chinensis.filteredRepeats.gff"
+out_directory_nepo <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape/output"
+axis_flip_nepo <- TRUE
+genome_size_nepo <- 777970226   # taille du génome pour % (mettre la valeur correcte)
+y_limit_nepo <- 5   # en pourcentage
+
+# ---- Lecture ----
+divergence_eg_gff_nepo <- read_gff(in_gff_nepo)
+divergence_eg_tes_gff_nepo <- as_tibble(divergence_eg_gff_nepo)
+
+# Calculer width si nécessaire (nécessite start/end)
+if(!("width" %in% colnames(divergence_eg_tes_gff_nepo)) && all(c("start","end") %in% colnames(divergence_eg_tes_gff_nepo))) {
+  divergence_eg_tes_gff_nepo <- divergence_eg_tes_gff_nepo %>%
+    mutate(width = as.numeric(end) - as.numeric(start) + 1)
+}
+
+# ---- Classification minimale ----
+divergence_eg_tes_gff_nepo <- divergence_eg_tes_gff_nepo %>%
+  mutate(subclass = sub("/.*", "", type),
+         superfamily = sub("-.*", "", sub(".*/", "", type))) %>%
+  mutate(subclass = ifelse(superfamily == "Penelope", "PLE", subclass)) %>%
+  mutate(subclass = ifelse(subclass %in% c("DNA","LINE","LTR","PLE","RC","SINE","Unknown"), subclass, "Other")) %>%
+  mutate(named_subclass = case_when(subclass == "DNA" ~ "DNA Transposon",
+                                    subclass == "LTR" ~ "LTR Retrotransposon",
+                                    subclass == "PLE" ~ "Penelope",
+                                    subclass == "RC" ~ "Rolling Circle",
+                                    TRUE ~ subclass))
+
+# ---- Préparation des données pour les plots (utilise 'kimura80' minuscule)
+divergence_eg_tes_rounded_for_plot_nepo <- divergence_eg_tes_gff_nepo %>%
+  filter(!is.na(kimura80)) %>%
+  mutate(kimura80 = as.numeric(kimura80)) %>%
+  filter(kimura80 <= 0.5) %>%
+  mutate(kimura80 = round(kimura80, 2)) %>%
+  group_by(named_subclass, kimura80) %>%
+  mutate(KIMURA_SUM = sum(width, na.rm = TRUE)) %>%
+  ungroup() %>%
+  select(subclass, named_subclass, kimura80, KIMURA_SUM) %>%
+  unique() %>%
+  arrange(named_subclass, kimura80) %>%
+  mutate(KIMURA_PERCENT = KIMURA_SUM / genome_size_nepo * 100)  # conversion en %
+
+# ---- Couleurs ----
+fill_colours_nepo <- tibble(subclass = c("DNA","LINE","LTR","PLE","RC","SINE","Other","Unknown"),
+                       named_subclass = c("DNA Transposon","LINE","LTR Retrotransposon","Penelope","Rolling Circle","SINE","Other","Unknown"),
+                       fill_colour = c("#E32017","#0098D4","#00782A","#7156A5","#EE7C0E","#9B0056","#F3A9BB","#A0A5A9")) %>%
+  filter(subclass %in% divergence_eg_tes_rounded_for_plot_nepo$subclass) %>%
+  arrange(named_subclass)
+
+# ---- Plots (y en pourcentage du génome) ----
+plot_title_nepo <- paste0("Repeat landscape of ", gsub("_", " ", species_name_nepo))
+kimura_plot_nepo <- ggplot(divergence_eg_tes_rounded_for_plot_nepo, aes(x = kimura80, y = KIMURA_PERCENT, fill = named_subclass)) +
+  geom_col(position = "stack", width = 0.01) +
+  theme_bw() +
+  labs(title = plot_title_nepo) + theme(plot.title = element_text(hjust = 0.5)) +
+  scale_fill_manual(values = fill_colours_nepo$fill_colour, name = "TE Subclass")
+
+subclass_kimura_plot_nepo <- kimura_plot_nepo +
+  scale_y_continuous(limits = c(0, y_limit_nepo), expand = c(0.01,0), name = "Percent of genome (%)")
+
+if(axis_flip_nepo){
+  subclass_kimura_plot_nepo <- subclass_kimura_plot_nepo +
+    scale_x_continuous(limits = c(0.51, -0.01), expand = c(0,0), name = "Kimura 2-Parameter Distance", trans = "reverse")
+} else {
+  subclass_kimura_plot_nepo <- subclass_kimura_plot_nepo +
+    scale_x_continuous(limits = c(-0.01, 0.51), expand = c(0,0), name = "Kimura 2-Parameter Distance")
+}
+ggsave(plot = subclass_kimura_plot_nepo, filename = paste0(out_directory_nepo, "/", species_name_nepo, "_classification_landscape_nepo_percent.pdf"), device = "pdf", width = 12.85, height = 8.5)
+
+# ---- Split plot (subclass) en % ----
+split_subclass_kimura_plot_nepo <- kimura_plot_nepo +
+  scale_y_continuous(limits = c(0, y_limit_nepo), name = "Percent of genome (%)", labels = function(x) paste0(x, "%")) +
+  facet_grid(subclass ~ ., scales = "fixed")
+
+if(axis_flip_nepo){
+  split_subclass_kimura_plot_nepo <- split_subclass_kimura_plot_nepo +
+    scale_x_continuous(limits = c(0.51, -0.01), expand = c(0,0), name = "Kimura 2-Parameter Distance", trans = "reverse")
+} else {
+  split_subclass_kimura_plot_nepo <- split_subclass_kimura_plot_nepo +
+    scale_x_continuous(limits = c(-0.01, 0.51), expand = c(0,0), name = "Kimura 2-Parameter Distance")
+}
+ggsave(plot = split_subclass_kimura_plot_nepo, filename = paste0(out_directory_nepo, "/", species_name_nepo, "_split_class_landscape_nepo_percent.pdf"), device = "pdf", width = 12.85, height = 8.5)
+
+```
+
+## Same scale of 10 species of Gerromorpha
+
+```{r}
+# Gerromorpha en % du génome (variables suffixées _gerro)
+gff_dir_gerro <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape"
+species_list_gerro <- c(
+  "Aquarius_najas",
+  "Aquarius_paludum",
+  "Gigantometra_gigas",
+  "Gerris_buenoi",
+  "Gerris_lacustris",
+  "Gerris_odontogaster",
+  "Hermatobates_lingyangjiaoensis",
+  "Microvelia_longipes",
+  "Rhagovelia_antilleana",
+  "Tetraripis_zetteli"
+)
+out_directory_gerro <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape/output"
+axis_flip_gerro <- TRUE
+y_limit_gerro <- 5
+
+# tailles de génomes (vecteur nommé)
+genome_sizes_gerro <- c(
+  Aquarius_najas = 886475811,
+  Aquarius_paludum = 1011789901,
+  Gigantometra_gigas = 1387783050,
+  Gerris_buenoi = 1001611993,
+  Gerris_lacustris = 937542417,
+  Gerris_odontogaster = 1221747930,
+  Hermatobates_lingyangjiaoensis = 912184758,
+  Microvelia_longipes = 669259681,
+  Rhagovelia_antilleana = 1181094652,
+  Tetraripis_zetteli = 2136658938
+)
+
+process_gff_gerro <- function(gff_path, species_name) {
+  g <- read_gff(gff_path)
+  df <- as_tibble(g)
+  if(!("width" %in% colnames(df)) && all(c("start","end") %in% colnames(df))) {
+    df <- df %>% mutate(width = as.numeric(end) - as.numeric(start) + 1)
+  }
+  df <- df %>%
+    mutate(subclass = sub("/.*", "", type),
+           superfamily = sub("-.*", "", sub(".*/", "", type))) %>%
+    mutate(subclass = ifelse(superfamily == "Penelope", "PLE", subclass)) %>%
+    mutate(subclass = ifelse(subclass %in% c("DNA","LINE","LTR","PLE","RC","SINE","Unknown"), subclass, "Other")) %>%
+    mutate(named_subclass = case_when(
+      subclass == "DNA" ~ "DNA Transposon",
+      subclass == "LTR" ~ "LTR Retrotransposon",
+      subclass == "PLE" ~ "Penelope",
+      subclass == "RC" ~ "Rolling Circle",
+      TRUE ~ subclass
+    ))
+  out <- df %>%
+    filter(!is.na(kimura80)) %>%
+    mutate(kimura80 = as.numeric(kimura80)) %>%
+    filter(kimura80 <= 0.5) %>%
+    mutate(kimura80 = round(kimura80, 2)) %>%
+    group_by(named_subclass, kimura80) %>%
+    mutate(KIMURA_SUM = sum(width, na.rm = TRUE)) %>%
+    ungroup() %>%
+    select(subclass, named_subclass, kimura80, KIMURA_SUM) %>%
+    unique() %>%
+    arrange(named_subclass, kimura80) %>%
+    mutate(species = species_name)
+  return(out)
+}
+
+all_dfs_gerro <- lapply(species_list_gerro, function(sp) {
+  gff_path <- file.path(gff_dir_gerro, paste0(sp, ".filteredRepeats.gff"))
+  process_gff_gerro(gff_path, sp)
+})
+df_all_gerro <- bind_rows(all_dfs_gerro)
+
+# Ajouter la taille du génome et convertir en pourcentage
+df_all_gerro <- df_all_gerro %>%
+  mutate(genome_size = genome_sizes_gerro[species],
+         KIMURA_PERCENT = as.numeric(KIMURA_SUM) / as.numeric(genome_size) * 100)
+
+fill_colours_gerro <- tibble(subclass = c("DNA","LINE","LTR","PLE","RC","SINE","Other","Unknown"),
+                       named_subclass = c("DNA Transposon","LINE","LTR Retrotransposon","Penelope","Rolling Circle","SINE","Other","Unknown"),
+                       fill_colour = c("#E32017","#0098D4","#00782A","#7156A5","#EE7C0E","#9B0056","#F3A9BB","#A0A5A9")) %>%
+  filter(subclass %in% df_all_gerro$subclass) %>%
+  arrange(named_subclass)
+
+plot_title_gerro <- "Repeat landscapes Gerromorpha (percent of genome)"
+p_gerro <- ggplot(df_all_gerro, aes(x = kimura80, y = KIMURA_PERCENT, fill = named_subclass)) +
+  geom_col(position = "stack", width = 0.01) +
+  scale_fill_manual(values = fill_colours_gerro$fill_colour, name = "TE Subclass") +
+  facet_wrap(~species, ncol = 3, scales = "fixed") +
+  theme_bw() +
+  labs(title = plot_title_gerro) +
+  theme(plot.title = element_text(hjust = 0.5),
+        strip.text = element_text(size = 10)) +
+  scale_y_continuous(limits = c(0, y_limit_gerro), expand = c(0,0), name = "Percent of genome (%)") +
+  { if(axis_flip_gerro) scale_x_continuous(limits = c(0.51, -0.01), expand = c(0,0), name = "Kimura 2-Parameter Distance", trans = "reverse")
+    else scale_x_continuous(limits = c(-0.01, 0.51), expand = c(0,0), name = "Kimura 2-Parameter Distance")
+  }
+
+out_file_gerro <- file.path(out_directory_gerro, "10species_repeatlandscape_3x3_gerro_percent.pdf")
+ggsave(plot = p_gerro, filename = out_file_gerro, device = "pdf", width = 12.85, height = 12)
+```
+
+## Same scale of 5 species of Cimicomorpha
+
+```{r}
+# Cimicomorpha en % du génome (variables suffixées _cimico)
+gff_dir_cimico <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape"
+species_list_cimico <- c(
+  "Adelphocoris_suturalis",
+  "Apolygus_lucorum",
+  "Cimex_lectularius",
+  "Rhynocoris_fuscipes",
+  "Triatoma_infestans"
+)
+out_directory_cimico <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape/output"
+axis_flip_cimico <- TRUE
+y_limit_cimico <- 6.5  # en pourcentage (ajuste si besoin)
+
+# tailles de génomes (vecteur nommé)
+genome_sizes_cimico <- c(
+  Adelphocoris_suturalis = 1281303703,
+  Apolygus_lucorum = 1023618409,
+  Cimex_lectularius = 510788938,
+  Rhynocoris_fuscipes = 621561295,
+  Triatoma_infestans = 1411141151
+)
+
+process_gff_cimico <- function(gff_path, species_name) {
+  g <- read_gff(gff_path)
+  df <- as_tibble(g)
+  if(!("width" %in% colnames(df)) && all(c("start","end") %in% colnames(df))) {
+    df <- df %>% mutate(width = as.numeric(end) - as.numeric(start) + 1)
+  }
+  df <- df %>%
+    mutate(subclass = sub("/.*", "", type),
+           superfamily = sub("-.*", "", sub(".*/", "", type))) %>%
+    mutate(subclass = ifelse(superfamily == "Penelope", "PLE", subclass)) %>%
+    mutate(subclass = ifelse(subclass %in% c("DNA","LINE","LTR","PLE","RC","SINE","Unknown"), subclass, "Other")) %>%
+    mutate(named_subclass = case_when(
+      subclass == "DNA" ~ "DNA Transposon",
+      subclass == "LTR" ~ "LTR Retrotransposon",
+      subclass == "PLE" ~ "Penelope",
+      subclass == "RC" ~ "Rolling Circle",
+      TRUE ~ subclass
+    ))
+  out <- df %>%
+    filter(!is.na(kimura80)) %>%
+    mutate(kimura80 = as.numeric(kimura80)) %>%
+    filter(kimura80 <= 0.5) %>%
+    mutate(kimura80 = round(kimura80, 2)) %>%
+    group_by(named_subclass, kimura80) %>%
+    mutate(KIMURA_SUM = sum(width, na.rm = TRUE)) %>%
+    ungroup() %>%
+    select(subclass, named_subclass, kimura80, KIMURA_SUM) %>%
+    unique() %>%
+    arrange(named_subclass, kimura80) %>%
+    mutate(species = species_name)
+  return(out)
+}
+
+all_dfs_cimico <- lapply(species_list_cimico, function(sp) {
+  gff_path <- file.path(gff_dir_cimico, paste0(sp, ".filteredRepeats.gff"))
+  process_gff_cimico(gff_path, sp)
+})
+df_all_cimico <- bind_rows(all_dfs_cimico)
+
+# Ajouter la taille du génome et convertir en pourcentage
+df_all_cimico <- df_all_cimico %>%
+  mutate(genome_size = genome_sizes_cimico[species],
+         KIMURA_PERCENT = as.numeric(KIMURA_SUM) / as.numeric(genome_size) * 100)
+
+fill_colours_cimico <- tibble(subclass = c("DNA","LINE","LTR","PLE","RC","SINE","Other","Unknown"),
+                       named_subclass = c("DNA Transposon","LINE","LTR Retrotransposon","Penelope","Rolling Circle","SINE","Other","Unknown"),
+                       fill_colour = c("#E32017","#0098D4","#00782A","#7156A5","#EE7C0E","#9B0056","#F3A9BB","#A0A5A9")) %>%
+  filter(subclass %in% df_all_cimico$subclass) %>%
+  arrange(named_subclass)
+
+plot_title_cimico <- "Repeat landscapes Cimicomorpha (percent of genome)"
+p_cimico <- ggplot(df_all_cimico, aes(x = kimura80, y = KIMURA_PERCENT, fill = named_subclass)) +
+  geom_col(position = "stack", width = 0.01) +
+  scale_fill_manual(values = fill_colours_cimico$fill_colour, name = "TE Subclass") +
+  facet_wrap(~species, ncol = 3, scales = "fixed") +
+  theme_bw() +
+  labs(title = plot_title_cimico) +
+  theme(plot.title = element_text(hjust = 0.5),
+        strip.text = element_text(size = 10)) +
+  scale_y_continuous(limits = c(0, y_limit_cimico), expand = c(0,0), name = "Percent of genome (%)") +
+  { if(axis_flip_cimico) scale_x_continuous(limits = c(0.51, -0.01), expand = c(0,0), name = "Kimura 2-Parameter Distance", trans = "reverse")
+    else scale_x_continuous(limits = c(-0.01, 0.51), expand = c(0,0), name = "Kimura 2-Parameter Distance")
+  }
+
+out_file_cimico <- file.path(out_directory_cimico, "5_cimicomorpha_species_repeatlandscape_3x3_cimico_percent.pdf")
+ggsave(plot = p_cimico, filename = out_file_cimico, device = "pdf", width = 12.85, height = 12)
+```
+
+## Same scale of 5 species of Pentatomomorpha
+
+```{r}
+# Pentatomorpha en % du génome (variables suffixées _pentato)
+gff_dir_pentato <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape"
+species_list_pentato <- c(
+  "Eocanthecona_furcellata",
+  "Gonocerus_acuteangulatus",
+  "Oncopeltus_fasciatus",
+  "Pyrrhocoris_apterus",
+  "Riptorus_pedestris"
+)
+out_directory_pentato <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape/output"
+axis_flip_pentato <- TRUE
+y_limit_pentato <- 5  # en pourcentage (ajuste si besoin)
+
+# tailles de génomes (vecteur nommé)
+genome_sizes_pentato <- c(
+  Eocanthecona_furcellata = 1140699769,
+  Gonocerus_acuteangulatus = 1106209166,
+  Oncopeltus_fasciatus = 1099610701,
+  Pyrrhocoris_apterus = 1120152408,
+  Riptorus_pedestris = 1079517510
+)
+
+process_gff_pentato <- function(gff_path, species_name) {
+  g <- read_gff(gff_path)
+  df <- as_tibble(g)
+  if(!("width" %in% colnames(df)) && all(c("start","end") %in% colnames(df))) {
+    df <- df %>% mutate(width = as.numeric(end) - as.numeric(start) + 1)
+  }
+  df <- df %>%
+    mutate(subclass = sub("/.*", "", type),
+           superfamily = sub("-.*", "", sub(".*/", "", type))) %>%
+    mutate(subclass = ifelse(superfamily == "Penelope", "PLE", subclass)) %>%
+    mutate(subclass = ifelse(subclass %in% c("DNA","LINE","LTR","PLE","RC","SINE","Unknown"), subclass, "Other")) %>%
+    mutate(named_subclass = case_when(
+      subclass == "DNA" ~ "DNA Transposon",
+      subclass == "LTR" ~ "LTR Retrotransposon",
+      subclass == "PLE" ~ "Penelope",
+      subclass == "RC" ~ "Rolling Circle",
+      TRUE ~ subclass
+    ))
+  out <- df %>%
+    filter(!is.na(kimura80)) %>%
+    mutate(kimura80 = as.numeric(kimura80)) %>%
+    filter(kimura80 <= 0.5) %>%
+    mutate(kimura80 = round(kimura80, 2)) %>%
+    group_by(named_subclass, kimura80) %>%
+    mutate(KIMURA_SUM = sum(width, na.rm = TRUE)) %>%
+    ungroup() %>%
+    select(subclass, named_subclass, kimura80, KIMURA_SUM) %>%
+    unique() %>%
+    arrange(named_subclass, kimura80) %>%
+    mutate(species = species_name)
+  return(out)
+}
+
+all_dfs_pentato <- lapply(species_list_pentato, function(sp) {
+  gff_path <- file.path(gff_dir_pentato, paste0(sp, ".filteredRepeats.gff"))
+  process_gff_pentato(gff_path, sp)
+})
+df_all_pentato <- bind_rows(all_dfs_pentato)
+
+# Ajouter la taille du génome et convertir en pourcentage
+df_all_pentato <- df_all_pentato %>%
+  mutate(genome_size = genome_sizes_pentato[species],
+         KIMURA_PERCENT = as.numeric(KIMURA_SUM) / as.numeric(genome_size) * 100)
+
+fill_colours_pentato <- tibble(subclass = c("DNA","LINE","LTR","PLE","RC","SINE","Other","Unknown"),
+                       named_subclass = c("DNA Transposon","LINE","LTR Retrotransposon","Penelope","Rolling Circle","SINE","Other","Unknown"),
+                       fill_colour = c("#E32017","#0098D4","#00782A","#7156A5","#EE7C0E","#9B0056","#F3A9BB","#A0A5A9")) %>%
+  filter(subclass %in% df_all_pentato$subclass) %>%
+  arrange(named_subclass)
+
+plot_title_pentato <- "Repeat landscapes Pentatomorpha (percent of genome)"
+p_pentato <- ggplot(df_all_pentato, aes(x = kimura80, y = KIMURA_PERCENT, fill = named_subclass)) +
+  geom_col(position = "stack", width = 0.01) +
+  scale_fill_manual(values = fill_colours_pentato$fill_colour, name = "TE Subclass") +
+  facet_wrap(~species, ncol = 3, scales = "fixed") +
+  theme_bw() +
+  labs(title = plot_title_pentato) +
+  theme(plot.title = element_text(hjust = 0.5),
+        strip.text = element_text(size = 10)) +
+  scale_y_continuous(limits = c(0, y_limit_pentato), expand = c(0,0), name = "Percent of genome (%)") +
+  { if(axis_flip_pentato) scale_x_continuous(limits = c(0.51, -0.01), expand = c(0,0), name = "Kimura 2-Parameter Distance", trans = "reverse")
+    else scale_x_continuous(limits = c(-0.01, 0.51), expand = c(0,0), name = "Kimura 2-Parameter Distance")
+  }
+
+out_file_pentato <- file.path(out_directory_pentato, "5_pentatomorpha_species_repeatlandscape_3x3_pentato_percent.pdf")
+ggsave(plot = p_pentato, filename = out_file_pentato, device = "pdf", width = 12.85, height = 12)
+
+```
+
+## RepeatLandscape All Heteroptera same scale
+
+```{r}
+# Combine 20 species -> single facetted percent plot (5 cols x 4 rows)
+# ---- Réglages ----
+gff_dir <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape"
+out_file_all <- "/Users/trystanbessonnier/Desktop/Genomique_comparative/Repeatlandscape/output/20species_repeatlandscape_percent_5x4.pdf"
+axis_flip_all <- TRUE
+y_limit_all <- 6.5   # en %, ajuste si tu veux (ex : 5 ou 10)
+
+# ---- listes d'espèces (tes 3 groupes + Ranatra) ----
+species_list_gerro <- c(
+  "Aquarius_najas","Aquarius_paludum","Gerris_buenoi","Gerris_lacustris","Gerris_odontogaster",
+  "Hermatobates_lingyangjiaoensis","Microvelia_longipes","Rhagovelia_antilleana","Tetraripis_zetteli"
+)
+species_list_cimico <- c("Adelphocoris_suturalis","Apolygus_lucorum","Cimex_lectularius","Rhynocoris_fuscipes","Triatoma_infestans")
+species_list_pentato <- c("Eocanthecona_furcellata","Gonocerus_acuteangulatus","Oncopeltus_fasciatus","Pyrrhocoris_apterus","Riptorus_pedestris")
+species_nepo <- "Ranatra_chinensis"
+
+species_list_all <- c(species_list_gerro, species_list_cimico, species_list_pentato, species_nepo)
+
+# ---- tailles de génomes (vecteur nommé combiné) ----
+genome_sizes_all <- c(
+  # Gerromorpha
+  Aquarius_najas = 886475811,
+  Aquarius_paludum = 1011789901,
+  Gerris_buenoi = 1001611993,
+  Gerris_lacustris = 937542417,
+  Gerris_odontogaster = 1221747930,
+  Hermatobates_lingyangjiaoensis = 912184758,
+  Microvelia_longipes = 669259681,
+  Rhagovelia_antilleana = 1181094652,
+  Tetraripis_zetteli = 2136658938,
+  # Cimicomorpha
+  Adelphocoris_suturalis = 1281303703,
+  Apolygus_lucorum = 1023618409,
+  Cimex_lectularius = 510788938,
+  Rhynocoris_fuscipes = 621561295,
+  Triatoma_infestans = 1411141151,
+  # Pentatomorpha
+  Eocanthecona_furcellata = 1140699769,
+  Gonocerus_acuteangulatus = 1106209166,
+  Oncopeltus_fasciatus = 1099610701,
+  Pyrrhocoris_apterus = 1120152408,
+  Riptorus_pedestris = 1079517510,
+  # Nepomorpha (Ranatra)
+  Ranatra_chinensis = 777970226
+)
+
+# ---- Fonction de traitement réutilisable ----
+process_gff_common <- function(gff_path, species_name) {
+  g <- read_gff(gff_path)
+  df <- as_tibble(g)
+  if(!("width" %in% colnames(df)) && all(c("start","end") %in% colnames(df))) {
+    df <- df %>% mutate(width = as.numeric(end) - as.numeric(start) + 1)
+  }
+  df <- df %>%
+    mutate(subclass = sub("/.*", "", type),
+           superfamily = sub("-.*", "", sub(".*/", "", type))) %>%
+    mutate(subclass = ifelse(superfamily == "Penelope", "PLE", subclass)) %>%
+    mutate(subclass = ifelse(subclass %in% c("DNA","LINE","LTR","PLE","RC","SINE","Unknown"), subclass, "Other")) %>%
+    mutate(named_subclass = case_when(
+      subclass == "DNA" ~ "DNA Transposon",
+      subclass == "LTR" ~ "LTR Retrotransposon",
+      subclass == "PLE" ~ "Penelope",
+      subclass == "RC" ~ "Rolling Circle",
+      TRUE ~ subclass
+    ))
+  out <- df %>%
+    filter(!is.na(kimura80)) %>%
+    mutate(kimura80 = as.numeric(kimura80)) %>%
+    filter(kimura80 <= 0.5) %>%
+    mutate(kimura80 = round(kimura80, 2)) %>%
+    group_by(named_subclass, kimura80) %>%
+    mutate(KIMURA_SUM = sum(width, na.rm = TRUE)) %>%
+    ungroup() %>%
+    select(subclass, named_subclass, kimura80, KIMURA_SUM) %>%
+    unique() %>%
+    arrange(named_subclass, kimura80) %>%
+    mutate(species = species_name)
+  return(out)
+}
+
+# ---- Traiter toutes les espèces ----
+all_dfs <- lapply(species_list_all, function(sp) {
+  gff_path <- file.path(gff_dir, paste0(sp, ".filteredRepeats.gff"))
+  process_gff_common(gff_path, sp)
+})
+df_all <- bind_rows(all_dfs)
+
+# ---- Ajouter genome_size et convertir en % ----
+df_all <- df_all %>%
+  mutate(genome_size = genome_sizes_all[species],
+         KIMURA_PERCENT = as.numeric(KIMURA_SUM) / as.numeric(genome_size) * 100)
+
+# ---- Palette couleurs (cohérente) ----
+fill_colours <- tibble(subclass = c("DNA","LINE","LTR","PLE","RC","SINE","Other","Unknown"),
+                       named_subclass = c("DNA Transposon","LINE","LTR Retrotransposon","Penelope","Rolling Circle","SINE","Other","Unknown"),
+                       fill_colour = c("#E32017","#0098D4","#00782A","#7156A5","#EE7C0E","#9B0056","#F3A9BB","#A0A5A9")) %>%
+  filter(subclass %in% df_all$subclass) %>%
+  arrange(named_subclass)
+
+# ---- Plot unique 20 espèces (5 cols x 4 rows) ----
+p_all <- ggplot(df_all, aes(x = kimura80, y = KIMURA_PERCENT, fill = named_subclass)) +
+  geom_col(position = "stack", width = 0.01) +
+  scale_fill_manual(values = fill_colours$fill_colour, name = "TE Subclass") +
+  facet_wrap(~species, ncol = 5, scales = "fixed") +
+  theme_bw() +
+  labs(title = "Repeat landscapes (20 species) - percent of genome") +
+  theme(plot.title = element_text(hjust = 0.5), strip.text = element_text(size = 8)) +
+  scale_y_continuous(limits = c(0, y_limit_all), expand = c(0,0), name = "Percent of genome (%)", labels = function(x) paste0(x, "%")) +
+  { if(axis_flip_all) scale_x_continuous(limits = c(0.51, -0.01), expand = c(0,0), name = "Kimura 2-Parameter Distance", trans = "reverse")
+    else scale_x_continuous(limits = c(-0.01, 0.51), expand = c(0,0), name = "Kimura 2-Parameter Distance")
+  }
+
+ggsave(plot = p_all, filename = out_file_all, device = "pdf", width = 16, height = 12)
+```
+
+### Add Kimura treshold
+
+-   K ≤ 0.02 : très récents / potentiellement encore activs (pic très jeune)
+
+-   0.02 \< K ≤ 0.05 : récentes
+
+-   0.05 \< K ≤ 0.10 : intermédiaires-jeunes
+
+-   0.10 \< K ≤ 0.15 : plutôt anciennes
+
+-   K \> 0.15 : anciennes
+
+```{r}
+# Variant A: place labels slightly below the top inside each facet so they are not hidden
+kimura_thresholds <- c(0.02, 0.05, 0.10, 0.15)
+df_labels <- data.frame(
+  x = kimura_thresholds,
+  # place labels à ~92% de la hauteur du panel (à l'intérieur pour éviter les strips)
+  y = rep(y_limit_all * 0.92, length(kimura_thresholds)),
+  label = c("0.02", "0.05", "0.10", "0.15")
+)
+
+p_all <- p_all +
+  geom_vline(xintercept = kimura_thresholds, linetype = "dashed", colour = "grey40", linewidth = 0.3) +
+  geom_text(data = df_labels, aes(x = x, y = y, label = label), inherit.aes = FALSE,
+            size = 3, colour = "grey20", hjust = 0.5, vjust = 0.5)
+# Sauvegarder (ton ggsave existant)
+ggsave(plot = p_all, filename = out_file_all, device = "pdf", width = 16, height = 12)
+message("PDF créé :", out_file_all)
+
 ```
