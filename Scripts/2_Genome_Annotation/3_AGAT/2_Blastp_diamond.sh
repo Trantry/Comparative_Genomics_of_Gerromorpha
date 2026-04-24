@@ -10,15 +10,15 @@
 #SBATCH --error=/home/tbessonn/stderr/%x_%A_%a.err
 
 #Variables
-WORKDIR=/home/tbessonn/1_ANNIE/1_Blastp
-REFDB=$WORKDIR/uniprot_sprot_trembl
+WORKDIR=/home/tbessonn/1_AGAT/1_Blastp
+REFDB=$WORKDIR/UniprotKB_arthropoda
 PROT_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/2_Genome_Annotation/All_prot_heteroptera.txt
 read KEY PROT < <(sed -n "${SLURM_ARRAY_TASK_ID}p" "$PROT_FILE")
 
 #1st Blastp vs Swissport DB
 mkdir -p $WORKDIR/$KEY
 cd $WORKDIR/$KEY
-#diamond makedb --in /Xnfs/khila/database/swissprot/2022_02/uniprot_sprot_trembl.fasta -d /home/tbessonn/1_ANNIE/1_Blastp/uniprot_sprot_trembl
+#diamond makedb --in diamond makedb --in /Xnfs/khila/database/UniprotKB_arthropoda_db_04_2026/uniprotkb_arthropoda.fasta -d /home/tbessonn/1_ANNIE/1_Blastp/UniprotKB_arthropoda
 
 if ls "$WORKDIR/$KEY"/*.outfmt6 1> /dev/null 2>&1; then
     echo "Skipping $KEY: .outfmt6 found in $WORKDIR/$KEY"

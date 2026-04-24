@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --array=1-21
-#SBATCH --job-name=ANNIE
+#SBATCH --job-name=AGAT
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=128G
@@ -8,29 +8,26 @@
 #SBATCH --partition=Cascade,Genoa-premium,Emerald-premium
 #SBATCH --output=/home/tbessonn/stdout/%x_%A_%a.out
 #SBATCH --error=/home/tbessonn/stderr/%x_%A_%a.err
+source "${HOME}/miniconda3/etc/profile.d/conda.sh"
+conda activate agat
 
-#Variables
-OUTDIR_IPR=/home/tbessonn/1_ANNIE/1_Interpro/ANNIE_output
-OUTDIR_BLAST=/home/tbessonn/1_ANNIE/1_Blastp/ANNIE_output
+# #Variables
+OUTDIR=/home/tbessonn/1_AGAT
 INTERPRO_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/2_Genome_Annotation/3_ANNIE/All_interprotsv.txt
 BLAST_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/2_Genome_Annotation/3_ANNIE/All_blast.txt
 GFF_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/2_Genome_Annotation/3_ANNIE/All_gff.txt
-
-#Interpro ANNIE
+# #Interpro
 read KEY TSV < <(sed -n "${SLURM_ARRAY_TASK_ID}p" "$INTERPRO_FILE")
-cd $OUTDIR_IPR/
-
-python3 /home/tbessonn/bin/Annie/annie.py \
-    -ipr $TSV \
-    -o $OUTDIR_IPR/${KEY}.annie.tsv
-
-#Blast ANNIE
+#Blast
 read KEY OUTFMT < <(sed -n "${SLURM_ARRAY_TASK_ID}p" "$BLAST_FILE")
 read KEY GFF < <(sed -n "${SLURM_ARRAY_TASK_ID}p" "$GFF_FILE")
-cd $OUTDIR_BLAST/
+cd $OUTDIR/
 
-python3 /home/tbessonn/bin/Annie/annie.py \
-    -b $OUTFMT \
-    -g $GFF \
-    -db /Xnfs/khila/database/swissprot/2022_02/uniprot_sprot_trembl.fasta \
-    -o $OUTDIR_BLAST/${KEY}.annie.tsv
+agat_sp_manage_functional_annotation.pl \
+  --gff $GFF \
+  --blast $OUTFMT \
+  --db /Xnfs/khila/database/UniprotKB_arthropoda_db_04_2026/uniprotkb_arthropoda.fasta \
+  --interpro $TSV \
+  --output $OUTDIR/${KEY}
+
+agat_sp_functional_statistics.pl --gff /home/tbessonn/1_AGAT/Gerris_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa.pseudo_label.gff -o /home/tbessonn/1_AGAT/test/caca

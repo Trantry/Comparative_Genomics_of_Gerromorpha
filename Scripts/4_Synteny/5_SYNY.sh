@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=syny25
+#SBATCH --job-name=syny26
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=332G
@@ -17,16 +17,16 @@ cd /home/tbessonn/3_SYNY/
 run_syny.pl -a *.gbff \
     -t 32 \
     --aligner mashmap \
-    --mpid 80 \
+    --mpid 90 \
     --min_asize 5500 \
     -g 0 1 5 10 20 \
-    -e 1e-10 \
+    -e 1e-30 \
     --resume \
     -c pair \
     --max_links 1000 \
     --max_ticks 1000 \
     --max_points_per_track 1000 \
-    -o /home/tbessonn/3_SYNY/output25
+    -o /home/tbessonn/3_SYNY/output26
 
 
 

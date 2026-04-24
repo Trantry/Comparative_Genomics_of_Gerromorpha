@@ -10,7 +10,7 @@
 #SBATCH --error=/home/tbessonn/stderr/%x_%A_%a.err
 
 #Variables
-WORKDIR=/home/tbessonn/1_ANNIE/1_Interpro
+WORKDIR=/home/tbessonn/1_AGAT/1_Interpro
 PROT_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/2_Genome_Annotation/All_prot_heteroptera.txt
 
 read KEY PROT < <(sed -n "${SLURM_ARRAY_TASK_ID}p" "$PROT_FILE")
