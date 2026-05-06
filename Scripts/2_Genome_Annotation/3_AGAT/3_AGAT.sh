@@ -12,10 +12,10 @@ source "${HOME}/miniconda3/etc/profile.d/conda.sh"
 conda activate agat
 
 # #Variables
-OUTDIR=/home/tbessonn/1_AGAT
-INTERPRO_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/2_Genome_Annotation/3_ANNIE/All_interprotsv.txt
-BLAST_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/2_Genome_Annotation/3_ANNIE/All_blast.txt
-GFF_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/2_Genome_Annotation/3_ANNIE/All_gff.txt
+OUTDIR=/home/tbessonn/1_AGAT/2_AGAT
+INTERPRO_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/2_Genome_Annotation/3_AGAT/All_interprotsv.txt
+BLAST_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/2_Genome_Annotation/3_AGAT/All_blast.txt
+GFF_FILE=/home/tbessonn/Comparative_Genomics_of_Gerromorpha/Scripts/2_Genome_Annotation/3_AGAT/All_gff.txt
 # #Interpro
 read KEY TSV < <(sed -n "${SLURM_ARRAY_TASK_ID}p" "$INTERPRO_FILE")
 #Blast
@@ -30,4 +30,4 @@ agat_sp_manage_functional_annotation.pl \
   --interpro $TSV \
   --output $OUTDIR/${KEY}
 
-agat_sp_functional_statistics.pl --gff /home/tbessonn/1_AGAT/Gerris_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa.pseudo_label.gff -o /home/tbessonn/1_AGAT/test/caca
+# agat_sp_functional_statistics.pl --gff /home/tbessonn/1_AGAT/Gerris_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa.pseudo_label.gff -o /home/tbessonn/1_AGAT/test/caca
