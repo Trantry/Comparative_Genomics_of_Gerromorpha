@@ -1,0 +1,110 @@
+---
+title: "3_Enrichment_analyses"
+execute:
+  echo: true
+  warning: false
+format:
+  docx:
+    toc: true
+    number-sections: true
+    highlight-style: github
+  html:
+    toc: true
+    number-sections: true
+    self-contained: true
+  pdf:
+    toc: true
+    number-sections: true 
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+# Enrichment Analyses
+
+## Environment setup
+
+```{r}
+#| eval: false
+save.image(file = "/Users/trystanbessonnier/Desktop/Comparative_Genomics_of_Gerromorpha/Scripts/5_Orthofinder/3_Enrichment_analyses.RData")
+```
+
+```{r}
+#| eval: false
+load(file = "/Users/trystanbessonnier/Desktop/Comparative_Genomics_of_Gerromorpha/Scripts/5_Orthofinder/3_Enrichment_analyses.RData")
+```
+
+## Data Loading
+
+```{r}
+#Define the environment here. 
+setwd("/Users/trystanbessonnier/Desktop/Genomique_comparative/Gene_enrichment")
+
+#Install packages
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("clusterProfiler")
+install.packages(c("ggraph", "tidygraph", "igraph", "ggplot2"))
+BiocManager::install("clusterProfiler", update = TRUE, ask = FALSE)
+
+install.packages("ggraph", dependencies = TRUE)
+library(ggraph)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(clusterProfiler)
+```
+
+## Duplication isolation
+
+```{r}
+# Chemin vers le fichier
+dup <- read.delim(
+  file = "/Users/trystanbessonnier/Desktop/Genomique_comparative/Orthofinder/Results_Apr14/Gene_Duplication_Events/Duplications.tsv",
+  sep = "\t",
+  header = TRUE,
+  quote = "",
+  stringsAsFactors = FALSE
+)
+
+# Filtrer N2 / N12 et Support >= 0.5
+dup_N2  <- subset(dup, Species.Tree.Node == "N2"  & Support >= 0.5)
+dup_N12 <- subset(dup, Species.Tree.Node == "N12" & Support >= 0.5)
+
+# Fonction utilitaire: transforme "g1, g2, g3" en vecteur de gènes
+split_genes <- function(x) {
+  x <- x[!is.na(x) & x != ""]
+  g <- unlist(strsplit(x, ",\\s*"))
+  g <- trimws(g)
+  g[g != ""]
+}
+
+# Extraire union(Genes 1, Genes 2) et dédupliquer
+genes_N2  <- sort(unique(c(split_genes(dup_N2$Genes.1),  split_genes(dup_N2$Genes.2))))
+genes_N12 <- sort(unique(c(split_genes(dup_N12$Genes.1), split_genes(dup_N12$Genes.2))))
+
+# Sauver en fichiers
+writeLines(genes_N2,  "genes_N2_support0.5.txt")
+writeLines(genes_N12, "genes_N12_support0.5.txt")
+
+# Contrôle
+length(genes_N2)
+length(genes_N12)
+
+c(
+  events = nrow(dup_N2),
+  orthogroups = length(unique(dup_N2$Orthogroup)),
+  unique_genes = length(genes_N2)
+)
+
+c(
+  events = nrow(dup_N12),
+  orthogroups = length(unique(dup_N12$Orthogroup)),
+  unique_genes = length(genes_N12)
+)
+```
+
+```{r}
+
+```
