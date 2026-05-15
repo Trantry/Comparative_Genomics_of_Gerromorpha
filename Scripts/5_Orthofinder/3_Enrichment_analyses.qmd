@@ -26,35 +26,35 @@ editor_options:
 
 ```{r}
 #| eval: false
-save.image(file = "/Users/trystanbessonnier/Desktop/Comparative_Genomics_of_Gerromorpha/Scripts/5_Orthofinder/3_Enrichment_analyses.RData")
+save.image(file = "/Users/trystan.bessonnier/Downloads/Comparative_Genomics_of_Gerromorpha/Scripts/5_Orthofinder/3_Enrichment_analyses.RData")
 ```
 
 ```{r}
 #| eval: false
-load(file = "/Users/trystanbessonnier/Desktop/Comparative_Genomics_of_Gerromorpha/Scripts/5_Orthofinder/3_Enrichment_analyses.RData")
+load(file = "/Users/trystan.bessonnier/Downloads/Comparative_Genomics_of_Gerromorpha/Scripts/5_Orthofinder/3_Enrichment_analyses.RData")
 ```
 
 ## Data Loading
 
 ```{r}
 #Define the environment here. 
-setwd("/Users/trystanbessonnier/Desktop/Genomique_comparative/Gene_enrichment")
+setwd("/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment")
 
 #Install packages
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
 BiocManager::install("clusterProfiler")
-install.packages(c("ggraph", "tidygraph", "igraph", "ggplot2"))
-BiocManager::install("clusterProfiler", update = TRUE, ask = FALSE)
-
-install.packages("ggraph", dependencies = TRUE)
-library(ggraph)
+library(ggplot2)
+library(AnnotationDbi)
+library(GO.db)
 library(dplyr)
 library(tidyr)
 library(stringr)
 library(clusterProfiler)
 ```
+
+# ClusterProfiler : Enrichment gene analyses in duplicated genes N2 and N12
 
 ## Duplication isolation
 
@@ -103,6 +103,499 @@ c(
   orthogroups = length(unique(dup_N12$Orthogroup)),
   unique_genes = length(genes_N12)
 )
+```
+
+```{r}
+read_interpro_TERM2GENE_prefixed <- function(path, species, go_col = "V14", id_col = "V1") {
+  ip <- read.delim(path, sep = "\t", header = FALSE, stringsAsFactors = FALSE, quote = "")
+
+  ip %>%
+    transmute(
+      gene_raw = .data[[id_col]],
+      go_raw   = .data[[go_col]]
+    ) %>%
+    filter(!is.na(go_raw), go_raw != "-", go_raw != "") %>%
+    separate_rows(go_raw, sep = "\\|") %>%
+    mutate(
+      term = str_replace(go_raw, "\\(.*\\)$", ""),  # enlève (InterPro)/(PANTHER)
+      term = trimws(term),
+      gene = paste0(species, "_", gene_raw)         # préfixe espèce_
+    ) %>%
+    filter(str_detect(term, "^GO:")) %>%
+    transmute(term = term, gene = gene) %>%
+    distinct()
+}
+
+interpro_dir <- "/Volumes/Trystan/Lyon/M2/Stage/interpro"
+files <- list.files(interpro_dir, pattern="\\.tsv$", full.names=TRUE)
+
+species_from_file <- function(f) tools::file_path_sans_ext(basename(f))
+
+TERM2GENE_all <- bind_rows(lapply(files, function(f) {
+  sp <- species_from_file(f)
+  read_interpro_TERM2GENE_prefixed(f, species = sp, go_col = "V14", id_col = "V1")
+})) %>% distinct()
+
+nrow(TERM2GENE_all)
+head(TERM2GENE_all)
+
+length(unique(TERM2GENE_all$gene))  # combien de gènes annotés (universe possible)
+length(unique(TERM2GENE_all$term))  # combien de GO différents
+```
+
+### Universe background
+
+```{r}
+universe_all <- sort(unique(TERM2GENE_all$gene))
+
+length(intersect(genes_N2, universe_all)) / length(genes_N2)
+length(intersect(genes_N12, universe_all)) / length(genes_N12)
+```
+
+### Enrichment
+
+```{r}
+go_ids_all <- unique(TERM2GENE_all$term)
+
+TERM2NAME_all <- AnnotationDbi::select(
+  GO.db,
+  keys = go_ids_all,
+  keytype = "GOID",
+  columns = c("GOID", "TERM")
+) %>%
+  distinct(GOID, TERM) %>%
+  filter(!is.na(TERM) & TERM != "") %>%
+  transmute(term = GOID, name = TERM)
+
+## ---- Enrichment N2 ----
+ego_N2_named <- enricher(
+  gene = genes_N2,
+  universe = universe_all,
+  TERM2GENE = TERM2GENE_all,
+  TERM2NAME = TERM2NAME_all,
+  pAdjustMethod = "BH",
+  pvalueCutoff = 0.01,
+  qvalueCutoff = 0.05,
+  minGSSize = 5,
+  maxGSSize = 500
+)
+
+N2_duplicated_vs_BG21<-dotplot(ego_N2_named, showCategory = 50)
+
+ggsave("N2_duplicated_vs_BG21.png", plot= N2_duplicated_vs_BG21, dpi=300, path="/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output")
+
+## ---- Enrichment N12 ----
+ego_N12_named <- enricher(
+  gene = genes_N12,
+  universe = universe_all,
+  TERM2GENE = TERM2GENE_all,
+  TERM2NAME = TERM2NAME_all,
+  pAdjustMethod = "BH",
+  pvalueCutoff = 0.01,
+  qvalueCutoff = 0.05,
+  minGSSize = 5,
+  maxGSSize = 500
+)
+
+N12_duplicated_vs_BG21<-dotplot(ego_N12_named, showCategory = 50)
+
+ggsave("N12_duplicated_vs_BG21.png", plot= N12_duplicated_vs_BG21, dpi=300, path="/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output")
+
+write.csv(as.data.frame(ego_N2), "GO_enrichment_N2_vsAll21.csv", row.names = FALSE)
+write.csv(as.data.frame(ego_N12), "GO_enrichment_N12_vsAll21.csv", row.names = FALSE)
+```
+
+# ClusterProfiler : Enrichment gene analyses in ALL genes N2 and N12
+
+### Genes N2 and N12 isolation
+
+```{r}
+interpro_dir <- "/Volumes/Trystan/Lyon/M2/Stage/interpro"
+
+species_N2 <- c(
+  "Hermatobates_lingyangjiaoensis",
+  "Microvelia_longipes",
+  "Tetraripis_zetteli",
+  "Rhagovelia_antilleana",
+  "Gigantometra_gigas",
+  "Aquarius_najas",
+  "Aquarius_paludum",
+  "Gerris_buenoi",
+  "Gerris_lacustris",
+  "Gerris_odontogaster"
+)
+
+species_N12 <- c(
+  "Gigantometra_gigas",
+  "Aquarius_najas",
+  "Aquarius_paludum",
+  "Gerris_buenoi",
+  "Gerris_lacustris",
+  "Gerris_odontogaster"
+)
+
+read_interpro_TERM2GENE_prefixed <- function(path, species, go_col = "V14", id_col = "V1") {
+  ip <- read.delim(path, sep = "\t", header = FALSE, stringsAsFactors = FALSE, quote = "")
+
+  ip %>%
+    transmute(
+      gene_raw = .data[[id_col]],
+      go_raw   = .data[[go_col]]
+    ) %>%
+    filter(!is.na(go_raw), go_raw != "-", go_raw != "") %>%
+    separate_rows(go_raw, sep = "\\|") %>%
+    mutate(
+      term = str_replace(go_raw, "\\(.*\\)$", ""),  # enlève (InterPro)/(PANTHER)
+      term = trimws(term),
+      gene = paste0(species, "_", gene_raw)         # espèce_LOC...
+    ) %>%
+    filter(str_detect(term, "^GO:")) %>%
+    transmute(term = term, gene = gene) %>%
+    distinct()
+}
+
+build_TERM2GENE_for_species <- function(species_vec, interpro_dir) {
+  bind_rows(lapply(species_vec, function(sp) {
+    f <- file.path(interpro_dir, paste0(sp, ".tsv"))
+    if (!file.exists(f)) stop("Fichier interpro manquant: ", f)
+    read_interpro_TERM2GENE_prefixed(f, species = sp, go_col = "V14", id_col = "V1")
+  })) %>% distinct()
+}
+
+TERM2GENE_N2  <- build_TERM2GENE_for_species(species_N2, interpro_dir)
+TERM2GENE_N12 <- build_TERM2GENE_for_species(species_N12, interpro_dir)
+
+# listes de gènes (tous les gènes annotés dans ces clades)
+genes_all_N2_fromInterpro  <- sort(unique(TERM2GENE_N2$gene))
+genes_all_N12_fromInterpro <- sort(unique(TERM2GENE_N12$gene))
+
+length(genes_all_N2_fromInterpro)
+length(genes_all_N12_fromInterpro)
+
+write.table(TERM2GENE_N2, file = "TERM2GENE_N2_fromInterpro.tsv",
+            sep = "\t", quote = FALSE, row.names = FALSE)
+
+write.table(TERM2GENE_N12, file = "TERM2GENE_N12_fromInterpro.tsv",
+            sep = "\t", quote = FALSE, row.names = FALSE)
+
+writeLines(genes_all_N2_fromInterpro,  "genes_ALL_N2_fromInterpro.txt")
+writeLines(genes_all_N12_fromInterpro, "genes_ALL_N12_fromInterpro.txt")
+```
+
+### Universe background
+
+```{r}
+## ---- Universe (background) : 21 espèces ----
+universe_all_21sp <- sort(unique(TERM2GENE_all$gene))
+
+## ---- QC : proportion de tes listes (N2/N12) qui sont annotées (présentes dans universe) ----
+prop_annotated_N2 <- length(intersect(genes_N2, universe_all_21sp)) / length(genes_N2)
+prop_annotated_N12 <- length(intersect(genes_N12, universe_all_21sp)) / length(genes_N12)
+
+prop_annotated_N2
+prop_annotated_N12
+```
+
+### Enrichment
+
+```{r}
+## ---- GO names (TERM2NAME) : commun à N2 et N12 ----
+go_ids_all <- unique(TERM2GENE_all$term)
+
+TERM2NAME_all <- AnnotationDbi::select(
+  GO.db,
+  keys = go_ids_all,
+  keytype = "GOID",
+  columns = c("GOID", "TERM")
+) %>%
+  distinct(GOID, TERM) %>%
+  filter(!is.na(TERM) & TERM != "") %>%
+  transmute(term = GOID, name = TERM)
+
+## ---- Enrichment sur TOUS les gènes du clade (pas seulement dupliqués) ----
+ego_ALLgenes_N2_named <- enricher(
+  gene = genes_all_N2_fromInterpro,      # <- tous les gènes N2 (10 espèces)
+  universe = universe_all_21sp,          # <- background 21 espèces (inchangé)
+  TERM2GENE = TERM2GENE_all,             # <- annotation GO globale (21 espèces)
+  TERM2NAME = TERM2NAME_all,
+  pAdjustMethod = "BH",
+  pvalueCutoff = 0.01,
+  qvalueCutoff = 0.05,
+  minGSSize = 5,
+  maxGSSize = 500
+)
+
+N2_ALL_vs_BG21<-dotplot(ego_ALLgenes_N2_named, showCategory = 50) +
+  theme(axis.text.y = element_text(size = 7))
+
+ggsave("N2_ALL_vs_BG21.png", plot= N2_ALL_vs_BG21, dpi=300, path="/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output")
+
+ego_ALLgenes_N12_named <- enricher(
+  gene = genes_all_N12_fromInterpro,     # <- tous les gènes N12 (6 espèces)
+  universe = universe_all_21sp,          # <- background 21 espèces (inchangé)
+  TERM2GENE = TERM2GENE_all,             # <- annotation GO globale (21 espèces)
+  TERM2NAME = TERM2NAME_all,
+  pAdjustMethod = "BH",
+  pvalueCutoff = 0.01,
+  qvalueCutoff = 0.05,
+  minGSSize = 5,
+  maxGSSize = 500
+)
+
+N12_ALL_vs_BG21<-dotplot(ego_ALLgenes_N12_named, showCategory = 50)+
+  theme(axis.text.y = element_text(size = 7))
+
+
+ggsave("N12_ALL_vs_BG21.png", plot= N12_ALL_vs_BG21, dpi=300, path="/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output")
+
+
+# exports (optionnel)
+write.csv(as.data.frame(ego_ALLgenes_N2_named), "GO_enrichment_ALLgenes_N2_vsAll21.csv", row.names = FALSE)
+write.csv(as.data.frame(ego_ALLgenes_N12_named), "GO_enrichment_ALLgenes_N12_vsAll21.csv", row.names = FALSE)
+```
+
+# ClusterProfiler : Enrichment gene analyses in ALL genes N12 vs background N2
+
+```{r}
+## ---- Enrichment : ALL genes N12 vs background = ALL genes N2 ----
+# gene set = tous les gènes annotés des 6 espèces (N12)
+# universe  = tous les gènes annotés des 10 espèces (N2)
+
+ego_ALLgenes_N12_vs_BG_N2 <- enricher(
+  gene = genes_all_N12_fromInterpro,
+  universe = genes_all_N2_fromInterpro,   # background = N2
+  TERM2GENE = TERM2GENE_all,
+  TERM2NAME = TERM2NAME_all,
+  pAdjustMethod = "BH",
+  pvalueCutoff = 0.01,
+  qvalueCutoff = 0.05,
+  minGSSize = 5,
+  maxGSSize = 500
+)
+
+N12_ALL_vs_BGN2<-dotplot(ego_ALLgenes_N12_vs_BG_N2, showCategory = 20)
+
+ggsave("N12_ALL_vs_BGN2.png", plot= N12_ALL_vs_BGN2, dpi=300, path="/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output")
+
+# export (optionnel)
+write.csv(as.data.frame(ego_ALLgenes_N12_vs_BG_N2),
+          "GO_enrichment_ALLgenes_N12_vs_BG_N2.csv",
+          row.names = FALSE)
+```
+
+# ClusterProfiler : Enrichment gene analyses in duplicated genes N12 vs background N2
+
+```{r}
+ego_duplicatedgenes_N12_vs_BG_N2 <- enricher(
+  gene = genes_N12,
+  universe = genes_all_N2_fromInterpro,   # background = N2
+  TERM2GENE = TERM2GENE_all,
+  TERM2NAME = TERM2NAME_all,
+  pAdjustMethod = "BH",
+  pvalueCutoff = 0.01,
+  qvalueCutoff = 0.05,
+  minGSSize = 5,
+  maxGSSize = 500
+)
+
+N12_duplicated_vs_BGN2<-dotplot(ego_duplicatedgenes_N12_vs_BG_N2, showCategory = 50)+
+  theme(axis.text.y = element_text(size = 7))
+
+
+ggsave("N12_duplicated_vs_BGN2.png", plot= N12_duplicated_vs_BGN2, dpi=300, path="/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output")
+```
+
+# ClusterProfiler : Enrichment gene analyses in ALL genes N11 vs background N2
+
+### Genes N11 isolation
+
+```{r}
+species_N11 <- c(
+  "Tetraripis_zetteli",
+  "Rhagovelia_antilleana"
+)
+
+read_interpro_TERM2GENE_prefixed <- function(path, species, go_col = "V14", id_col = "V1") {
+  ip <- read.delim(path, sep = "\t", header = FALSE, stringsAsFactors = FALSE, quote = "")
+
+  ip %>%
+    transmute(
+      gene_raw = .data[[id_col]],
+      go_raw   = .data[[go_col]]
+    ) %>%
+    filter(!is.na(go_raw), go_raw != "-", go_raw != "") %>%
+    separate_rows(go_raw, sep = "\\|") %>%
+    mutate(
+      term = str_replace(go_raw, "\\(.*\\)$", ""),  # enlève (InterPro)/(PANTHER)
+      term = trimws(term),
+      gene = paste0(species, "_", gene_raw)         # espèce_LOC...
+    ) %>%
+    filter(str_detect(term, "^GO:")) %>%
+    transmute(term = term, gene = gene) %>%
+    distinct()
+}
+
+build_TERM2GENE_for_species <- function(species_vec, interpro_dir) {
+  bind_rows(lapply(species_vec, function(sp) {
+    f <- file.path(interpro_dir, paste0(sp, ".tsv"))
+    if (!file.exists(f)) stop("Fichier interpro manquant: ", f)
+    read_interpro_TERM2GENE_prefixed(f, species = sp, go_col = "V14", id_col = "V1")
+  })) %>% distinct()
+}
+
+TERM2GENE_N11  <- build_TERM2GENE_for_species(species_N11, interpro_dir)
+
+# listes de gènes (tous les gènes annotés dans ces clades)
+genes_all_N11_fromInterpro  <- sort(unique(TERM2GENE_N11$gene))
+
+length(genes_all_N11_fromInterpro)
+
+write.table(TERM2GENE_N11, file = "TERM2GENE_N11_fromInterpro.tsv",
+            sep = "\t", quote = FALSE, row.names = FALSE)
+
+
+writeLines(genes_all_N11_fromInterpro,  "genes_ALL_N11_fromInterpro.txt")
+```
+
+### Enrichment
+
+```{r}
+ego_ALLgenes_N11_vs_BG_N2 <- enricher(
+  gene = genes_all_N11_fromInterpro,
+  universe = genes_all_N2_fromInterpro,   # background = N2
+  TERM2GENE = TERM2GENE_all,
+  TERM2NAME = TERM2NAME_all,
+  pAdjustMethod = "BH",
+  pvalueCutoff = 0.01,
+  qvalueCutoff = 0.05,
+  minGSSize = 5,
+  maxGSSize = 500
+)
+
+N11_ALL_vs_BGN2<-dotplot(ego_ALLgenes_N11_vs_BG_N2, showCategory = 20)
+
+ggsave("N11_ALL_vs_BGN2.png", plot= N11_ALL_vs_BGN2, dpi=300, path="/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output")
+
+```
+
+# ClusterProfiler : Enrichment gene analyses in duplicated genes N11
+
+## Duplication N11 isolation
+
+```{r}
+# Chemin vers le fichier
+
+dup <- read.delim(
+  file = "/Volumes/Trystan/Lyon/M2/Stage/Orthofinder/Results_Apr14/Gene_Duplication_Events/Duplications.tsv",
+  sep = "\t",
+  header = TRUE,
+  quote = "",
+  stringsAsFactors = FALSE
+)
+
+# Filtrer N11 Support >= 0.5
+dup_N11  <- subset(dup, Species.Tree.Node == "N11"  & Support >= 0.5)
+
+# Fonction utilitaire: transforme "g1, g2, g3" en vecteur de gènes
+split_genes <- function(x) {
+  x <- x[!is.na(x) & x != ""]
+  g <- unlist(strsplit(x, ",\\s*"))
+  g <- trimws(g)
+  g[g != ""]
+}
+
+# Extraire union(Genes 1, Genes 2) et dédupliquer
+genes_N11  <- sort(unique(c(split_genes(dup_N11$Genes.1),  split_genes(dup_N11$Genes.2))))
+
+# Sauver en fichiers
+writeLines(genes_N11,  "genes_N11_support0.5.txt")
+
+# Contrôle
+length(genes_N11)
+
+c(
+  events = nrow(dup_N11),
+  orthogroups = length(unique(dup_N11$Orthogroup)),
+  unique_genes = length(genes_N11)
+)
+
+```
+
+### Enrichment
+
+```{r}
+ego_dup_N11_vs_BG_N2 <- enricher(
+  gene = genes_N11,
+  universe = genes_all_N2_fromInterpro,
+  TERM2GENE = TERM2GENE_all,
+  TERM2NAME = TERM2NAME_all,
+  pAdjustMethod = "BH",
+  pvalueCutoff = 0.01,
+  qvalueCutoff = 0.05,
+  minGSSize = 5,
+  maxGSSize = 500
+)
+
+N11_duplicated_vs_BGN2<-dotplot(ego_dup_N11_vs_BG_N2, showCategory = 20)
+
+ggsave("N11_duplicated_vs_BGN2.png", plot= N11_duplicated_vs_BGN2, dpi=300, path="/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output")
+
+
+# export
+write.csv(as.data.frame(ego_dup_N11_vs_BG_N2),
+          "GO_enrichment_DUPgenes_N11_vs_BG_ALLgenes_N2.csv",
+          row.names = FALSE)
+
+# QC rapide
+c(
+  N11_dup_total = length(genes_N11),
+  N11_dup_in_BG = length(genes_N11_annotated_in_N2BG),
+  BG_N2_total = length(genes_all_N2_fromInterpro)
+)
+```
+
+```{r}
+## ---- Barplot split par ONTOLOGY (top N par BP/CC/MF) ----
+library(enrichplot)
+library(ggplot2)
+library(dplyr)
+library(GO.db)
+library(AnnotationDbi)
+
+# 1) Ajouter ONTOLOGY à TON objet enricher (ex: ego_N2_named)
+onto_map <- AnnotationDbi::select(
+  GO.db,
+  keys = unique(ego_N2_named@result$ID),
+  keytype = "GOID",
+  columns = c("GOID", "ONTOLOGY")
+) %>%
+  distinct(GOID, ONTOLOGY) %>%
+  transmute(ID = GOID, ONTOLOGY = ONTOLOGY)
+
+ego_N2_onto <- ego_N2_named
+ego_N2_onto@result <- ego_N2_onto@result %>% left_join(onto_map, by = "ID")
+
+# 2) Barplot : top 15 PAR ontologie
+p_n2_bar_nofacet <- barplot(
+  ego_N2_onto,
+  x = "Count",
+  showCategory = 15,
+  split = "ONTOLOGY",
+  label_format = 30        # wrap des labels (mets Inf si tu ne veux pas wrap)
+) +
+  aes(fill = ONTOLOGY) +
+  scale_fill_brewer(palette = "Set2")
+
+p_n2_bar_nofacet +
+  geom_text(aes(label = Count), nudge_x = 2, size = 3) +
+  scale_y_discrete()
+
+# Option facet (BP/CC/MF séparés)
+p_n2_bar_facet <- p_n2_bar_nofacet +
+  enrichplot::autofacet(by = "row", scales = "free") +
+  scale_y_discrete()
+
+p_n2_bar_facet
 ```
 
 ```{r}

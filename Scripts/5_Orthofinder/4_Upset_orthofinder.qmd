@@ -1,0 +1,155 @@
+---
+title: "Upset_Orthofinder"
+execute:
+  echo: true
+  warning: false
+format:
+  docx:
+    toc: true
+    number-sections: true
+    highlight-style: github
+  html:
+    toc: true
+    number-sections: true
+    self-contained: true
+  pdf:
+    toc: true
+    number-sections: true 
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+# Upset
+
+## Environment setup
+
+```{r}
+#| eval: false
+save.image(file = "//Users/trystan.bessonnier/Downloads/Comparative_Genomics_of_Gerromorpha/Scripts/5_Orthofinder/4_Upset_orthofinder.RData")
+```
+
+```{r}
+#| eval: false
+load(file = "/Users/trystan.bessonnier/Downloads/Comparative_Genomics_of_Gerromorpha/Scripts/5_Orthofinder/4_Upset_orthofinder.RData")
+```
+
+## Loading data
+
+```{r}
+#Define the environment here. 
+setwd("/Volumes/Trystan/Lyon/M2/Stage/Orthofinder/Results_Apr14")
+
+install.packages("UpSetR")   
+library(ggplot2)
+library(UpSetR)
+library(dplyr)
+```
+
+```{r}
+
+orthos <- read.table("Orthogroups/Orthogroups.tsv", 
+                     sep="\t", header=TRUE, row.names=1, stringsAsFactors=FALSE)
+
+# Présence/absence : cellule non vide = 1, vide = 0
+orthos_bin <- as.data.frame((orthos != "") * 1)
+
+
+upset(
+  orthos_bin,
+  nsets = ncol(orthos_bin),
+  nintersects = 120,
+)
+```
+
+## Pan-génomique ?
+
+```{r}
+library(ggplot2)
+
+# Lire Orthogroups.tsv
+orthos <- read.table(
+  "Orthogroups/Orthogroups.tsv",
+  sep = "\t", header = TRUE, row.names = 1,
+  stringsAsFactors = FALSE, check.names = FALSE
+)
+
+# présence/absence
+orthos_bin <- (orthos != "") * 1
+
+# Nombre d'espèces total
+N <- ncol(orthos_bin)
+
+# Fréquence par orthogroupe = nb d'espèces où présent
+freq <- rowSums(orthos_bin)
+
+# Seuil softcore > 90%
+softcore_cutoff <- ceiling(0.9 * N)  # pour N=21 -> 19
+
+# Catégories pan-génome
+cat <- ifelse(freq == N, "Core",
+       ifelse(freq >= softcore_cutoff, "Softcore",
+       ifelse(freq == 1, "Private", "Dispensable")))
+
+df <- data.frame(
+  Orthogroup = rownames(orthos_bin),
+  freq = freq,
+  category = factor(cat, levels = c("Private", "Dispensable", "Softcore", "Core"))
+)
+
+
+df$freq_pct <- 100 * df$freq / N
+
+ggplot(df, aes(x = freq, fill = category)) +
+  geom_bar(width = 0.9) +
+  scale_x_continuous(breaks = seq(1, N, by = 1)) +
+  labs(x = paste0("Frequency (#species, N=", N, ")"),
+       y = "Number of orthogroups",
+       fill = "Class") +
+  scale_fill_manual(values = c(
+    Private = "#AA4466",
+    Dispensable = "#6699CC",
+    Softcore = "#009E73",
+    Core = "#E69F00"
+  )) +
+  theme_classic()
+```
+
+```{r}
+
+# table de comptage par fréquence et catégorie
+bar_df <- df %>%
+  count(freq, category) %>%
+  tidyr::complete(freq = 1:N, category, fill = list(n = 0)) %>%
+  group_by(freq) %>%
+  mutate(total_freq = sum(n)) %>%
+  ungroup()
+
+ggplot(bar_df, aes(x = freq, y = n, fill = category)) +
+  geom_col(width = 0.9) +
+  # affiche le total au-dessus de chaque barre (somme des catégories)
+  geom_text(
+    data = bar_df %>% distinct(freq, total_freq),
+    aes(x = freq, y = total_freq, label = total_freq),
+    inherit.aes = FALSE,
+    vjust = -0.2,
+    size = 3
+  ) +
+  scale_x_continuous(breaks = 1:N) +
+  scale_fill_manual(values = c(
+    Private = "#AA4466",
+    Dispensable = "#6699CC",
+    Softcore = "#009E73",
+    Core = "#E69F00"
+  )) +
+  labs(x = paste0("Frequency (#species, N=", N, ")"),
+       y = "Number of orthogroups",
+       fill = "Class") +
+  coord_cartesian(clip = "off") +
+  theme_classic() +
+  theme(plot.margin = margin(5.5, 20, 5.5, 5.5))
+```
+
+```{r}
+
+```
