@@ -54,7 +54,7 @@ do
     then
         busco -i "$GENOME" \
         -l hemiptera_odb12 \
-        -m proteins \
+        -m genome \
         -o $key \
         --out_path "$WORKDIR" \
         --cpu 16

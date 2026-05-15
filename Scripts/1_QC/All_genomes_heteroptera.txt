@@ -6,7 +6,7 @@ hermatobatesLingyangjiaoensis /home/tbessonn/ressources/genomes/gerromorpha/herm
 microveliaLongipes /home/tbessonn/ressources/genomes/gerromorpha/microvelia_longipes/Mlon_polished_genome_round2.fasta
 tetraripisZetteli /home/tbessonn/ressources/genomes/gerromorpha/tetraripis_zetteli/tzet_genome_flye_v4_unmasked.fasta
 gerrisBuenoi /home/tbessonn/ressources/genomes/gerromorpha/gerris_buenoi/new/genome.softmasked.fa
-rhagoveliaAntilleana /home/tbessonn/ressources/genomes/gerromorpha/rhagovelia_antilleana/unmasked_genome/rhagovelia_antilleana_genome_fourth_polish.fasta.renamed
+rhagoveliaAntilleana /home/tbessonn/ressources/genomes/gerromorpha/rhagovelia_antilleana/rhagovelia_antilleana_genome_v2.fa
 gerrisOdontogaster /home/tbessonn/ressources/genomes/gerromorpha/gerris_odontogaster/gerris_odontogaster_long.PolcaCorrected.sixth_polished.fa
 adelphocorisSuturalis /home/tbessonn/ressources/genomes/non_gerromorpha/cimicomorpha/adelphocoris_suturalis/ncbi_dataset/ncbi_dataset/data/GCA_030762985.1/GCA_030762985.1_ASM3076298v1_genomic.fna
 apolygusLucorum /home/tbessonn/ressources/genomes/non_gerromorpha/cimicomorpha/apolygus_lucorum/ncbi_dataset/ncbi_dataset/data/GCA_009739505.2/GCA_009739505.2_ASM973950v2_genomic.fna

@@ -11,6 +11,4 @@
 source "${HOME}/miniconda3/etc/profile.d/conda.sh"
 conda activate ortho
 
-orthofinder -f /home/tbessonn/4_orthofinder/filtered -a 64 -t 64 -s /home/tbessonn/4_orthofinder/tree/species_tree_ranatra_rooted.nwk -y -A mafft -I 1.4
-
-#orthofinder -f /home/tbessonn/4_orthofinder -a 64 -t 64 -M msa -A famsa -T iqtree3 -s /home/tbessonn/4_orthofinder/tree/species_tree_ranatra_rooted.nwk
+orthofinder -f /home/tbessonn/5_CODEML/3_orthofinder -a 64 -t 64 -s /home/tbessonn/4_orthofinder/tree/species_tree_ranatra_rooted.nwk -y -A mafft -I 1.4 -X

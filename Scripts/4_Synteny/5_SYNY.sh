@@ -36,6 +36,7 @@ run_syny.pl -a *.gbff \
    -t 32 \
    --no_map \
    --no_circos \
+   --resume \
    -g 0 1 5 10 20 \
    -e 1e-30 \
    -o /home/tbessonn/3_SYNY/output29
