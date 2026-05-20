@@ -1,0 +1,17 @@
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820859_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820859_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820860_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820860_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820861_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820861_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820862_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820862_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820863_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820863_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820864_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820864_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820865_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820865_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820866_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR16820866_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4427078_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4427078_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4427079_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4427079_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4449814_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4449814_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4449815_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4449815_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4449939_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4449939_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4449940_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4449940_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4449941_1.fastq /scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR4449941_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR3287340.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/T_infestans/SRR5298593.fastq fastq

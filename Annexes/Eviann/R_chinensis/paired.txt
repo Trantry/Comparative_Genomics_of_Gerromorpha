@@ -1,0 +1,2 @@
+/scratch/Bio/tbessonn/RNA_seq/R_chinensis/SRR11241329_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_chinensis/SRR11241329_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_chinensis/SRR28788880_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_chinensis/SRR28788880_2.fastq fastq

@@ -1,0 +1,3 @@
+/scratch/Cascade/tbessonn/RNA-seq/A_paludum/SRR17258928_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/A_paludum/SRR17258928_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/A_paludum/SRR2051469_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/A_paludum/SRR2051469_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/A_paludum/SRR27541579_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/A_paludum/SRR27541579_2.fastq fastq

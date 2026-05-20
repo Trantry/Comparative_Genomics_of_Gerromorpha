@@ -1,0 +1,1 @@
+/scratch/Bio/tbessonn/RNA_seq/G_acuteangulatus/ERR12861026_1.fastq /scratch/Bio/tbessonn/RNA_seq/G_acuteangulatus/ERR12861026_2.fastq fastq

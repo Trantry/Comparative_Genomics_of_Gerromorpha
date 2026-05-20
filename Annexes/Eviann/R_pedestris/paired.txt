@@ -1,0 +1,160 @@
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821980_1.fastq	/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821980_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821981_1.fastq	/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821981_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821982_1.fastq	/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821982_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821983_1.fastq	/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821983_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821984_1.fastq	/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821984_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821985_1.fastq	/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821985_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821986_1.fastq	/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821986_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821987_1.fastq	/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821987_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821988_1.fastq	/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821988_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821989_1.fastq	/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821989_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821990_1.fastq	/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821990_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821991_1.fastq	/scratch/Bio/tbessonn/RNA_seq/R_pedestris/DRR821991_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR13306904_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR13306904_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085650_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085650_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085651_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085651_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085652_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085652_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085653_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085653_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085654_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085654_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085655_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085655_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085656_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085656_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085657_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085657_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085658_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085658_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085659_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085659_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085660_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085660_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085661_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085661_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085662_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085662_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085663_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085663_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085664_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085664_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085665_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085665_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085666_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085666_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085667_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085667_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085668_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085668_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085669_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085669_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085670_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR17085670_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR18670484_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR18670484_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR18670485_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR18670485_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21672247_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21672247_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21672248_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21672248_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21672249_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21672249_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21672250_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21672250_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21672251_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21672251_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21672252_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21672252_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21820231_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21820231_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21820232_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21820232_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21820233_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21820233_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21820234_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21820234_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21820235_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21820235_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21820236_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR21820236_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542270_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542270_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542271_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542271_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542272_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542272_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542273_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542273_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542274_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542274_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542275_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542275_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542276_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542276_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542277_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542277_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542278_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542278_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542279_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542279_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542280_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542280_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542281_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542281_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542282_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542282_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542283_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542283_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542284_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542284_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542285_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542285_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542286_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542286_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542287_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542287_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542288_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542288_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542289_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542289_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542290_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542290_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542291_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542291_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542292_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542292_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542293_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542293_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542294_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542294_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542295_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542295_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542296_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542296_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542297_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542297_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542298_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542298_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542299_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542299_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542300_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542300_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542301_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542301_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542302_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542302_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542303_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542303_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542304_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22542304_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR25740259_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR25740259_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26081701_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26081701_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26081719_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26081719_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082169_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082169_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082180_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082180_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082452_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082452_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082457_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082457_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082477_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082477_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082478_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082478_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082553_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26082553_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26086974_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26086974_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26087117_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26087117_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26087156_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26087156_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26087184_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26087184_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26087202_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26087202_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26117312_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26117312_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26117891_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26117891_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26117910_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26117910_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26119282_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26119282_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26121117_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26121117_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26122318_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26122318_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26124583_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26124583_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26124863_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26124863_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26124864_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR26124864_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27541581_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27541581_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544992_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544992_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544993_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544993_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544994_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544994_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544995_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544995_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544996_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544996_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544997_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544997_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544999_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27544999_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27545000_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27545000_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27545001_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27545001_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27545002_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27545002_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27545003_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR27545003_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR4429103_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR4429103_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR12816272.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR12816273.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR12816274.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR12816275.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR12816276.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR12816277.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR12816278.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556929.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556930.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556931.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556932.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556933.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556934.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556935.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556936.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556937.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556938.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556939.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556940.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556941.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556942.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556943.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556944.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556945.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556946.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556947.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556948.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556949.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556950.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556951.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556952.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556953.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556954.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556955.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556956.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556957.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556958.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556959.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556960.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_pedestris/SRR22556961.fastq fastq

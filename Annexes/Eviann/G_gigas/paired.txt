@@ -1,0 +1,3 @@
+/scratch/Cascade/tbessonn/RNA-seq/G_gigas/SRR7062187_1.fastq /scratch/Cascade/tbessonn/RNA-seq/G_gigas/SRR7062187_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/G_gigas/SRR7062188_1.fastq /scratch/Cascade/tbessonn/RNA-seq/G_gigas/SRR7062188_2.fastq fastq
+/home/tbessonn/ressources/RNA_seq/Gerromorpha/G_gigas/Ggi10_L2_362X62.R1.fastq /home/tbessonn/ressources/RNA_seq/Gerromorpha/G_gigas/Ggi10_L2_362X62.R2.fastq fastq

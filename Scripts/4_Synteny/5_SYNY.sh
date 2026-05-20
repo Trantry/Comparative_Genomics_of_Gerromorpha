@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=syny29
+#SBATCH --job-name=syny30
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=332G
@@ -37,6 +37,6 @@ run_syny.pl -a *.gbff \
    --no_map \
    --no_circos \
    --resume \
-   -g 0 1 5 10 20 \
-   -e 1e-30 \
-   -o /home/tbessonn/3_SYNY/output29
+   -g 0 1 5 \
+   -e 1e-10 \
+   -o /home/tbessonn/3_SYNY/output30

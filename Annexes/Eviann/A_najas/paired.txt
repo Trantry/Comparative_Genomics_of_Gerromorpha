@@ -1,0 +1,9 @@
+/home/tbessonn/water_striders/A_najas/01.isoseq/01.FLNC/flnc-1.bam bam_isoseq
+/home/tbessonn/water_striders/A_najas/01.isoseq/01.FLNC/flnc-2.bam bam_isoseq
+/home/tbessonn/water_striders/A_najas/01.isoseq/01.FLNC/flnc-3.bam bam_isoseq
+/home/tbessonn/water_striders/A_najas/01.isoseq/01.FLNC/flnc-4.bam bam_isoseq
+/home/tbessonn/water_striders/A_najas/01.isoseq/01.FLNC/flnc-5.bam bam_isoseq
+/home/tbessonn/water_striders/A_najas/01.isoseq/01.FLNC/flnc-6.bam bam_isoseq
+/home/tbessonn/water_striders/A_najas/01.isoseq/01.FLNC/flnc-7.bam bam_isoseq
+/home/tbessonn/water_striders/A_najas/01.isoseq/01.FLNC/flnc-8.bam bam_isoseq
+/home/tbessonn/ressources/RNA_seq/Gerromorpha/A_najas/Aqu_naj_1.fq /home/tbessonn/ressources/RNA_seq/Gerromorpha/A_najas/Aqu_naj_2.fq fastq

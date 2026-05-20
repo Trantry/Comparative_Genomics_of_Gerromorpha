@@ -1,0 +1,2 @@
+/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/G_lacustris/ERR12245542_1.fastq /scratch/Bio/tbessonn/RNA_seq/Gerromorpha/G_lacustris/ERR12245542_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/G_lacustris/Ger_lac_1.fq /scratch/Bio/tbessonn/RNA_seq/Gerromorpha/G_lacustris/Ger_lac_2.fq fastq

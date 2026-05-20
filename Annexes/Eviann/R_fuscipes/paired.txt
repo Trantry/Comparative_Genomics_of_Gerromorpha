@@ -1,0 +1,2 @@
+/scratch/Bio/tbessonn/RNA_seq/R_fuscipes/SRR22799259_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_fuscipes/SRR22799259_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/R_fuscipes/SRR27541585_1.fastq /scratch/Bio/tbessonn/RNA_seq/R_fuscipes/SRR27541585_2.fastq fastq

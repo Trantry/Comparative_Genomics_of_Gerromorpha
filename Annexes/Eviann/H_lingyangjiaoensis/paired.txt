@@ -1,0 +1,1 @@
+/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/H_lingyangjiaoensis/SRR11249087_1.fastq /scratch/Bio/tbessonn/RNA_seq/Gerromorpha/H_lingyangjiaoensis/SRR11249087_2.fastq fastq

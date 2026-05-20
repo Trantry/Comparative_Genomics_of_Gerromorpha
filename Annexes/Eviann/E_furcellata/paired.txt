@@ -1,0 +1,9 @@
+/scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR22405947_1.fastq /scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR22405947_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR28044103_1.fastq /scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR28044103_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR28044104_1.fastq /scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR28044104_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR28044105_1.fastq /scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR28044105_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR28044106_1.fastq /scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR28044106_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR28044107_1.fastq /scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR28044107_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR28044108_1.fastq /scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR28044108_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR34824517_1.fastq /scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR34824517_2.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR35264038_1.fastq /scratch/Bio/tbessonn/RNA_seq/E_furcellata/SRR35264038_2.fastq fastq

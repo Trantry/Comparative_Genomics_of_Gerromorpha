@@ -39,7 +39,7 @@
 #2_Launch codeml_Branch Model
 LIST=/home/tbessonn/5_CODEML/6_codeml/og.list
 PAML=/home/tbessonn/5_CODEML/4_pal2nal/paml
-TREE=/home/tbessonn/5_CODEML/5_Raxml/species_tree.rooted_Ran_chi_marked.nwk
+TREE=/home/tbessonn/5_CODEML/5_Raxml/species_tree.rooted_Ran_chi_marked_ancestor.nwk
 TPL=/home/tbessonn/5_CODEML/6_codeml/templates/branchsite.tpl.ctl
 OUT=/home/tbessonn/5_CODEML/6_codeml/branchsite_gerromorpha
 

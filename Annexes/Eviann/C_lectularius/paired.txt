@@ -1,0 +1,113 @@
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR11365085_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR11365085_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR1660430_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR1660430_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR1852639_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR1852639_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR1852640_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR1852640_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935970_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935970_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935971_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935971_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935972_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935972_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935973_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935973_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935974_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935974_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935975_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935975_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935976_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935976_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935977_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935977_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935978_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935978_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935979_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935979_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935980_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935980_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935981_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935981_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935985_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935985_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935994_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935994_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935995_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935995_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935996_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935996_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935997_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935997_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935998_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935998_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935999_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18935999_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936000_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936000_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936001_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936001_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936002_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936002_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936003_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936003_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936004_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936004_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936005_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936005_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936006_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936006_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936007_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936007_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936008_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR18936008_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997097_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997097_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997098_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997098_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997099_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997099_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997100_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997100_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997101_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997101_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997102_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997102_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997103_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997103_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997104_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997104_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997105_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997105_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997106_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997106_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997107_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997107_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997108_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997108_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997109_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997109_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997110_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997110_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997111_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997111_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997112_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997112_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997113_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997113_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997114_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR27997114_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072511_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072511_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072512_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072512_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072513_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072513_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072514_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072514_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072515_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072515_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072516_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072516_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072517_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072517_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072518_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072518_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072519_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072519_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072520_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072520_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072521_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072521_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072522_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072522_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072523_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072523_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072524_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072524_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072525_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072525_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072526_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072526_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072527_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072527_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072528_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28072528_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116171_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116171_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116173_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116173_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116174_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116174_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116175_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116175_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116176_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116176_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116177_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116177_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116178_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116178_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116179_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116179_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116180_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116180_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116181_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116181_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116182_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116182_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116183_1.fastq	/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR28116183_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR9117105_1.fastq /scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR9117105_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR9117106_1.fastq /scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR9117106_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR9117107_1.fastq /scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR9117107_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR9117108_1.fastq /scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR9117108_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR9117109_1.fastq /scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR9117109_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR9117110_1.fastq /scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR9117110_2.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR14140300.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3084449.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3084450.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3084451.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3084452.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297745.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297746.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297758.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297791.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297806.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297807.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297810.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297811.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297812.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297813.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297814.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297815.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297816.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297817.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297818.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297819.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297820.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297821.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297822.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297823.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR3297824.fastq fastq
+/scratch/Cascade/tbessonn/RNA-seq/C_lectularius/SRR650709.fastq fastq
