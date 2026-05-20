@@ -1,12 +1,5 @@
-/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/SRR17258960_1.fastq /scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/SRR17258960_2.fastq fastq
-/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/Rhagovelia_sp_Puerto_Rico_f.fq /scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/Rhagovelia_sp_Puerto_Rico_r.fq fastq
-/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/R-ant_embryos_leg123_rnaseq_reads_trimmed_concatenated.fastq fastq
-/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/SRR5420607.fastq fastq
-/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/SRR5420608.fastq fastq
-/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/SRR5420609.fastq fastq
-/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/SRR5420610.fastq fastq
-/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/SRR5420611.fastq fastq
-/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/SRR5420612.fastq fastq
-/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/SRR5420613.fastq fastq
-/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/SRR5420614.fastq fastq
-/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/R_antilleana/SRR5420615.fastq fastq
+/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/T_zetteli/ARNTzetteli_EKRN230034977-1A_HGK23DSX7_L4_1.fq /scratch/Bio/tbessonn/RNA_seq/Gerromorpha/T_zetteli/ARNTzetteli_EKRN230034977-1A_HGK23DSX7_L4_2.fq fastq
+/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/T_zetteli/tzet_leg1_1_concatenated.fq /scratch/Bio/tbessonn/RNA_seq/Gerromorpha/T_zetteli/tzet_leg1_2_concatenated.fq fastq
+/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/T_zetteli/tzet_leg2_1_concatenated.fq /scratch/Bio/tbessonn/RNA_seq/Gerromorpha/T_zetteli/tzet_leg2_2_concatenated.fq fastq
+/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/T_zetteli/tzet_leg3_1_concatenated.fq /scratch/Bio/tbessonn/RNA_seq/Gerromorpha/T_zetteli/tzet_leg3_2_concatenated.fq fastq
+/scratch/Bio/tbessonn/RNA_seq/Gerromorpha/T_zetteli/tzet_reads_barcode_trimmed_cat.fastq fastq
