@@ -1,0 +1,450 @@
+---
+title: "GO_enrichment"
+execute:
+  echo: true
+  warning: false
+format:
+  docx:
+    toc: true
+    number-sections: true
+    highlight-style: github
+  html:
+    toc: true
+    number-sections: true
+    self-contained: true
+  pdf:
+    toc: true
+    number-sections: true 
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+# GO_enrichment
+
+## Environment setup
+
+```{r}
+#| eval: false
+save.image(file = "/Users/trystan.bessonnier/Downloads/Comparative_Genomics_of_Gerromorpha/Scripts/6_CODEML/7_lnL_and_LRT.RData")
+```
+
+```{r}
+#| eval: false
+load(file = "/Users/trystan.bessonnier/Downloads/Comparative_Genomics_of_Gerromorpha/Scripts/6_CODEML/7_lnL_and_LRT.RData")
+```
+
+## Loading data
+
+```{r}
+setwd("/Volumes/Trystan/Lyon/M2/Stage/6_codeml")
+```
+
+```{r}
+# ============================================================
+# GO enrichment des OG significatifs branch-site codeml
+# Unité statistique = orthogroup (OG), pas transcript/gène
+# ============================================================
+
+library(tidyverse)
+library(clusterProfiler)
+library(GO.db)
+library(AnnotationDbi)
+
+# -----------------------------
+# 1. Paramètres
+# -----------------------------
+
+fasta_dir <- "/Volumes/Trystan/Lyon/M2/Stage/6_codeml/Single_Copy_Orthologue_Sequences"
+agat_dir  <- "/Volumes/Trystan/Lyon/M2/Stage/AGAT"
+
+outdir <- "/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output_branchsite_GO"
+dir.create(outdir, recursive = TRUE, showWarnings = FALSE)
+
+sig_OG <- c(
+  "OG0004663",
+  "OG0005016",
+  "OG0004877",
+  "OG0003851",
+  "OG0004649"
+)
+
+# -----------------------------
+# 2. Lire les headers FASTA des OG
+# -----------------------------
+
+read_og_fasta_headers <- function(f) {
+  og <- tools::file_path_sans_ext(basename(f))
+  
+  headers <- readLines(f)
+  headers <- headers[grepl("^>", headers)]
+  headers <- sub("^>", "", headers)
+  
+  tibble(
+    OG = og,
+    header = headers
+  ) %>%
+    tidyr::separate(
+      header,
+      into = c("species", "transcript"),
+      sep = "\\|",
+      remove = FALSE
+    ) %>%
+    mutate(
+      gene_id = paste0(species, "|", transcript)
+    ) %>%
+    dplyr::distinct()
+}
+
+fasta_files <- list.files(
+  fasta_dir,
+  pattern = "\\.fa$|\\.fasta$",
+  full.names = TRUE
+)
+
+OG2genes <- bind_rows(lapply(fasta_files, read_og_fasta_headers)) %>%
+  dplyr::distinct()
+
+# -----------------------------
+# 3. Lire les GO depuis les GFF AGAT
+# -----------------------------
+
+get_attr <- function(attr, key) {
+  pattern <- paste0("(^|;)", key, "=([^;]+)")
+  stringr::str_match(attr, pattern)[, 3]
+}
+
+read_gff_GO <- function(gff_path) {
+  species <- basename(dirname(gff_path))
+  
+  gff <- suppressWarnings(
+    read.delim(
+      gff_path,
+      sep = "\t",
+      header = FALSE,
+      comment.char = "#",
+      quote = "",
+      stringsAsFactors = FALSE,
+      col.names = c(
+        "seqid", "source", "type", "start", "end",
+        "score", "strand", "phase", "attributes"
+      )
+    )
+  )
+  
+  gff %>%
+    dplyr::filter(type == "mRNA") %>%
+    dplyr::mutate(
+      transcript = get_attr(attributes, "ID"),
+      go_raw = get_attr(attributes, "Ontology_term"),
+      gene_id = paste0(species, "|", transcript)
+    ) %>%
+    dplyr::filter(!is.na(go_raw), go_raw != "", go_raw != "-") %>%
+    tidyr::separate_rows(go_raw, sep = ",") %>%
+    dplyr::mutate(
+      term = stringr::str_extract(go_raw, "GO:[0-9]+")
+    ) %>%
+    dplyr::filter(!is.na(term)) %>%
+    dplyr::select(gene_id, term) %>%
+    dplyr::distinct()
+}
+
+gff_files <- list.files(
+  agat_dir,
+  pattern = "\\.gff$|\\.gff3$",
+  full.names = TRUE,
+  recursive = TRUE
+)
+
+TERM2GENE_transcripts <- bind_rows(lapply(gff_files, read_gff_GO)) %>%
+  dplyr::distinct()
+
+# -----------------------------
+# 4. Convertir GO-transcrits vers GO-OG
+# -----------------------------
+
+OG_GO <- OG2genes %>%
+  dplyr::inner_join(TERM2GENE_transcripts, by = "gene_id") %>%
+  dplyr::select(OG, species, transcript, term) %>%
+  dplyr::distinct()
+
+TERM2OG <- OG_GO %>%
+  dplyr::select(term, OG) %>%
+  dplyr::distinct()
+
+# -----------------------------
+# 5. Construire TERM2NAME avec GO.db
+# -----------------------------
+
+GO_names_all <- AnnotationDbi::select(
+  GO.db,
+  keys = unique(TERM2OG$term),
+  keytype = "GOID",
+  columns = c("GOID", "TERM", "ONTOLOGY")
+) %>%
+  dplyr::distinct(GOID, TERM, ONTOLOGY) %>%
+  dplyr::filter(!is.na(TERM), TERM != "") %>%
+  dplyr::transmute(
+    term = GOID,
+    name = paste0(TERM, " [", ONTOLOGY, "]")
+  )
+
+GO_names_clean <- AnnotationDbi::select(
+  GO.db,
+  keys = unique(TERM2OG$term),
+  keytype = "GOID",
+  columns = c("GOID", "TERM", "ONTOLOGY")
+) %>%
+  dplyr::distinct(GOID, TERM, ONTOLOGY) %>%
+  dplyr::filter(!is.na(TERM), TERM != "") %>%
+  dplyr::transmute(
+    term = GOID,
+    GO_name = TERM,
+    GO_ontology = ONTOLOGY
+  )
+
+# -----------------------------
+# 6. Définir l'univers et les OG significatifs avec GO
+# -----------------------------
+
+universe_OG <- sort(unique(TERM2OG$OG))
+sig_OG_with_GO <- intersect(sig_OG, universe_OG)
+sig_OG_without_GO <- setdiff(sig_OG, universe_OG)
+
+cat("Nombre total d'OG dans les FASTA :", length(unique(OG2genes$OG)), "\n")
+cat("Nombre d'OG avec au moins un GO :", length(universe_OG), "\n")
+cat("Nombre d'OG branch-site significatifs :", length(sig_OG), "\n")
+cat("Nombre d'OG branch-site significatifs avec GO :", length(sig_OG_with_GO), "\n")
+cat("OG branch-site sans GO :", paste(sig_OG_without_GO, collapse = ", "), "\n")
+
+# -----------------------------
+# 7. Table descriptive des GO des 5 OG branch-site
+# -----------------------------
+
+branchsite_GO_table <- OG_GO %>%
+  dplyr::filter(OG %in% sig_OG) %>%
+  dplyr::left_join(GO_names_clean, by = "term") %>%
+  dplyr::group_by(OG, term, GO_name, GO_ontology) %>%
+  dplyr::summarise(
+    n_species_annotated = dplyr::n_distinct(species),
+    species = paste(sort(unique(species)), collapse = "; "),
+    .groups = "drop"
+  ) %>%
+  dplyr::arrange(OG, GO_ontology, term)
+
+write.csv(
+  branchsite_GO_table,
+  file.path(outdir, "branchsite_5OG_GO_annotation_table.csv"),
+  row.names = FALSE
+)
+
+# -----------------------------
+# 8. Enrichissement GO au niveau OG
+# -----------------------------
+
+ego_branchsite <- enricher(
+  gene = sig_OG_with_GO,
+  universe = universe_OG,
+  TERM2GENE = TERM2OG,
+  TERM2NAME = GO_names_all,
+  pAdjustMethod = "BH",
+  pvalueCutoff = 1,
+  qvalueCutoff = 1,
+  minGSSize = 2,
+  maxGSSize = 500
+)
+
+ego_branchsite_df <- as.data.frame(ego_branchsite)
+
+write.csv(
+  ego_branchsite_df,
+  file.path(outdir, "GO_enrichment_branchsite_5OG_vs_all_codeml_OG.csv"),
+  row.names = FALSE
+)
+
+ego_branchsite_sig <- ego_branchsite_df %>%
+  dplyr::filter(qvalue < 0.05)
+
+write.csv(
+  ego_branchsite_sig,
+  file.path(outdir, "GO_enrichment_branchsite_5OG_qvalue005.csv"),
+  row.names = FALSE
+)
+
+# -----------------------------
+# 9. Dotplot si enrichissement disponible
+# -----------------------------
+
+if (nrow(ego_branchsite_df) > 0) {
+  p_branchsite <- dotplot(ego_branchsite, showCategory = 20)
+  
+  ggsave(
+    filename = file.path(outdir, "GO_dotplot_branchsite_5OG.png"),
+    plot = p_branchsite,
+    dpi = 300,
+    width = 8,
+    height = 6
+  )
+}
+
+# -----------------------------
+# 10. Résumés utiles à afficher
+# -----------------------------
+
+cat("\nNombre de GO uniques par OG branch-site :\n")
+
+print(
+  TERM2OG %>%
+    dplyr::filter(OG %in% sig_OG) %>%
+    dplyr::count(OG, name = "n_unique_GO") %>%
+    dplyr::arrange(OG)
+)
+
+cat("\nTop résultats enrichissement GO :\n")
+
+print(
+  ego_branchsite_df %>%
+    dplyr::select(ID, Description, GeneRatio, BgRatio, pvalue, p.adjust, qvalue, geneID, Count) %>%
+    dplyr::arrange(p.adjust) %>%
+    head(20)
+)
+```
+
+```{r}
+library(tidyverse)
+library(clusterProfiler)
+
+# -----------------------------
+# Préparer les résultats significatifs
+# -----------------------------
+
+ego_plot_df <- ego_branchsite_df %>%
+  dplyr::filter(qvalue < 0.05) %>%
+  dplyr::mutate(
+    Description_clean = stringr::str_remove(Description, " \\[[A-Z]+\\]$"),
+    Ontology = stringr::str_extract(Description, "\\[[A-Z]+\\]$"),
+    Ontology = stringr::str_remove_all(Ontology, "\\[|\\]"),
+    minus_log10_qvalue = -log10(qvalue),
+    Description_clean = forcats::fct_reorder(Description_clean, minus_log10_qvalue)
+  )
+
+# -----------------------------
+# 1. Dotplot clusterProfiler
+# -----------------------------
+
+p_dot <- dotplot(
+  ego_branchsite,
+  showCategory = 100,
+  x = "GeneRatio",
+  color = "qvalue"
+) +
+  ggplot2::ggtitle("GO enrichment of branch-site significant orthogroups") +
+  ggplot2::theme_bw()
+
+ggsave(
+  filename = file.path(outdir, "GO_dotplot_branchsite_qvalue005.png"),
+  plot = p_dot,
+  dpi = 300,
+  width = 9,
+  height = 6
+)
+
+# -----------------------------
+# 2. Barplot custom : -log10(qvalue)
+# -----------------------------
+
+p_bar <- ggplot(
+  ego_plot_df,
+  aes(
+    x = Description_clean,
+    y = minus_log10_qvalue,
+    fill = Ontology
+  )
+) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "GO enrichment of branch-site significant orthogroups",
+    x = "GO term",
+    y = "-log10(q-value)",
+    fill = "Ontology"
+  ) +
+  theme_bw() +
+  theme(
+    axis.text.y = element_text(size = 9),
+    plot.title = element_text(hjust = 0.5)
+  )
+
+ggsave(
+  filename = file.path(outdir, "GO_barplot_branchsite_qvalue005.png"),
+  plot = p_bar,
+  dpi = 300,
+  width = 9,
+  height = 7
+)
+
+# Afficher les plots dans RStudio
+p_dot
+p_bar
+```
+
+```{r}
+gerromorpha_species <- c(
+  "Hermatobates_lingyangjiaoensis",
+  "Microvelia_longipes",
+  "Tetraripis_zetteli",
+  "Rhagovelia_antilleana",
+  "Gigantometra_gigas",
+  "Aquarius_najas",
+  "Aquarius_paludum",
+  "Gerris_buenoi",
+  "Gerris_lacustris",
+  "Gerris_odontogaster"
+)
+
+# GO associés uniquement aux séquences Gerromorpha
+OG_GO_gerro <- OG_GO %>%
+  dplyr::filter(species %in% gerromorpha_species) %>%
+  dplyr::distinct()
+
+TERM2OG_gerro <- OG_GO_gerro %>%
+  dplyr::select(term, OG) %>%
+  dplyr::distinct()
+
+# Background = tous les OG codeml ayant au moins un GO chez Gerromorpha
+universe_OG_gerro <- sort(unique(TERM2OG_gerro$OG))
+
+# Foreground = les 5 OG branch-site ayant au moins un GO chez Gerromorpha
+sig_OG_with_GO_gerro <- intersect(sig_OG, universe_OG_gerro)
+
+GO_names_gerro <- AnnotationDbi::select(
+  GO.db,
+  keys = unique(TERM2OG_gerro$term),
+  keytype = "GOID",
+  columns = c("GOID", "TERM", "ONTOLOGY")
+) %>%
+  dplyr::distinct(GOID, TERM, ONTOLOGY) %>%
+  dplyr::filter(!is.na(TERM), TERM != "") %>%
+  dplyr::transmute(
+    term = GOID,
+    name = paste0(TERM, " [", ONTOLOGY, "]")
+  )
+
+ego_branchsite_gerro <- enricher(
+  gene = sig_OG_with_GO_gerro,
+  universe = universe_OG_gerro,
+  TERM2GENE = TERM2OG_gerro,
+  TERM2NAME = GO_names_gerro,
+  pAdjustMethod = "BH",
+  pvalueCutoff = 1,
+  qvalueCutoff = 1,
+  minGSSize = 2,
+  maxGSSize = 500
+)
+
+ego_branchsite_gerro_df <- as.data.frame(ego_branchsite_gerro)
+
+ego_branchsite_gerro_df %>%
+  dplyr::arrange(qvalue) %>%
+  head(20)
+```

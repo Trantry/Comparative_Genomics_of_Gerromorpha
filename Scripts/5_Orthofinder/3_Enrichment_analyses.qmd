@@ -52,6 +52,63 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 library(clusterProfiler)
+
+make_go_barplot <- function(enrich_obj, title, top_n = 10) {
+  
+  res <- as.data.frame(enrich_obj)
+  
+  if (nrow(res) == 0) {
+    warning(paste("Aucun résultat pour :", title))
+    return(NULL)
+  }
+  
+  onto_map <- AnnotationDbi::select(
+    GO.db,
+    keys = unique(res$ID),
+    keytype = "GOID",
+    columns = c("GOID", "ONTOLOGY")
+  ) %>%
+    distinct(GOID, ONTOLOGY) %>%
+    rename(ID = GOID)
+  
+  plot_data <- res %>%
+    left_join(onto_map, by = "ID") %>%
+    filter(!is.na(ONTOLOGY)) %>%
+    group_by(ONTOLOGY) %>%
+    arrange(p.adjust, .by_group = TRUE) %>%
+    slice_head(n = top_n) %>%
+    ungroup() %>%
+    mutate(
+  Description = case_when(
+    str_detect(Description, "oxidoreductase activity, acting on paired donors") ~
+      "oxidoreductase activity, acting on paired donors",
+    TRUE ~ Description
+  ),
+  Description = str_wrap(Description, width = 65),
+  Description = reorder(Description, Count),
+  ONTOLOGY = factor(ONTOLOGY, levels = c("BP", "MF", "CC"))
+)
+  
+  ggplot(plot_data, aes(x = Count, y = Description, fill = ONTOLOGY)) +
+    geom_col() +
+    geom_text(aes(label = Count), hjust = -0.2, size = 10) +
+    facet_grid(ONTOLOGY ~ ., scales = "free_y", space = "free_y") +
+    expand_limits(x = max(plot_data$Count) * 1.15) +
+    labs(
+      title = title,
+      x = "Nombre de gènes",
+      y = "Termes GO"
+    ) +
+    theme_bw() +
+theme(
+  legend.position = "none",
+  axis.text.y = element_text(size = 25),
+  axis.text.x = element_text(size = 25),
+  axis.title = element_text(size = 25),
+  strip.text.y = element_text(size = 20, face = "bold"),
+  plot.title = element_text(size = 30, face = "bold")
+)
+}
 ```
 
 # ClusterProfiler : Enrichment gene analyses in duplicated genes N2 and N12
@@ -61,7 +118,7 @@ library(clusterProfiler)
 ```{r}
 # Chemin vers le fichier
 dup <- read.delim(
-  file = "/Users/trystanbessonnier/Desktop/Genomique_comparative/Orthofinder/Results_Apr14/Gene_Duplication_Events/Duplications.tsv",
+  file = "/Volumes/Trystan/Lyon/M2/Stage/Orthofinder/Results_May12/Gene_Duplication_Events/Duplications.tsv",
   sep = "\t",
   header = TRUE,
   quote = "",
@@ -184,6 +241,24 @@ N2_duplicated_vs_BG21<-dotplot(ego_N2_named, showCategory = 50)
 
 ggsave("N2_duplicated_vs_BG21.png", plot= N2_duplicated_vs_BG21, dpi=300, path="/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output")
 
+####Barplot CC, BP et MF
+N2_duplicated_vs_BG21_barplot <- make_go_barplot(
+  enrich_obj = ego_N2_named,
+  title = "Duplications Gerromorpha vs Heteroptera",
+  top_n = 10
+)
+
+N2_duplicated_vs_BG21_barplot
+
+ggsave(
+  "N2_duplicated_vs_BG21_barplot.png",
+  plot = N2_duplicated_vs_BG21_barplot,
+  dpi = 300,
+  width = 18,
+  height = 26,
+  path = "/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output"
+)
+
 ## ---- Enrichment N12 ----
 ego_N12_named <- enricher(
   gene = genes_N12,
@@ -200,6 +275,25 @@ ego_N12_named <- enricher(
 N12_duplicated_vs_BG21<-dotplot(ego_N12_named, showCategory = 50)
 
 ggsave("N12_duplicated_vs_BG21.png", plot= N12_duplicated_vs_BG21, dpi=300, path="/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output")
+
+
+####Barplot CC, BP et MF
+N12_duplicated_vs_BG21_barplot <- make_go_barplot(
+  enrich_obj = ego_N12_named,
+  title = "Duplications Gerridae vs Heteroptera",
+  top_n = 10
+)
+
+N12_duplicated_vs_BG21_barplot
+
+ggsave(
+  "N12_duplicated_vs_BG21_barplot.png",
+  plot = N12_duplicated_vs_BG21_barplot,
+  dpi = 300,
+  width = 18,
+  height = 26,
+  path = "/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output"
+)
 
 write.csv(as.data.frame(ego_N2), "GO_enrichment_N2_vsAll21.csv", row.names = FALSE)
 write.csv(as.data.frame(ego_N12), "GO_enrichment_N12_vsAll21.csv", row.names = FALSE)
@@ -330,6 +424,7 @@ N2_ALL_vs_BG21<-dotplot(ego_ALLgenes_N2_named, showCategory = 50) +
 
 ggsave("N2_ALL_vs_BG21.png", plot= N2_ALL_vs_BG21, dpi=300, path="/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output")
 
+
 ego_ALLgenes_N12_named <- enricher(
   gene = genes_all_N12_fromInterpro,     # <- tous les gènes N12 (6 espèces)
   universe = universe_all_21sp,          # <- background 21 espèces (inchangé)
@@ -347,7 +442,6 @@ N12_ALL_vs_BG21<-dotplot(ego_ALLgenes_N12_named, showCategory = 50)+
 
 
 ggsave("N12_ALL_vs_BG21.png", plot= N12_ALL_vs_BG21, dpi=300, path="/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output")
-
 
 # exports (optionnel)
 write.csv(as.data.frame(ego_ALLgenes_N2_named), "GO_enrichment_ALLgenes_N2_vsAll21.csv", row.names = FALSE)
@@ -403,6 +497,24 @@ N12_duplicated_vs_BGN2<-dotplot(ego_duplicatedgenes_N12_vs_BG_N2, showCategory =
 
 
 ggsave("N12_duplicated_vs_BGN2.png", plot= N12_duplicated_vs_BGN2, dpi=300, path="/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output")
+
+###Barplot CC, BP et MF
+N12_duplicated_vs_BGN2_barplot <- make_go_barplot(
+  enrich_obj = ego_duplicatedgenes_N12_vs_BG_N2,
+  title = "Duplications Gerridae vs Gerromorpha",
+  top_n = 10
+)
+
+N12_duplicated_vs_BGN2_barplot
+
+ggsave(
+  "N12_duplicated_vs_BGN2_barplot.png",
+  plot = N12_duplicated_vs_BGN2_barplot,
+  dpi = 300,
+  width = 18,
+  height = 26,
+  path = "/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output"
+)
 ```
 
 # ClusterProfiler : Enrichment gene analyses in ALL genes N11 vs background N2
@@ -555,49 +667,140 @@ c(
 ```
 
 ```{r}
-## ---- Barplot split par ONTOLOGY (top N par BP/CC/MF) ----
-library(enrichplot)
-library(ggplot2)
-library(dplyr)
-library(GO.db)
-library(AnnotationDbi)
+## Dossier de sortie
+outdir <- "/Volumes/Trystan/Lyon/M2/Stage/Gene_enrichment/output"
 
-# 1) Ajouter ONTOLOGY à TON objet enricher (ex: ego_N2_named)
-onto_map <- AnnotationDbi::select(
-  GO.db,
-  keys = unique(ego_N2_named@result$ID),
-  keytype = "GOID",
-  columns = c("GOID", "ONTOLOGY")
-) %>%
-  distinct(GOID, ONTOLOGY) %>%
-  transmute(ID = GOID, ONTOLOGY = ONTOLOGY)
+## Fonction pour ajouter l'ontologie GO à un objet enrichResult
+add_go_ontology <- function(enrich_obj) {
+  
+  res <- as.data.frame(enrich_obj)
+  
+  if (nrow(res) == 0) {
+    warning("L'objet d'enrichissement ne contient aucun résultat.")
+    return(res)
+  }
+  
+  onto_map <- AnnotationDbi::select(
+    GO.db,
+    keys = unique(res$ID),
+    keytype = "GOID",
+    columns = c("GOID", "ONTOLOGY")
+  ) %>%
+    distinct(GOID, ONTOLOGY) %>%
+    rename(ID = GOID)
+  
+  res_onto <- res %>%
+    left_join(onto_map, by = "ID") %>%
+    filter(!is.na(ONTOLOGY)) %>%
+    mutate(
+      ONTOLOGY = factor(
+        ONTOLOGY,
+        levels = c("BP", "MF", "CC"),
+        labels = c("Biological Process", "Molecular Function", "Cellular Component")
+      )
+    )
+  
+  return(res_onto)
+}
 
-ego_N2_onto <- ego_N2_named
-ego_N2_onto@result <- ego_N2_onto@result %>% left_join(onto_map, by = "ID")
+## Fonction pour faire un barplot propre, top N par ontologie
+plot_go_barplot_by_ontology <- function(enrich_obj,
+                                        title,
+                                        top_n = 15,
+                                        output_name = NULL,
+                                        width = 12,
+                                        height = 9) {
+  
+  res_onto <- add_go_ontology(enrich_obj)
+  
+  if (nrow(res_onto) == 0) {
+    warning(paste("Aucun résultat à afficher pour :", title))
+    return(NULL)
+  }
+  
+  plot_data <- res_onto %>%
+    group_by(ONTOLOGY) %>%
+    arrange(p.adjust, .by_group = TRUE) %>%
+    slice_head(n = top_n) %>%
+    ungroup() %>%
+    mutate(
+      Description_wrapped = str_wrap(Description, width = 45),
+      Description_wrapped = reorder(Description_wrapped, Count)
+    )
+  
+  p <- ggplot(plot_data, aes(x = Count, y = Description_wrapped, fill = ONTOLOGY)) +
+    geom_col() +
+    geom_text(
+      aes(label = Count),
+      hjust = -0.2,
+      size = 3
+    ) +
+    facet_grid(
+      ONTOLOGY ~ .,
+      scales = "free_y",
+      space = "free_y"
+    ) +
+    labs(
+      title = title,
+      x = "Nombre de gènes",
+      y = "Termes GO",
+      fill = "Ontologie"
+    ) +
+    theme_bw() +
+    theme(
+      strip.text.y = element_text(size = 11, face = "bold"),
+      axis.text.y = element_text(size = 8),
+      axis.text.x = element_text(size = 9),
+      plot.title = element_text(size = 13, face = "bold"),
+      legend.position = "none"
+    ) +
+    expand_limits(x = max(plot_data$Count) * 1.12)
+  
+  if (!is.null(output_name)) {
+    ggsave(
+      filename = file.path(outdir, output_name),
+      plot = p,
+      width = width,
+      height = height,
+      dpi = 300
+    )
+  }
+  
+  return(p)
+}
 
-# 2) Barplot : top 15 PAR ontologie
-p_n2_bar_nofacet <- barplot(
-  ego_N2_onto,
-  x = "Count",
-  showCategory = 15,
-  split = "ONTOLOGY",
-  label_format = 30        # wrap des labels (mets Inf si tu ne veux pas wrap)
-) +
-  aes(fill = ONTOLOGY) +
-  scale_fill_brewer(palette = "Set2")
+## ---- 1. N2 duplicated genes vs background 21 Heteroptera ----
 
-p_n2_bar_nofacet +
-  geom_text(aes(label = Count), nudge_x = 2, size = 3) +
-  scale_y_discrete()
+p_N2_dup_vs_BG21 <- plot_go_barplot_by_ontology(
+  enrich_obj = ego_N2_named,
+  title = "GO enrichment - N2 duplicated genes vs 21 Heteroptera",
+  top_n = 15,
+  output_name = "GO_barplot_N2_duplicated_vs_BG21.png"
+)
 
-# Option facet (BP/CC/MF séparés)
-p_n2_bar_facet <- p_n2_bar_nofacet +
-  enrichplot::autofacet(by = "row", scales = "free") +
-  scale_y_discrete()
+p_N2_dup_vs_BG21
 
-p_n2_bar_facet
-```
 
-```{r}
+## ---- 2. N12 duplicated genes vs background 21 Heteroptera ----
 
+p_N12_dup_vs_BG21 <- plot_go_barplot_by_ontology(
+  enrich_obj = ego_N12_named,
+  title = "GO enrichment - N12 duplicated genes vs 21 Heteroptera",
+  top_n = 15,
+  output_name = "GO_barplot_N12_duplicated_vs_BG21.png"
+)
+
+p_N12_dup_vs_BG21
+
+
+## ---- 3. N12 duplicated genes vs background 10 Gerromorpha ----
+
+p_N12_dup_vs_BGN2 <- plot_go_barplot_by_ontology(
+  enrich_obj = ego_duplicatedgenes_N12_vs_BG_N2,
+  title = "GO enrichment - N12 duplicated genes vs 10 Gerromorpha",
+  top_n = 15,
+  output_name = "GO_barplot_N12_duplicated_vs_BGN2.png"
+)
+
+p_N12_dup_vs_BGN2
 ```

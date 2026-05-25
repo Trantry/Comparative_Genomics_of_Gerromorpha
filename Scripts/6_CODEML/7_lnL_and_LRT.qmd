@@ -1,0 +1,259 @@
+---
+title: "lnL_and_LRT"
+execute:
+  echo: true
+  warning: false
+format:
+  docx:
+    toc: true
+    number-sections: true
+    highlight-style: github
+  html:
+    toc: true
+    number-sections: true
+    self-contained: true
+  pdf:
+    toc: true
+    number-sections: true 
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+# lnL extraction and signifcant test
+
+## Environment setup
+
+```{r}
+#| eval: false
+save.image(file = "/Users/trystan.bessonnier/Downloads/Comparative_Genomics_of_Gerromorpha/Scripts/6_CODEML/7_lnL_and_LRT.RData")
+```
+
+```{r}
+#| eval: false
+load(file = "/Users/trystan.bessonnier/Downloads/Comparative_Genomics_of_Gerromorpha/Scripts/6_CODEML/7_lnL_and_LRT.RData")
+```
+
+## Loading data
+
+```{r}
+setwd("/Volumes/Trystan/Lyon/M2/Stage/6_codeml")
+```
+
+```{r}
+get_lnL <- function(f) {
+  if (!file.exists(f)) return(NA_real_)
+  x <- readLines(f, warn = FALSE)
+  x <- x[grep("^lnL\\(", x)]
+  if (length(x) == 0) return(NA_real_)
+  m <- regexec("lnL\\(.*\\):\\s*([-0-9.]+)", x[1])
+  r <- regmatches(x[1], m)[[1]]
+  if (length(r) < 2) return(NA_real_)
+  as.numeric(r[2])
+}
+```
+
+# Site Models
+
+## M8 (**β and ω)** vs M7 (**β)**
+
+### Hypothesis tested :
+
+Does adding an extra class of sites with ω \> 1 (adaptive evolution) fit the data better than a model with ten classes with flexible normalized non-synonymous ratio distribution ?
+
+```{r}
+base <- "M7M8"
+ogs <- list.dirs(base, recursive = FALSE, full.names = FALSE)
+
+res <- data.frame(OG=ogs, lnL_M7=NA_real_, lnL_M8=NA_real_)
+for (i in seq_along(ogs)) {
+  og <- ogs[i]
+  res$lnL_M7[i] <- get_lnL(file.path(base, og, "M7.out"))
+  res$lnL_M8[i] <- get_lnL(file.path(base, og, "M8.out"))
+}
+
+res$LRT <- 2*(res$lnL_M8 - res$lnL_M7)
+res$pvalue <- pchisq(res$LRT, df=2, lower.tail=FALSE)
+res$qvalue <- p.adjust(res$pvalue, method="BH")
+res$significant <- ifelse(
+  !is.na(res$qvalue) & res$qvalue < 0.05,
+  "YES",
+  "NO")
+
+res <- res[order(res$qvalue, res$pvalue),]
+write.table(res, file=file.path(base,"M7M8_results.tsv"),
+            sep="\t", quote=FALSE, row.names=FALSE)
+head(res, 20)
+```
+
+## M2a (positive selection) vs M1a (nearly neutral)
+
+### Hypothesis tested:
+
+Does adding a third class of sites with ω \> 1 (adaptive evolution) fit the data better than a model with two classes ω \< 1, ω = 1 ?
+
+```{r}
+base <- "M1aM2a"
+ogs <- list.dirs(base, recursive = FALSE, full.names = FALSE)
+
+res <- data.frame(OG=ogs, lnL_M1a=NA_real_, lnL_M2a=NA_real_)
+for (i in seq_along(ogs)) {
+  og <- ogs[i]
+  res$lnL_M1a[i] <- get_lnL(file.path(base, og, "M1a.out"))
+  res$lnL_M2a[i] <- get_lnL(file.path(base, og, "M2a.out"))
+}
+
+res$LRT <- 2*(res$lnL_M2a - res$lnL_M1a)
+res$pvalue <- pchisq(res$LRT, df=2, lower.tail=FALSE)
+res$qvalue <- p.adjust(res$pvalue, method="BH")
+res$significant <- ifelse(
+  !is.na(res$qvalue) & res$qvalue < 0.05,
+  "YES",
+  "NO")
+
+res <- res[order(res$qvalue, res$pvalue),]
+write.table(res, file=file.path(base,"M1aM2a_results.tsv"),
+            sep="\t", quote=FALSE, row.names=FALSE)
+head(res, 20)
+```
+
+# Branch Models
+
+## Two-ratio vs one-ratio
+
+### Hypothesis tested:
+
+Are the foreground branches that you specify (Gerromorpha) more likely to have different ω from background branches (Other Heteroptera) ?
+
+```{r}
+base <- "branch_gerromorpha"
+ogs <- list.dirs(base, recursive = FALSE, full.names = FALSE)
+
+res <- data.frame(OG=ogs, lnL_one=NA_real_, lnL_two=NA_real_)
+for (i in seq_along(ogs)) {
+  og <- ogs[i]
+  res$lnL_one[i] <- get_lnL(file.path(base, og, "one_ratio.out"))
+  res$lnL_two[i] <- get_lnL(file.path(base, og, "two_ratio.out"))
+}
+
+res$LRT <- 2*(res$lnL_two - res$lnL_one)
+res$pvalue <- pchisq(res$LRT, df=1, lower.tail=FALSE)
+res$qvalue <- p.adjust(res$pvalue, method="BH")
+res$significant <- ifelse(
+  !is.na(res$qvalue) & res$qvalue < 0.05,
+  "YES",
+  "NO")
+
+res <- res[order(res$qvalue, res$pvalue),]
+write.table(res, file=file.path(base,"branch_gerromorpha_results.tsv"),
+            sep="\t", quote=FALSE, row.names=FALSE)
+head(res, 20)
+```
+
+## Free-ratio vs one-ratio
+
+### Hypothesis tested :
+
+For a tree of s species, is ω different among lineages ?
+
+```{r}
+base <- "free_vs_one"
+ogs <- list.dirs(base, recursive = FALSE, full.names = FALSE)
+
+res <- data.frame(OG=ogs, lnL_one=NA_real_, lnL_free=NA_real_)
+for (i in seq_along(ogs)) {
+  og <- ogs[i]
+  res$lnL_one[i]  <- get_lnL(file.path(base, og, "one_ratio.out"))
+  res$lnL_free[i] <- get_lnL(file.path(base, og, "free_ratio.out"))
+}
+
+res$LRT <- 2*(res$lnL_free - res$lnL_one)
+
+# df = 2s-4 (s: tree of s species) :
+k <- 2*21-4
+
+res$pvalue <- pchisq(res$LRT, df=k, lower.tail=FALSE)
+res$qvalue <- p.adjust(res$pvalue, method="BH")
+res$significant <- ifelse(
+  !is.na(res$qvalue) & res$qvalue < 0.05,
+  "YES",
+  "NO")
+
+res <- res[order(res$qvalue, res$pvalue),]
+write.table(res, file=file.path(base,"free_vs_one_results.tsv"),
+            sep="\t", quote=FALSE, row.names=FALSE)
+
+head(res, 20)
+```
+
+# Branch-site Models
+
+## MA (ω \> 1) vs MA (ω=1)
+
+### Hypothesis tested :
+
+Is the defined “foreground branch” (Gerromorpha) more likely to contain sites with ω \> 1
+
+## All Gerromorpha (ancestor+living species) foreground
+
+```{r}
+base <- "branchsite_gerromorpha"
+ogs <- list.dirs(base, recursive = FALSE, full.names = FALSE)
+
+res <- data.frame(OG=ogs, lnL_null=NA_real_, lnL_alt=NA_real_)
+for (i in seq_along(ogs)) {
+  og <- ogs[i]
+  res$lnL_null[i] <- get_lnL(file.path(base, og, "bsA_null.out"))
+  res$lnL_alt[i]  <- get_lnL(file.path(base, og, "bsA_alt.out"))
+}
+
+res$LRT <- 2*(res$lnL_alt - res$lnL_null)
+
+# mixture 50:50: p = 0.5 * P(Chi1 >= LRT)
+res$pvalue <- ifelse(is.na(res$LRT), NA_real_,
+                     ifelse(res$LRT <= 0, 1,
+                            0.5 * pchisq(res$LRT, df=1, lower.tail=FALSE)))
+
+res$qvalue <- p.adjust(res$pvalue, method="BH")
+res$significant <- ifelse(
+  !is.na(res$qvalue) & res$qvalue < 0.05,
+  "YES",
+  "NO")
+
+res <- res[order(res$qvalue, res$pvalue),]
+write.table(res, file=file.path(base,"branchsite_gerromorpha_results.tsv"),
+            sep="\t", quote=FALSE, row.names=FALSE)
+head(res, 20)
+```
+
+## All ancestor Gerromorpha (ancestor only) foreground
+
+```{r}
+base <- "branchsite_ancestor_gerromorpha"
+ogs <- list.dirs(base, recursive = FALSE, full.names = FALSE)
+
+res <- data.frame(OG=ogs, lnL_null=NA_real_, lnL_alt=NA_real_)
+for (i in seq_along(ogs)) {
+  og <- ogs[i]
+  res$lnL_null[i] <- get_lnL(file.path(base, og, "bsA_null.out"))
+  res$lnL_alt[i]  <- get_lnL(file.path(base, og, "bsA_alt.out"))
+}
+
+res$LRT <- 2*(res$lnL_alt - res$lnL_null)
+
+# mixture 50:50: p = 0.5 * P(Chi1 >= LRT)
+res$pvalue <- ifelse(is.na(res$LRT), NA_real_,
+                     ifelse(res$LRT <= 0, 1,
+                            0.5 * pchisq(res$LRT, df=1, lower.tail=FALSE)))
+
+res$qvalue <- p.adjust(res$pvalue, method="BH")
+res$significant <- ifelse(
+  !is.na(res$qvalue) & res$qvalue < 0.05,
+  "YES",
+  "NO")
+
+res <- res[order(res$qvalue, res$pvalue),]
+write.table(res, file=file.path(base,"branchsite_gerromorpha_results.tsv"),
+            sep="\t", quote=FALSE, row.names=FALSE)
+head(res, 20)
+```
